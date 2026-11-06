@@ -108,8 +108,9 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  opts:["Namespaces zorgen ervoor dat een container enkel zijn eigen processen ziet.","Met cgroups beperk je hoeveel CPU en geheugen een container mag gebruiken.","Docker gebruikt een hypervisor om elke container een eigen kernel te geven.","<code>chroot</code> alleen volstaat om een proces volledig te isoleren.","Alle containers op dezelfde host delen de kernel van de host."],
  ok:[0,1,4],
  ex:["Docker gebruikt geen hypervisor.","<code>chroot</code> isoleert enkel bestanden: het proces ziet bv. <code>/myAppFolder</code> als <code>/</code>. Processen, netwerk en gebruikers blijven gedeeld."]},
-{n:3,type:"open",pts:2,q:"Geef twee belangrijke verschillen tussen een virtuele machine en een container.",
- model:["<b>Eigen besturingssysteem:</b> een VM heeft een eigen kernel bovenop een hypervisor, een container deelt de kernel van de host.","<b>Opstarttijd en grootte:</b> een container start in seconden en de image is MB's groot in plaats van GB's.","Ook goed: een VM emuleert hardware, een container is een geïsoleerd proces (namespaces en cgroups)."]},
+{n:3,type:"multi",pts:2,q:"Welke uitspraken zijn juiste verschillen tussen een virtuele machine (VM) en een container?",
+ opts:["Een VM heeft een eigen kernel bovenop een hypervisor; een container deelt de kernel van de host.","Een container start veel sneller op dan een VM.","Een container emuleert hardware, een VM niet.","Een VM deelt de kernel van de host, een container heeft een eigen kernel.","Een container is een geïsoleerd proces op de host (namespaces en cgroups)."],ok:[0,1,4],
+ ex:["Een container deelt de kernel van de host en is een geïsoleerd proces; daardoor is hij veel lichter en start hij in seconden.","Een VM draait een eigen besturingssysteem met eigen kernel bovenop een hypervisor die hardware emuleert."]},
 {n:4,type:"multi",pts:2,q:"Welke uitspraken over containers in de praktijk zijn juist?",
  opts:["Op één host kunnen tientallen tot honderden containers tegelijk draaien.","Docker is niet de enige manier om containers te draaien: images zijn gestandaardiseerd (OCI) en werken ook met bv. Podman of containerd.","Microservices draaien vaak in containers die over meerdere machines verspreid zijn, en clouddiensten gebruiken containers op grote schaal.","Per host kan je van eenzelfde image maar één container starten.","Containers zijn enkel bedoeld voor ontwikkeling en testen, niet voor productie."],
  ok:[0,1,2],
@@ -120,7 +121,7 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  ex:["Lagen worden gedeeld. Een container krijgt enkel een eigen read/write-laag bovenaan."]},
 {n:6,type:"fill",pts:2,
  q:"<code>docker ps</code> geeft deze uitvoer:<pre>CONTAINER ID   IMAGE   COMMAND                  CREATED\nfa538e1a29bd   nginx   \"/docker-entrypoint.…\"   6 seconds ago</pre>Vul het ontbrekende woord aan om een interactieve shell in deze draaiende container te starten:<pre>docker ____ -it fa538e1a29bd /bin/sh</pre>",
- accept:["exec"],answer:"<code>exec</code>",
+ accept:["exec","docker exec","docker exec -it"],answer:"<code>exec</code>",
  ex:["<code>exec</code> voert iets uit in een draaiende container. Met <code>exit</code> stopt enkel die shell, niet de container.","<code>docker attach</code> liever niet: met <code>exit</code> sluit je dan de container."]},
 {n:7,type:"mc",pts:1,
  q:"Je voert deze commando's na elkaar uit. Er draaiden vooraf geen containers.<pre>$ docker container run -it fedora echo \"hello 1\"\nhello 1\n$ docker container run -it fedora echo \"hello 2\"\nhello 2\n$ docker container run -it fedora echo \"hello 3\"\nhello 3</pre>Hoeveel containers zijn er daarna nog actief (status Up)?",
@@ -134,14 +135,15 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  opts:["<code>docker stop web</code>","<code>docker exec -it 4f1c sh</code>","<code>docker run -d nginx:1.27</code> (start een tweede container)","<code>docker run -d web</code>","<code>docker exec -it nginx:1.27 sh</code>"],ok:[0,1,2],
  ex:["<b>Image</b> (naam:tag of image ID, voert zelf niets uit): <code>run</code>, <code>pull</code>, <code>push</code>, <code>tag</code>, <code>rmi</code>.","<b>Container</b> (naam of container ID): <code>start</code>, <code>stop</code>, <code>exec</code>, <code>logs</code>, <code>rm</code>.","D en E halen die twee door elkaar: <code>web</code> is een container, <code>nginx:1.27</code> een image."]},
 {n:10,type:"fill",pts:2,q:"Je voert <code>docker run bitnami/mongodb</code> uit. Welke tag van de image wordt gebruikt?",
- accept:["latest",":latest"],answer:"<code>latest</code>",
+ accept:["latest",":latest","bitnami/mongodb:latest","docker.io/bitnami/mongodb:latest","de tag latest","tag latest"],answer:"<code>latest</code>",
  ex:["Volledige naam: <code>[registry/][account/]naam[:tag]</code>. Zonder registry is het <code>docker.io</code>, zonder tag <code>latest</code>.","Een tag is een label, geen kopie. <code>latest</code> is niet automatisch de nieuwste: lokaal verandert hij pas bij <code>docker pull</code>."]},
-{n:11,type:"open",pts:2,
- q:"Je voert deze commando's uit:<pre>$ docker run hello-world\n$ docker ps -a\nCONTAINER ID   IMAGE         COMMAND    CREATED         STATUS\nb3cc9b72393f   hello-world   \"/hello\"   8 seconds ago   Exited (0) 7 seconds ago\n$ docker rm b3c</pre>Werkt het laatste commando? Antwoord met ja of nee en leg uit waarom.",
- model:["<b>Ja.</b> De container is gestopt (<code>Exited</code>), dus je mag hem verwijderen. Je mag een ID afkorten tot de eerste tekens, zolang die uniek zijn.","Je moet uit <code>docker ps</code> kunnen afleiden of een container nog draait: hij leeft zolang zijn hoofdproces (CMD/ENTRYPOINT) draait. <code>Exited (0)</code> = goed afgelopen, een ander getal = fout."]},
+{n:11,type:"mc",pts:1,
+ q:"Je voert deze commando's uit:<pre>$ docker run hello-world\n$ docker ps -a\nCONTAINER ID   IMAGE         COMMAND    CREATED         STATUS\nb3cc9b72393f   hello-world   \"/hello\"   8 seconds ago   Exited (0) 7 seconds ago\n$ docker rm b3c</pre>Werkt het laatste commando?",
+ opts:["Ja: de container is gestopt, en een afgekort ID volstaat zolang het uniek is.","Nee: je moet het volledige container-ID opgeven.","Nee: een gestopte container moet je eerst opnieuw starten voor je hem kan verwijderen.","Nee: <code>docker rm</code> verwijdert images; voor een container heb je <code>docker rmi</code> nodig."],ok:[0],
+ ex:["De container is gestopt (<code>Exited</code>), dus je mag hem verwijderen. Je mag een ID afkorten tot de eerste tekens, zolang die uniek zijn.","Omgekeerd voor D: <code>docker rm</code> = container, <code>docker rmi</code> = image."]},
 {n:12,type:"fill",pts:2,
  q:"In je <code>docker-compose.yml</code> staat:<pre>services:\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}</pre>In welk bestand, in dezelfde map, zet je <code>DB_PASSWORD=geheim</code>, zodat <code>docker compose up</code> de waarde automatisch invult? Geef de bestandsnaam.",
- accept:[".env"],answer:"<code>.env</code>",
+ accept:[".env","env",".env-bestand","env-bestand",".env bestand","env bestand",".env file","env file","bestand .env","het bestand .env","het .env-bestand","het .env bestand"],answer:"<code>.env</code>",
  ex:["Altijd opletten met <code>.env</code>: zet het in <code>.gitignore</code> én <code>.dockerignore</code>. Een wachtwoord dat ooit in een laag van een image zat, raak je niet meer kwijt."]},
 {n:13,type:"mc",pts:1,
  q:"Deze twee commando's werken allebei:<pre>docker run -d httpd\ndocker run -d httpd</pre>Maar bij deze twee commando's faalt het tweede:<pre>docker run -d -p 80:80 httpd\ndocker run -d -p 80:80 httpd</pre>Waarom?",
@@ -151,8 +153,9 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  q:"Op de host bestaat de map <code>/data/shared</code>. Je start twee containers:<pre>docker run -d --name container-A -v /data/shared:/app/output ubuntu-app-1\ndocker run -d --name container-B -v /data/shared:/var/log/app ubuntu-app-2</pre>De applicatie in container-A schrijft het bestand <code>rapport.pdf</code> in <code>/app/output/</code>. Wat gebeurt er?",
  opts:["<code>rapport.pdf</code> is enkel zichtbaar in container-A, want containers kunnen elkaars bestanden nooit zien.","<code>rapport.pdf</code> verschijnt meteen op de host in <code>/data/shared</code>, maar container-B ziet het pas na een herstart.","<code>rapport.pdf</code> is meteen zichtbaar op de host in <code>/data/shared</code> én in container-B als <code>/var/log/app/rapport.pdf</code>.","Container-A loopt vast, want een bind mount hoort exclusief bij de laatst gestarte container.","Het bestand wordt niet gedeeld, want de paden in beide containers zijn verschillend."],ok:[2],
  ex:["Bind mount: <code>-v mijnmap:containermap</code>. De bestanden staan op de host, de container denkt dat hij in zijn eigen map schrijft. Het is live, en het overleeft <code>docker rm</code>.","Containers met dezelfde hostmap delen die, ook met verschillende paden in de container.","Named volume (<code>-v pgdata:/...</code>): enkel een naam, Docker beheert de opslag."]},
-{n:15,type:"open",pts:2,q:"Leg uit wat er gebeurt met argumenten die je na de imagenaam meegeeft bij <code>docker run</code>, als de image (a) enkel een CMD heeft en (b) enkel een ENTRYPOINT heeft. Wanneer kies je voor ENTRYPOINT?",
- model:["<b>(a) CMD:</b> de argumenten vervangen de CMD. <code>docker run img ls</code> voert <code>ls</code> uit.","<b>(b) ENTRYPOINT:</b> de argumenten worden erachter geplakt. <code>ENTRYPOINT [\"echo\",\"hallo\"]</code> + <code>docker run img wereld</code> geeft <code>hallo wereld</code>.","<b>ENTRYPOINT</b> als de image altijd hetzelfde programma start (bv. een CLI-tool). Anders CMD."]},
+{n:15,type:"multi",pts:2,q:"Welke uitspraken over argumenten na de imagenaam bij <code>docker run</code> en over CMD/ENTRYPOINT zijn juist?",
+ opts:["Heeft de image enkel een CMD, dan vervangen de argumenten na de imagenaam de CMD.","Heeft de image enkel een CMD, dan worden de argumenten achter de CMD geplakt.","Heeft de image enkel een ENTRYPOINT, dan worden de argumenten achter de ENTRYPOINT geplakt.","ENTRYPOINT kies je als de image altijd hetzelfde programma moet starten, bv. een command-line-tool.","Een ENTRYPOINT kan je bij <code>docker run</code> nooit overschrijven."],ok:[0,2,3],
+ ex:["CMD = standaardcommando dat je kan vervangen: <code>docker run img ls</code> voert <code>ls</code> uit.","ENTRYPOINT: argumenten worden erachter geplakt; overschrijven kan wel, met <code>--entrypoint</code>."]},
 {n:16,type:"multi",pts:2,q:"Welke uitspraken over de RUN-instructie in een Dockerfile zijn juist?",
  opts:["Een volgende RUN-instructie overschrijft de vorige.","RUN mag maar één keer in een Dockerfile staan.","RUN mag meerdere keren in een Dockerfile staan.","RUN wordt uitgevoerd wanneer de container start.","RUN wordt uitgevoerd tijdens het bouwen van de image."],ok:[2,4],
  ex:["RUN dient om de image te maken: bij <code>docker build</code>, vóór het starten. Elke RUN maakt een laag."]},
@@ -166,7 +169,7 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  ex:["<code>scratch</code> is een lege containerdoos. Zonder CMD moet je het commando bij het opstarten meegeven."]},
 {n:19,type:"fill",pts:2,
  q:"Deze multi-stage Dockerfile is nog niet af:<pre># Stage 1: bouwen\nFROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env\nWORKDIR /src\nCOPY *.csproj ./\nRUN dotnet restore\nCOPY . ./\nRUN dotnet publish -c Release -o /out\n\n# Stage 2: productie\nFROM mcr.microsoft.com/dotnet/aspnet:10.0\nWORKDIR /app\n[AANVULLEN]\nENTRYPOINT [\"dotnet\", \"MyDotNetApp.dll\"]</pre>Schrijf de volledige regel voor <code>[AANVULLEN]</code> die de gepubliceerde bestanden uit de eerste stage naar de werkmap van de productie-stage kopieert.",
- regex:/^copy\s+--from=build-env\s+\/out\/?\s+(\.|\.\/|\/app\/?)$/i,answer:"<code>COPY --from=build-env /out .</code> (ook juist: <code>/app</code> als doel)",
+ regex:/^copy\s+--from[= ]build-env\s+\/out\/?\.?\s+(\.|\.\/|\/app\/?|\/app\/\.)$/i,answer:"<code>COPY --from=build-env /out .</code> (ook juist: <code>/app</code> als doel)",
  ex:["Haalt de dll's uit <code>/out</code> van de eerste stage naar de nieuwe. Vergeet de naam van de stage niet (de naam na <code>AS</code>)."]},
 {n:20,type:"mc",pts:1,
  q:"Een ontwikkelaar bouwt een image voor een C-applicatie. <code>apt-get install gcc</code> duurt 2 minuten, het compileren 5 seconden. De broncode <code>main.c</code> verandert vaak. Welke Dockerfile is het efficiëntst?",
@@ -188,9 +191,10 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  q:"Gegeven deze <code>docker-compose.yml</code>:<pre>services:\n  frontend-app:\n    image: nginx:alpine\n    ports:\n      - \"4000:80\"\n  data-service:\n    image: my-api-server\n    ports:\n      - \"6000:9000\"</pre><code>data-service</code> luistert in de container op poort 9000. Welke URL gebruikt de <code>frontend-app</code>-container om <code>data-service</code> aan te spreken?",
  accept:["http://data-service:9000","http://data-service:9000/","data-service:9000"],answer:"<code>http://data-service:9000</code>",
  ex:["De servicenaam (DNS van Compose) en de containerpoort, niet de hostpoort 6000. Vanaf de host zelf gebruik je wel <code>localhost:6000</code>."]},
-{n:25,type:"open",pts:2,
- q:"In deze <code>docker-compose.yml</code> zitten twee fouten: WordPress vindt de database niet, en na <code>docker compose down</code> en <code>up</code> is de database leeg. Benoem beide fouten en geef de correctie.<pre>services:\n  data:\n    image: mysql:8\n    restart: always\n    environment:\n      MYSQL_ROOT_PASSWORD: supersecretroot\n      MYSQL_DATABASE: wordpress\n      MYSQL_USER: wordpress\n      MYSQL_PASSWORD: supersecret\n  wordpress:\n    depends_on:\n      - data\n    image: wordpress\n    ports:\n      - \"8000:80\"\n    restart: always\n    environment:\n      WORDPRESS_DB_HOST: wordpress\n      WORDPRESS_DB_USER: wordpress\n      WORDPRESS_DB_PASSWORD: supersecret\nvolumes:\n  db_data: {}</pre>",
- model:["<b>1.</b> <code>WORDPRESS_DB_HOST: wordpress</code> verwijst naar zichzelf. Het moet de databankservice zijn: <code>data</code> (of <code>data:3306</code>).","<b>2.</b> Het volume <code>db_data</code> is gedeclareerd maar nergens gebruikt. Voeg bij de service <code>data</code> toe: <code>volumes: - db_data:/var/lib/mysql</code>."]},
+{n:25,type:"multi",pts:2,
+ q:"In deze <code>docker-compose.yml</code> zitten twee fouten: WordPress vindt de database niet, en na <code>docker compose down</code> en <code>up</code> is de database leeg. Welke aanpassingen lossen samen beide problemen op?<pre>services:\n  data:\n    image: mysql:8\n    restart: always\n    environment:\n      MYSQL_ROOT_PASSWORD: supersecretroot\n      MYSQL_DATABASE: wordpress\n      MYSQL_USER: wordpress\n      MYSQL_PASSWORD: supersecret\n  wordpress:\n    depends_on:\n      - data\n    image: wordpress\n    ports:\n      - \"8000:80\"\n    restart: always\n    environment:\n      WORDPRESS_DB_HOST: wordpress\n      WORDPRESS_DB_USER: wordpress\n      WORDPRESS_DB_PASSWORD: supersecret\nvolumes:\n  db_data: {}</pre>",
+ opts:["<code>WORDPRESS_DB_HOST: wordpress</code> vervangen door <code>WORDPRESS_DB_HOST: data</code>","<code>WORDPRESS_DB_HOST: wordpress</code> vervangen door <code>WORDPRESS_DB_HOST: localhost</code>","Bij de service <code>data</code> toevoegen: <code>volumes: - db_data:/var/lib/mysql</code>","Het blok <code>volumes: db_data: {}</code> onderaan verwijderen","Bij de service <code>wordpress</code> <code>ports: - \"3306:3306\"</code> toevoegen"],ok:[0,2],
+ ex:["Services vinden elkaar via hun servicenaam: de databank heet <code>data</code>; <code>wordpress</code> verwijst naar zichzelf.","Het named volume is bovenaan gedeclareerd, maar wordt pas gebruikt als je het bij de service koppelt aan de map waar MySQL zijn data bewaart."]},
 {n:26,type:"mc",pts:1,q:"Je staat in de map met <code>docker-compose.yml</code>. Met welk commando start je alle services in de achtergrond?",
  opts:["<code>docker compose start</code>","<code>docker compose up -d</code>","<code>docker run -d docker-compose.yml</code>","<code>docker compose build</code>"],ok:[1],
  ex:["<code>start</code> start enkel services die al aangemaakt zijn. <code>build</code> bouwt alleen images."]},
@@ -198,10 +202,11 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
  opts:["Het stopt en verwijdert de containers en het netwerk van het project. Named volumes blijven bestaan.","Het stopt de containers, maar verwijdert niets.","Het verwijdert containers, netwerk, volumes én images.","Het verwijdert enkel de volumes."],ok:[0],
  ex:["Volumes blijven, anders is je databank weg. Met <code>down -v</code> gaan ze wel mee. Images blijven altijd staan."]},
 {n:28,type:"fill",pts:2,q:"Op je Linux-host draait een eigen registry op poort 5000. Je hebt net lokaal de image <code>httpbin:v1</code> gebouwd. Welke naam moet de image krijgen (met <code>docker tag</code>) om ze naar die registry te kunnen pushen?",
- accept:["localhost:5000/httpbin:v1"],answer:"<code>localhost:5000/httpbin:v1</code>",
+ accept:["localhost:5000/httpbin:v1","docker tag httpbin:v1 localhost:5000/httpbin:v1","127.0.0.1:5000/httpbin:v1"],answer:"<code>localhost:5000/httpbin:v1</code>",
  ex:["De naam begint met de registry (<code>host:poort</code>). Daarna: <code>docker push localhost:5000/httpbin:v1</code>."]},
-{n:29,type:"open",pts:2,q:"Je hebt lokaal de image <code>webapp:1.0</code> gebouwd. Je wil die publiceren in je eigen repository op Docker Hub. Je gebruikersnaam is <code>kdgstudent</code>. Geef in de juiste volgorde de commando's die je uitvoert.",
- model:["<pre>docker login\ndocker tag webapp:1.0 kdgstudent/webapp:1.0\ndocker push kdgstudent/webapp:1.0</pre>","De naam is zeer belangrijk: <code>account/naam:tag</code>. Zonder je account vooraan krijg je <i>denied</i>.","Verkeerde naam gegeven? Niet opnieuw bouwen, gewoon opnieuw taggen (geen kopie, enkel een extra label) en die naam pushen."]},
+{n:29,type:"mc",pts:1,q:"Je hebt lokaal de image <code>webapp:1.0</code> gebouwd. Je wil die publiceren in je eigen repository op Docker Hub. Je gebruikersnaam is <code>kdgstudent</code>. Welke reeks commando's werkt?",
+ opts:["<code>docker login</code> → <code>docker tag webapp:1.0 kdgstudent/webapp:1.0</code> → <code>docker push kdgstudent/webapp:1.0</code>","<code>docker login</code> → <code>docker push webapp:1.0</code>","<code>docker tag kdgstudent/webapp:1.0</code> → <code>docker login</code> → <code>docker push kdgstudent/webapp:1.0</code>","<code>docker login</code> → <code>docker push kdgstudent webapp:1.0</code>"],ok:[0],
+ ex:["De naam is zeer belangrijk: <code>account/naam:tag</code>. Zonder je account vooraan probeert Docker naar <code>docker.io/library/...</code> te pushen en krijg je <i>denied</i>.","<code>docker tag</code> heeft twee namen nodig: de bestaande en de nieuwe."]},
 {n:30,type:"multi",pts:2,oos:true,q:"Naar welke van deze diensten kan je container images pushen?",
  opts:["Docker Hub","Quay.io","GitHub Container Registry (ghcr.io)","Google Artifact Registry","Docker Desktop","Docker Compose"],ok:[0,1,2,3],
  ex:["Docker Desktop en Docker Compose zijn tools, geen registries."]},
@@ -252,7 +257,7 @@ const MINE = [
  ex:["<code>-d</code> betekent enkel \"op de achtergrond\", niet \"blijf draaien\". <code>docker ps</code> toont enkel draaiende containers."]},
 {id:"R2-10",topic:"t2",type:"fill",pts:2,
  q:"Op je server draait al weken <code>kdgstudent/mvc:latest</code>. Je collega heeft net een nieuwe versie gepusht onder dezelfde naam en tag. Je doet:<pre>$ docker rm -f mvc\n$ docker run -d --name mvc -p 80:8080 kdgstudent/mvc</pre>Toch draait de oude versie. Welk volledig commando moest je vóór <code>docker run</code> uitvoeren?",
- accept:["docker pull kdgstudent/mvc","docker pull kdgstudent/mvc:latest","docker image pull kdgstudent/mvc","docker image pull kdgstudent/mvc:latest"],answer:"<code>docker pull kdgstudent/mvc</code>",
+ accept:["docker pull kdgstudent/mvc","docker pull kdgstudent/mvc:latest","docker image pull kdgstudent/mvc","docker image pull kdgstudent/mvc:latest","docker pull docker.io/kdgstudent/mvc","docker pull docker.io/kdgstudent/mvc:latest"],answer:"<code>docker pull kdgstudent/mvc</code>",
  ex:["<code>docker run</code> downloadt enkel als de image lokaal nog niet bestaat. Je lokale <code>latest</code> verschuift pas mee bij <code>docker pull</code>."]},
 {id:"R2-12",topic:"t2",type:"mc",pts:1,
  q:"<pre>$ docker run -d --rm --name api -p 80:3000 kdgstudent/api:2.0\n$ docker ps -a\nCONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES\n$ docker logs api\nError response from daemon: No such container: api</pre>De app crasht blijkbaar meteen bij het opstarten. Wat is de juiste verklaring en aanpak?",
@@ -260,7 +265,7 @@ const MINE = [
  ex:["Logs horen bij een container, niet bij een image. Container weg = logs weg."]},
 {id:"R1-6",topic:"t3",type:"fill",pts:2,
  q:"Op een host met IP <code>192.168.121.199</code> draait al een nginx-container met <code>-p 80:80</code>. Een tweede nginx-container moet bereikbaar zijn via <code>http://192.168.121.199:8080</code>. nginx luistert in de container op poort 80. Vul aan:<pre>docker run -d -p __________ nginx:latest</pre>",
- accept:["8080:80"],answer:"<code>8080:80</code>",
+ accept:["8080:80","-p 8080:80","--publish 8080:80"],answer:"<code>8080:80</code>",
  ex:["<code>-p HOSTPOORT:CONTAINERPOORT</code>. Hostpoort 80 is bezet, dus 8080 op de host naar 80 in de container. De daemon regelt dit met een iptables-DNAT-regel."]},
 {id:"R1-7",topic:"t3",type:"multi",pts:2,
  q:"Je start:<pre>docker run -d --name db1 -e POSTGRES_PASSWORD=geheim \\\n    -v pgdata:/var/lib/postgresql/data postgres:16</pre>Er bestond vooraf geen volume <code>pgdata</code>. Welke uitspraken zijn juist?",
@@ -330,11 +335,11 @@ const MINE = [
  ex:["<code>history</code> werkt op een image (lagen en instructies). <code>logs</code> hoort bij een container: <code>docker logs api</code>.","<code>api</code> is een containernaam: <code>docker pull api</code> zoekt <code>docker.io/library/api:latest</code>. Juist is <code>docker pull kdgstudent/api:2.1</code>."]},
 {id:"R3-9",topic:"t2",type:"fill",pts:2,
  q:"<pre>$ docker run -d --name worker kdgstudent/worker:1.0\n$ docker ps\nCONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES</pre>Een minuut later is <code>docker ps</code> leeg. Je wil nagaan of <code>worker</code> normaal gestopt is (<code>Exited (0)</code>) of met een fout. Welk volledig commando toont ook de gestopte containers, met hun status?",
- accept:["docker ps -a","docker container ls -a","docker ps --all","docker container ls --all"],answer:"<code>docker ps -a</code> (ook goed: <code>docker container ls -a</code>)",
+ accept:["docker ps -a","docker container ls -a","docker ps --all","docker container ls --all","docker container ps -a","docker container ps --all","docker ps -a --all"],answer:"<code>docker ps -a</code> (ook goed: <code>docker container ls -a</code>)",
  ex:["<code>docker ps</code> toont enkel draaiende containers. Bij een fout zoek je de oorzaak met <code>docker logs worker</code>, zolang de container niet verwijderd is."]},
 {id:"R3-4",topic:"t3",type:"fill",pts:2,
  q:"Op de host staat je website in <code>/home/student/site</code>. nginx serveert in de container de bestanden uit <code>/usr/share/nginx/html</code>. Een wijziging op de host moet meteen zichtbaar zijn, zonder de container opnieuw te bouwen of te starten. Vul aan:<pre>docker run -d -p 8080:80 -v ______________________ nginx:1.27</pre>",
- accept:["/home/student/site:/usr/share/nginx/html","/home/student/site/:/usr/share/nginx/html","/home/student/site:/usr/share/nginx/html/","/home/student/site/:/usr/share/nginx/html/"],answer:"<code>/home/student/site:/usr/share/nginx/html</code>",
+ accept:["/home/student/site:/usr/share/nginx/html","/home/student/site/:/usr/share/nginx/html","/home/student/site:/usr/share/nginx/html/","/home/student/site/:/usr/share/nginx/html/","-v /home/student/site:/usr/share/nginx/html","-v /home/student/site/:/usr/share/nginx/html"],answer:"<code>/home/student/site:/usr/share/nginx/html</code>",
  ex:["Bind mount <code>HOSTPAD:CONTAINERPAD</code>: de bestanden blijven op de host en nginx leest ze live."]},
 {id:"R3-12",topic:"t3",type:"mc",pts:1,
  q:"<pre>$ docker run -d --name app -v appdata:/data kdgstudent/notes:1.0\n  ... (enkele notities opgeslagen in /data) ...\n$ docker rm -f app\n$ docker run -d --name app2 -v appdata:/data kdgstudent/notes:1.0</pre>Wat ziet <code>app2</code> in <code>/data</code>?",
@@ -346,7 +351,7 @@ const MINE = [
  ex:["Configuratie ligt vast bij het aanmaken van een container: <code>up -d</code> maakt de gewijzigde container opnieuw aan, <code>restart</code> niet.","<code>stop</code> verwijdert niets. <code>down</code> laat volumes staan, <code>down -v</code> niet."]},
 {id:"R3-15",topic:"t4",type:"fill",pts:2,
  q:"<pre>services:\n  web:\n    image: kdgstudent/shop:1.0\n    build: ./shop\n    ports:\n      - \"80:8080\"</pre>Het project draait al. Je hebt de broncode in <code>./shop</code> aangepast. Welk volledig commando zorgt dat de image opnieuw gebouwd wordt en de container met de nieuwe code op de achtergrond draait?",
- accept:["docker compose up -d --build","docker compose up --build -d","docker compose up --build --detach","docker compose up --detach --build"],answer:"<code>docker compose up -d --build</code>",
+ accept:["docker compose up -d --build","docker compose up --build -d","docker compose up --build --detach","docker compose up --detach --build","docker-compose up -d --build","docker-compose up --build -d"],answer:"<code>docker compose up -d --build</code>",
  ex:["Zonder <code>--build</code> gebruikt Compose de bestaande lokale image, en zie je je wijziging niet."]},
 {id:"R3-3",topic:"t5",type:"mc",pts:1,
  q:"Deze Dockerfile wordt gebouwd als <code>logtest</code>:<pre>FROM alpine:3.20\nRUN echo \"gebouwd\" >> /log.txt\nCMD [\"sh\", \"-c\", \"echo gestart >> /log.txt && cat /log.txt\"]</pre>Daarna voer je uit:<pre>$ docker run --name t logtest\n$ docker start -a t</pre>(<code>-a</code> toont de output in je terminal.) Wat is de output van <code>docker start -a t</code>?",
@@ -401,7 +406,7 @@ let state = {phase:"start", n:20, sel:[], cur:0, ans:{}};
 try{ const s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s && Array.isArray(s.sel) && s.sel.every(id=>BYID[id])) state=s; }catch(e){}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 const $ = s => document.querySelector(s);
-const norm = s => s.trim().replace(/\s+/g," ").toLowerCase();
+const norm = s => s.trim().replace(/^[`'"“”‘’]+|[`'"“”‘’]+$/g,"").trim().replace(/\s+/g," ").toLowerCase();
 const fmt = x => (Math.round(x*10)/10).toString().replace(".",",");
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
@@ -422,7 +427,7 @@ function pick(n){
 function grade(q,a){
   if(q.type==="mc") return a.sel.length===1 && q.ok.includes(a.sel[0]) ? q.pts : 0;
   if(q.type==="multi"){ const hit=a.sel.filter(i=>q.ok.includes(i)).length; return Math.round(q.pts*hit/q.ok.length*10)/10; }
-  if(q.type==="fill"){ const v=norm(a.text); return (q.regex ? q.regex.test(v) : q.accept.map(norm).includes(v)) ? q.pts : 0; }
+  if(q.type==="fill"){ const v=norm(a.text), w=v.replace(/[.;,]+$/,""); const ok=x=>q.regex ? q.regex.test(x) : q.accept.map(norm).includes(x); return (ok(v)||ok(w)) ? q.pts : 0; }
   return a.self==null ? null : a.self;
 }
 function stat(id){ const a=state.ans[id], q=BYID[id]; if(!a||!a.done||a.pts==null) return ""; return a.pts>=q.pts?"ok":a.pts<=0?"bad":"half"; }
@@ -464,7 +469,7 @@ function renderStart(){
   <h3 style="font-size:15px;margin:20px 0 6px">Onderdelen</h3>
   <ul class="endlist" style="font-size:14px">${TOPICS.map(t=>`<li style="cursor:default"><span>${t.name}</span><span style="color:var(--muted)">${counts[t.id]} vragen</span></li>`).join("")}</ul>
   <div class="actions" style="margin-top:18px"><button class="btn primary" id="go">Start examen</button>${hasOld?`<button class="btn" id="resume">Verder met vorig examen (${state.sel.length} vragen)</button>`:""}</div>
-  <p class="hint" style="margin-top:10px">Puntentelling: meerkeuze 1 punt, de rest 2 punten. Een fout antwoord kost niets. Bij meerdere antwoorden krijg je punten in verhouding tot de juiste die je aanduidt. Open vragen beoordeel je zelf.</p></div>`;
+  <p class="hint" style="margin-top:10px"><b>Puntentelling</b><br>• Meerkeuze (één antwoord): 1 punt. Juist = 1, fout = 0.<br>• Invulvraag: 2 punten. Juist = 2, fout = 0.<br>• Meerdere antwoorden: 2 punten, in verhouding tot het aantal juiste opties dat je aanduidt. Een foute optie aanduiden kost niets.<br>Er gaan nooit punten af van je totaalscore: een fout antwoord levert voor die vraag gewoon geen (of minder) punten op.</p></div>`;
   $("#main").innerHTML=h;
   const r=$("#nRange"), v=$("#nVal");
   r.oninput=()=>{ state.n=+r.value; v.textContent=r.value; save(); };
