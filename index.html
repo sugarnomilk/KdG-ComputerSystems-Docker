@@ -457,7 +457,7 @@ function renderStart(){
   const counts = Object.fromEntries(TOPICS.map(t=>[t.id,POOL.filter(q=>q.topic===t.id).length]));
   const hasOld = state.sel.length>0;
   let h = `<div class="card"><h2 style="margin:0 0 6px;font-size:20px">Nieuw oefenexamen</h2>
-  <p style="margin:0 0 16px;color:var(--muted)">Kies hoeveel vragen je wil. Je krijgt een willekeurige selectie uit ${POOL.length} vragen (voorbeeldexamen en oefenrondes), verdeeld over alle onderdelen van de cursus: elk onderdeel komt minstens één keer aan bod. Vragen die out of scope zijn, zitten er niet in.</p>
+  <p style="margin:0 0 16px;color:var(--muted)">Kies hoeveel vragen je wil. Je krijgt een willekeurige selectie uit minstens ${POOL.length} vragen. Er worden doorlopend vragen bijgevoegd tot en met de examendatum. Vragen zijn verdeeld over alle onderdelen van de cursus: elk onderdeel komt minstens één keer aan bod.</p>
   <label for="nRange" style="font-weight:600">Aantal vragen: <span id="nVal">${state.n}</span></label>
   <input type="range" id="nRange" min="${MIN}" max="${MAX}" step="1" value="${state.n}" style="width:100%;margin:10px 0 8px">
   <div class="actions" style="margin-top:4px">${[10,15,20,30,MAX].map(v=>`<button class="btn" data-n="${v}">${v}</button>`).join("")}</div>
