@@ -26,9 +26,11 @@ Points are never subtracted from your total. Everything is graded automatically;
 
 Your progress is stored only in your own browser; nothing is sent anywhere. Use **"Kopieer resultaat"** at the end to keep your result or to go over your mistakes later (with AI or a classmate).
 
-## Updates
+## Upcoming
 
-More questions will be added up to the exam date. Reload the page to get the latest version.
+- More questions, added continuously up to the exam date. Reload the page to get the latest version.
+- Code cleanup: proper, semantic HTML and CSS (no change in how the app works).
+- A generalized version that can be reused for other exams: the quiz engine separated from the questions, so a new course only needs its own question file.
 
 ---
 
