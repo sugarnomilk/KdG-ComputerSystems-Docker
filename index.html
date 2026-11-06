@@ -538,7 +538,7 @@ function renderEnd(){
     let pick=""; if(a&&a.done){ if(q.opts) pick=" (gekozen: "+(a.sel.map(j=>L[j]).join(",")||"-")+")"; else if(q.type==="fill") pick=" (antwoord: "+a.text.trim()+")"; }
     lines.push(id+" · "+q.topic+" · "+s+pick); });
   const report=lines.join("\n");
-  h+=`</ul><h3 style="font-size:15px;margin:18px 0 6px">Resultaat bewaren</h3><p class="hint" style="margin:0 0 8px">Kopieer je resultaat als je het wil bijhouden, bv. in je notities of om er later met Claude of een medestudent je fouten mee te bespreken.</p><textarea id="report" readonly style="min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px">${escH(report)}</textarea>
+  h+=`</ul><h3 style="font-size:15px;margin:18px 0 6px">Resultaat bewaren</h3><p class="hint" style="margin:0 0 8px">Kopieer je resultaat als je het wil bijhouden, bv. in je notities of om er later met AI of een medestudent je fouten mee te bespreken.</p><textarea id="report" readonly style="min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px">${escH(report)}</textarea>
   <div class="actions" style="margin-top:10px"><button class="btn" id="copy">Kopieer resultaat</button><button class="btn primary" id="again">Nieuw examen</button><span class="hint" id="copied" style="align-self:center"></span></div></div>`;
   $("#main").innerHTML=h;
   $("#copy").onclick=async()=>{ const ta=$("#report"); try{ await navigator.clipboard.writeText(report); $("#copied").textContent="Gekopieerd."; }catch(e){ ta.focus(); ta.select(); $("#copied").textContent="Selecteer en kopieer de tekst hierboven (Ctrl/Cmd+C)."; } };
