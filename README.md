@@ -1,11 +1,35 @@
-# CS2 Docker – interactief oefenexamen
+# CS2 Docker – Practice Exam (v0.1)
 
-Oefenvragen voor het vak Computersystemen 2 (KdG), onderdeel Docker.
+A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG). No login or account needed.
 
-**Open de oefenpagina:** https://sugarnomilk.github.io/KdG-ComputerSystems-Docker/
+**Open the practice exam:** https://sugarnomilk.github.io/KdG-ComputerSystems-Docker/
 
-- Kies 10 tot 40 vragen; elk onderdeel van de cursus komt minstens één keer aan bod.
-- Antwoorden worden pas getoond na "Bevestig". Je voortgang blijft enkel in je eigen browser.
-- Leerstof: Docker Engine op Linux, volgens de cursus. Out of scope (o.a. Google Cloud / serverless) zit er niet in.
+> **Language:** the app and all questions are in **Dutch**, the same language as the real exam.
 
-Een deel van de vragen komt uit het voorbeeldexamen van de cursus; enkel bedoeld om te studeren.
+## What's included
+
+- Questions from the course's sample exam plus extra practice questions, covering the whole course: containers on Linux, the Docker CLI, ports and volumes, Docker Compose, Dockerfiles, layers / cache / multi-stage builds / security, and publishing to registries.
+- Choose 10 to 40 questions per session; every course topic appears at least once.
+- Scope: Docker Engine on Linux, as taught in the course. Topics the teacher marked out of scope (e.g. Google Cloud / serverless containers, Docker Desktop) are left out.
+
+## Scoring
+
+| Question type | Points | Grading |
+|---|---|---|
+| Multiple choice (one answer) | 1 | correct = 1, wrong = 0 |
+| Fill-in | 2 | correct = 2, wrong = 0 |
+| Multiple answers | 2 | in proportion to the correct options you select; selecting a wrong option costs nothing |
+
+Points are never subtracted from your total. Everything is graded automatically; fill-in answers ignore capitals, extra spaces, quotes and a trailing period.
+
+## Privacy
+
+Your progress is stored only in your own browser; nothing is sent anywhere. Use **"Kopieer resultaat"** at the end to keep your result or to go over your mistakes later (with AI or a classmate).
+
+## Updates
+
+More questions will be added up to the exam date. Reload the page to get the latest version.
+
+---
+
+Part of the questions come from the course's sample exam. For study purposes only.

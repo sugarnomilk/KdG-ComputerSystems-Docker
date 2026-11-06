@@ -85,7 +85,7 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
 <body>
 <div class="wrap">
   <header>
-    <h1>CS2 Docker – oefenexamen</h1>
+    <h1>CS2 Docker – oefenexamen <span style="font-size:13px;font-weight:400;color:var(--muted)">v0.1</span></h1>
     <div class="score" id="score"></div>
   </header>
   <div class="toolbar" id="toolbar">
@@ -395,6 +395,7 @@ const TOPICS = [
  {id:"t7",name:"Publiceren en registries"}
 ];
 
+const VERSION = "v0.1";
 
 const TYPE = {mc:"Meerkeuze",multi:"Meerdere antwoorden",fill:"Invulvraag",open:"Open vraag"};
 const L = "ABCDEFGH";
@@ -469,7 +470,7 @@ function renderStart(){
   <h3 style="font-size:15px;margin:20px 0 6px">Onderdelen</h3>
   <ul class="endlist" style="font-size:14px">${TOPICS.map(t=>`<li style="cursor:default"><span>${t.name}</span><span style="color:var(--muted)">${counts[t.id]} vragen</span></li>`).join("")}</ul>
   <div class="actions" style="margin-top:18px"><button class="btn primary" id="go">Start examen</button>${hasOld?`<button class="btn" id="resume">Verder met vorig examen (${state.sel.length} vragen)</button>`:""}</div>
-  <p class="hint" style="margin-top:10px"><b>Puntentelling</b><br>• Meerkeuze (één antwoord): 1 punt. Juist = 1, fout = 0.<br>• Invulvraag: 2 punten. Juist = 2, fout = 0.<br>• Meerdere antwoorden: 2 punten, in verhouding tot het aantal juiste opties dat je aanduidt. Een foute optie aanduiden kost niets.<br>Er gaan nooit punten af van je totaalscore: een fout antwoord levert voor die vraag gewoon geen (of minder) punten op.</p></div>`;
+  <p class="hint" style="margin-top:10px"><b>Puntentelling</b><br>• Meerkeuze (één antwoord): 1 punt. Juist = 1, fout = 0.<br>• Invulvraag: 2 punten. Juist = 2, fout = 0.<br>• Meerdere antwoorden: 2 punten, in verhouding tot het aantal juiste opties dat je aanduidt. Een foute optie aanduiden kost niets.<br>Er gaan nooit punten af van je totaalscore: een fout antwoord levert voor die vraag gewoon geen (of minder) punten op.<br>Alles wordt automatisch verbeterd. Bij invulvragen maken hoofdletters, spaties, aanhalingstekens en een punt op het einde niets uit.</p><p class="hint" style="margin-top:10px"><b>Privacy</b><br>Je voortgang blijft enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p></div>`;
   $("#main").innerHTML=h;
   const r=$("#nRange"), v=$("#nVal");
   r.oninput=()=>{ state.n=+r.value; v.textContent=r.value; save(); };
@@ -538,7 +539,7 @@ function renderEnd(){
   state.sel.forEach((id,k)=>{ const a=state.ans[id], q=BYID[id]; const s=a&&a.done&&a.pts!=null?`${fmt(a.pts)} / ${q.pts}`:"—";
     h+=`<li data-k="${k}"><span>Vraag ${k+1} · ${TNAME[q.topic]}</span><span>${s}</span></li>`; });
   const d=new Date(), ds=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-  const lines=["Resultaat oefenpagina CS2 Docker – "+ds,"Score: "+fmt(got)+" / "+max+" ("+pct+"%)",""];
+  const lines=["Resultaat oefenpagina CS2 Docker "+VERSION+" – "+ds,"Score: "+fmt(got)+" / "+max+" ("+pct+"%)",""];
   state.sel.forEach(id=>{ const a=state.ans[id], q=BYID[id]; const s=a&&a.done&&a.pts!=null ? (a.pts>=q.pts?"✅":a.pts<=0?"❌":"🟡")+" "+fmt(a.pts)+"/"+q.pts : "– niet beantwoord";
     let pick=""; if(a&&a.done){ if(q.opts) pick=" (gekozen: "+(a.sel.map(j=>L[j]).join(",")||"-")+")"; else if(q.type==="fill") pick=" (antwoord: "+a.text.trim()+")"; }
     lines.push(id+" · "+q.topic+" · "+s+pick); });
