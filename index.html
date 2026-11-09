@@ -404,7 +404,7 @@ const MINE = [
  ex:["Elke FROM start een nieuwe, lege stage. In de eindimage zit enkel de laatste stage plus wat je met <code>COPY --from</code> overneemt: hier enkel het gecompileerde programma."]},
 {id:"R5-15",topic:"t7",type:"fill",pts:2,
  q:"Gisteren startte je een eigen registry en pushte je er een image naar:<pre>$ docker run -d -p 5000:5000 --name registry registry:latest\n$ docker tag mynginx localhost:5000/mynginx:v1\n$ docker push localhost:5000/mynginx:v1</pre>Vannacht werd de host herstart. Vandaag lukt <code>docker push localhost:5000/mynginx:v2</code> niet, en <code>docker ps -a</code> toont de container <code>registry</code> als <code>Exited</code>. Met welk volledig commando start je deze bestaande registry-container opnieuw (zonder een nieuwe aan te maken)?",
- accept:["docker start registry","docker container start registry","start registry"],answer:"<code>docker start registry</code>",
+ accept:["docker start registry","docker container start registry"],answer:"<code>docker start registry</code>",
  ex:["<code>start</code> werkt op een container: de naam uit de kolom NAMES. <code>localhost:5000/mynginx:v1</code> is een imagenaam.","Met <code>--restart=always</code> bij de eerste <code>docker run</code> was de registry na de reboot vanzelf gestart."]},
 {id:"R5-16",topic:"t2",type:"multi",pts:2,
  q:"<pre>$ docker run -d --name db \\\n    -e POSTGRES_USER=myuser \\\n    -e POSTGRES_PASSWORD=geheim \\\n    -e POSTGRES_DB=mydb \\\n    postgres:17</pre>Welke uitspraken zijn juist?",
