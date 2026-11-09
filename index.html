@@ -636,7 +636,7 @@ function pick(n){
 
 function grade(q,a){
   if(q.type==="mc") return a.sel.length===1 && q.ok.includes(a.sel[0]) ? q.pts : 0;
-  if(q.type==="multi"){ const hit=a.sel.filter(i=>q.ok.includes(i)).length; return Math.round(q.pts*hit/q.ok.length*10)/10; }
+  if(q.type==="multi"){ const hit=a.sel.filter(i=>q.ok.includes(i)).length, miss=a.sel.length-hit; return Math.max(0, Math.round(q.pts*(hit-miss)/q.ok.length*10)/10); }
   if(q.type==="fill"){ const v=norm(a.text), w=v.replace(/[.;,]+$/,""); const ok=x=>q.regex ? q.regex.test(x) : q.accept.map(norm).includes(x); return (ok(v)||ok(w)) ? q.pts : 0; }
   return a.self==null ? null : a.self;
 }
@@ -679,7 +679,7 @@ function renderStart(){
   <h3 style="font-size:15px;margin:20px 0 6px">Onderdelen</h3>
   <ul class="endlist" style="font-size:14px">${TOPICS.map(t=>`<li style="cursor:default"><span>${t.name}</span><span style="color:var(--muted)">${counts[t.id]} vragen</span></li>`).join("")}</ul>
   <div class="actions" style="margin-top:18px"><button class="btn primary" id="go">Start examen</button>${hasOld?`<button class="btn" id="resume">Verder met vorig examen (${state.sel.length} vragen)</button>`:""}</div>
-  <p class="hint" style="margin-top:10px"><b>Puntentelling</b><br>• Meerkeuze (één antwoord): 1 punt. Juist = 1, fout = 0.<br>• Invulvraag: 2 punten. Juist = 2, fout = 0.<br>• Meerdere antwoorden: 2 punten, in verhouding tot het aantal juiste opties dat je aanduidt. Een foute optie aanduiden kost niets.<br>Er gaan nooit punten af van je totaalscore: een fout antwoord levert voor die vraag gewoon geen (of minder) punten op.<br>Alles wordt automatisch verbeterd. Bij invulvragen maken hoofdletters, spaties, aanhalingstekens en een punt op het einde niets uit.</p><p class="hint" style="margin-top:10px"><b>Privacy</b><br>Je voortgang blijft enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p></div>`;
+  <p class="hint" style="margin-top:10px"><b>Puntentelling</b><br>• Meerkeuze (één antwoord): 1 punt. Juist = 1, fout = 0.<br>• Invulvraag: 2 punten. Juist = 2, fout = 0.<br>• Meerdere antwoorden: 2 punten. Elke juiste optie die je aanduidt is 2 ÷ (aantal juiste opties) waard; elke foute optie die je aanduidt trekt evenveel af. Niet gokken dus. Een vraag geeft nooit minder dan 0.<br>Voorbeeld: 2 juiste opties, je duidt er één juiste en één foute aan → 1 − 1 = 0 punten.<br>Alles wordt automatisch verbeterd. Bij invulvragen maken hoofdletters, spaties, aanhalingstekens en een punt op het einde niets uit.</p><p class="hint" style="margin-top:10px"><b>Privacy</b><br>Je voortgang blijft enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p></div>`;
   $("#main").innerHTML=h;
   const r=$("#nRange"), v=$("#nVal");
   r.oninput=()=>{ state.n=+r.value; v.textContent=r.value; save(); };
