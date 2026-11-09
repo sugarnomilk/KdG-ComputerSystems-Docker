@@ -528,8 +528,8 @@ const MINE = [
  ex:["EXPOSE is documentatie, LABEL is metadata. RUN gebeurt één keer bij <code>docker build</code>, CMD bij elke start."]},
 {id:"R6-30",topic:"t7",type:"fill",pts:2,
  q:"<pre>$ docker ps -a\nCONTAINER ID   IMAGE                                STATUS                     NAMES\n3fa91c0d22e1   localhost:5000/kdgstudent/blog:2.1   Exited (0) 9 hours ago     blog</pre>De host werd vannacht herstart. Met welk volledig commando start je deze <b>bestaande</b> container opnieuw, zonder een nieuwe aan te maken?",
- accept:["docker start blog","docker container start blog","docker start 3fa91c0d22e1","docker start 3fa9","docker start 3fa91c0d","docker container start 3fa91c0d22e1"],answer:"<code>docker start blog</code>",
- ex:["<code>start</code> krijgt de containernaam (kolom NAMES) of het container ID, niet de imagenaam."]},
+ regex:/^docker (container )?start (blog|3(?:f(?:a(?:9(?:1(?:c(?:0(?:d(?:2(?:2(?:e(?:1)?)?)?)?)?)?)?)?)?)?)?)$/,answer:"<code>docker start blog</code> (ook juist: het container ID of de eerste tekens ervan, bv. <code>docker start 3fa9</code>)",
+ ex:["<code>start</code> krijgt de containernaam (kolom NAMES) of het container ID, niet de imagenaam. Een ID mag je afkorten tot de eerste tekens, zolang die uniek zijn (voorbeeldexamen vraag 11): hier staat er maar één container, dus ook <code>docker start 3</code> is juist."]},
 {id:"R7-1",topic:"t1",type:"multi",pts:2,
  q:"Een bedrijf verhuist zijn applicaties van virtuele machines naar Docker-containers op één Linux-host. De security officer is bezorgd. Welke uitspraken zijn juist?",
  opts:["Wordt een kernelkwetsbaarheid vanuit één container misbruikt, dan kan een aanvaller ook de host en de andere containers treffen.","Containers zijn trager dan VM's, omdat Docker een emulatielaag voor de hardware toevoegt.","Bij VM's is dat kernelrisico kleiner, omdat elke VM een eigen kernel heeft bovenop een hypervisor.","Elke container krijgt een eigen kopie van de kernel, zodat een lek beperkt blijft tot die ene container.","Een app die op de laptop van de ontwikkelaar werkt, start in een container op de server vaak niet, omdat de image de systeembibliotheken van de laptop mist."],ok:[0,2],
@@ -747,7 +747,7 @@ const MINE = [
  ex:["Geen hypervisor, één gedeelde kernel. chroot alleen is geen isolatie."]},
 {id:"R8-35",topic:"t2",type:"fill",pts:2,
  q:"<pre>$ docker ps -a\nCONTAINER ID   IMAGE                                STATUS                    NAMES\n9e8d7c6b5a41   localhost:5000/kdgstudent/wiki:3.0   Exited (0) 2 hours ago    wiki\n1f2e3d4c5b6a   postgres:16                          Exited (0) 2 hours ago    wikidb</pre>De host werd herstart. Met welk volledig commando start je de <b>bestaande</b> container van de wiki-app opnieuw (niet de databank), zonder een nieuwe container aan te maken?",
- regex:/^docker (container )?start (wiki|9e8d[0-9a-f]*)$/,
+ regex:/^docker (container )?start (wiki|9(?:e(?:8(?:d(?:7(?:c(?:6(?:b(?:5(?:a(?:4(?:1)?)?)?)?)?)?)?)?)?)?)?)$/,
  answer:"<code>docker start wiki</code>",
  ex:["<code>start</code> krijgt een containernaam of -ID. <code>docker start</code> heeft geen <code>-d</code>: de container start vanzelf op de achtergrond."]}
 ];
