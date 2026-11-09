@@ -85,7 +85,7 @@ nav.pager{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
 <body>
 <div class="wrap">
   <header>
-    <h1>CS2 Docker – oefenexamen <span style="font-size:13px;font-weight:400;color:var(--muted)">v0.1</span></h1>
+    <h1>CS2 Docker – oefenexamen <span style="font-size:13px;font-weight:400;color:var(--muted)">v0.2</span></h1>
     <div class="score" id="score"></div>
   </header>
   <div class="toolbar" id="toolbar">
@@ -686,7 +686,92 @@ const MINE = [
  q:"<pre>$ docker ps -a\nCONTAINER ID   IMAGE                                STATUS                    NAMES\n9e8d7c6b5a41   localhost:5000/kdgstudent/wiki:3.0   Exited (0) 2 hours ago    wiki\n1f2e3d4c5b6a   postgres:16                          Exited (0) 2 hours ago    wikidb</pre>De host werd herstart. Met welk volledig commando start je de <b>bestaande</b> container van de wiki-app opnieuw (niet de databank), zonder een nieuwe container aan te maken?",
  regex:/^docker (container )?start (wiki|9(?:e(?:8(?:d(?:7(?:c(?:6(?:b(?:5(?:a(?:4(?:1)?)?)?)?)?)?)?)?)?)?)?)$/,
  answer:"<code>docker start wiki</code>",
- ex:["<code>start</code> krijgt een containernaam of -ID. <code>docker start</code> heeft geen <code>-d</code>: de container start vanzelf op de achtergrond."]}
+ ex:["<code>start</code> krijgt een containernaam of -ID. <code>docker start</code> heeft geen <code>-d</code>: de container start vanzelf op de achtergrond."]},
+{id:"R9-1",topic:"t7",type:"multi",pts:2,
+ q:"<pre>$ docker ps -a\nCONTAINER ID   IMAGE                 STATUS                  NAMES\n3c9a71e0b2d4   kdgstudent/blog:1.0   Exited (0) 1 hour ago   blog</pre>Er werd geen volume gebruikt. In de read/write-laag van <code>blog</code> staan blogposts die gebruikers hebben opgeladen. Welke uitspraken zijn juist?",
+ opts:["<code>docker start blog</code> start dezelfde container opnieuw, en de posts staan er nog.","<code>docker run -d kdgstudent/blog:1.0</code> start een container waarin dezelfde posts staan.","<code>docker start 3c9</code> werkt ook.","<code>docker start -d blog</code> start de container op de achtergrond.","<code>docker run -d blog</code> start de bestaande container opnieuw op de achtergrond."],
+ ok:[0,2],
+ ex:["<code>start</code> = een bestaande container (naam of uniek begin van het ID); de read/write-laag blijft.","<code>run</code> = altijd een <b>nieuwe</b> container vanuit een <b>image</b>, met een lege read/write-laag. <code>blog</code> is een containernaam: <code>docker run -d blog</code> zoekt de image <code>docker.io/library/blog:latest</code>.","<code>docker start</code> heeft geen <code>-d</code>."]},
+{id:"R9-7a",topic:"t7",type:"multi",pts:2,
+ q:"<pre>$ docker build -t kdgstudent/api:2.0 .\n$ docker tag kdgstudent/api:2.0 localhost:5000/kdgstudent/api:2.0\n$ docker tag kdgstudent/api:2.0 localhost:5000/kdgstudent/api:latest\n$ docker push localhost:5000/kdgstudent/api:2.0</pre>Alles lukt. Welke uitspraken zijn juist?",
+ opts:["<code>docker push kdgstudent/api:2.0</code> zou naar dezelfde plek pushen als het laatste commando.","Op <code>localhost:5000</code> staat nu enkel de tag <code>2.0</code>; <code>latest</code> moet je apart pushen.","<code>docker images</code> toont drie regels met hetzelfde IMAGE ID.","De twee <code>docker tag</code>-commando's maakten kopieën, dus de image staat drie keer op je schijf.","Na <code>docker tag</code> bestaat <code>kdgstudent/api:2.0</code> niet meer, omdat de image hernoemd werd."],
+ ok:[1,2],
+ ex:["De registry staat in de naam; zonder hostnaam vooraan is het <code>docker.io</code>.","Een tag is een extra label: geen kopie en geen hernoeming. Je pusht per tag."]},
+{id:"R9-7b",topic:"t7",type:"multi",pts:2,
+ q:"<pre>$ docker run -d -p 5000:5000 --name registry registry:latest</pre>De host wordt herstart. Welke uitspraken zijn juist?",
+ opts:["De registry draait daarna vanzelf weer, omdat ze met <code>-d</code> gestart werd.","<code>docker start registry</code> start dezelfde registry-container opnieuw.","Met <code>--restart=always</code> bij <code>docker run</code> was ze na de herstart vanzelf gestart.","<code>docker start -d registry</code> start ze op de achtergrond.","Voor een push naar <code>localhost:5000</code> moet je eerst <code>docker login</code> doen bij Docker Hub."],
+ ok:[1,2],
+ ex:["Cursus (private registry): \"Start registry again: <code>docker start registry</code> OR <code>docker run … --restart=always</code>\".","<code>-d</code> betekent enkel \"op de achtergrond\". <code>docker login</code> is voor Docker Hub."]},
+{id:"R9-12",topic:"t7",type:"fill",pts:2,
+ q:"Je hebt lokaal de image <code>webapp:1.0</code>. Je bedrijf heeft een eigen registry op <code>registry.kdg.be</code>. Vul aan, zodat je de image daarna met dezelfde naam en tag naar die registry kan pushen:<pre>docker tag webapp:1.0 ______________________</pre>",
+ regex:/^(docker (image )?tag webapp:1\.0 )?registry\.kdg\.be\/webapp:1\.0$/,
+ answer:"<code>registry.kdg.be/webapp:1.0</code>",
+ ex:["Volledige naam: <code>[registry/][account/]naam[:tag]</code>. Daarna: <code>docker push registry.kdg.be/webapp:1.0</code>."]},
+{id:"R9-2",topic:"t5",type:"multi",pts:2,
+ q:"<pre>FROM nginx:1.27\nLABEL author=\"Student &lt;student@kdg.be&gt;\"\nADD https://example.com/logo.png /usr/share/nginx/html/\nCOPY index.html style.css /usr/share/nginx/html/</pre>Welke uitspraken zijn juist?",
+ opts:["ADD kan een bestand van een URL ophalen; COPY kan dat niet.","Schrijf je de COPY-regel als <code>COPY index.html style.css /usr/share/nginx/html</code> (zonder slash op het einde van het doel), dan werkt de build nog altijd.","LABEL voegt metadata toe (bv. de auteur) en maakt geen bestandslaag.","Volgens de cursus gebruik je best altijd ADD, omdat het meer kan dan COPY.","De COPY-regel is geldig: er zijn twee bronnen, en het doel eindigt op <code>/</code>."],
+ ok:[0,2,4],
+ ex:["Cursus: \"If &gt;1 SRC, DST must end with a slash /\" en \"You'll mostly use COPY\".","Het laatste argument van COPY is altijd het doel. Enkel RUN, COPY en ADD maken lagen."]},
+{id:"R9-8",topic:"t5",type:"mc",pts:1,
+ q:"Een Dockerfile bevat na elkaar <code>WORKDIR /opt</code>, <code>WORKDIR app</code> en <code>WORKDIR config</code>. Wat is daarna de werkmap?",
+ opts:["<code>/config</code>","<code>/opt/app/config</code>","<code>config</code>","De build faalt: WORKDIR moet een absoluut pad zijn."],
+ ok:[1],
+ ex:["Cursus: WORKDIR is \"absolute, or relative to previous\"."]},
+{id:"R9-3",topic:"t3",type:"multi",pts:2,
+ q:"De image <code>nginx:1.27</code> bevat <code>EXPOSE 80</code>. Je start:<pre>docker run -d --name web -P -v /srv/site:/usr/share/nginx/html nginx:1.27</pre>Welke uitspraken zijn juist?",
+ opts:["De site is bereikbaar via poort 80 van de host, omdat nginx in de container op poort 80 luistert.","Docker kiest zelf een willekeurige hostpoort; welke, zie je in de kolom PORTS van <code>docker ps</code>.","Zonder <code>-P</code> zou de site ook bereikbaar zijn via poort 80 van de host, omdat de image <code>EXPOSE 80</code> bevat.","Na <code>docker rm -f web</code> staan de bestanden nog in <code>/srv/site</code>.","<code>docker exec web sh -c \"echo x &gt; /usr/share/nginx/html/x.html\"</code> maakt <code>/srv/site/x.html</code> aan op de host."],
+ ok:[1,3,4],
+ ex:["<code>-P</code> publiceert de ge-EXPOSE-de poorten op willekeurige hostpoorten; EXPOSE zelf publiceert niets.","Een bind mount schrijft rechtstreeks in de hostmap en overleeft <code>docker rm</code>."]},
+{id:"R9-9",topic:"t3",type:"multi",pts:2,
+ q:"De app luistert in de container op poort 3000. Je start:<pre>docker run -d --name shop -p 8080:3000 kdgstudent/shop:1.0</pre>Welke uitspraken zijn juist?",
+ opts:["Op de host zelf bereik je de app via <code>http://localhost:3000</code>.","De Docker-daemon maakt een iptables-regel (DNAT) die verkeer naar poort 8080 van de host doorstuurt naar poort 3000 in de container.","<code>-p 3000:8080</code> had hetzelfde resultaat gegeven.","Een tweede container met <code>-p 8080:3000</code> faalt, omdat poort 8080 op de host al in gebruik is.","Een tweede container van dezelfde image met <code>-p 8081:3000</code> lukt."],
+ ok:[1,3,4],
+ ex:["<code>-p HOST:CONTAINER</code>. Cursus: \"The docker daemon creates a firewall rule using iptables to perform destination nat (DNAT)\" en \"A port on the host can only be used for publishing once\"."]},
+{id:"R9-13",topic:"t3",type:"mc",pts:1,
+ q:"Op een Linux-host start de gewone gebruiker <code>jan</code> (geen root) zonder Docker een eigen webserverprogramma dat op poort 80 wil luisteren. Het programma geeft een fout over rechten. Wat is de verklaring?",
+ opts:["Poort 80 is op een host met Docker altijd voorbehouden aan de Docker-daemon.","Poorten onder 1024 zijn \"privileged ports\": zonder root-rechten kan je er niet op luisteren.","<code>jan</code> moet eerst <code>docker login</code> uitvoeren.","Poort 80 kan je enkel gebruiken via een iptables-DNAT-regel."],
+ ok:[1],
+ ex:["Met Docker lukt <code>-p 80:80</code> wel: de daemon (root) maakt de DNAT-regel."]},
+{id:"R9-4",topic:"t4",type:"multi",pts:2,
+ q:"<pre>name: shop\nservices:\n  api:\n    image: kdgstudent/shop-api:1.0\n    ports:\n      - \"8080:3000\"\n  db:\n    image: postgres:17\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}</pre>Je voert in de projectmap <code>docker compose up -d</code> uit. Welke uitspraken zijn juist?",
+ opts:["De container van <code>api</code> heet <code>shop-api-1</code>.","<code>api</code> kan de databank niet bereiken, omdat <code>db</code> geen <code>ports:</code> heeft.","<code>api</code> bereikt de databank via de hostnaam <code>db</code>.","Op de host zelf bereik je <code>api</code> via <code>http://localhost:3000</code>.","<code>docker compose exec api sh</code> opent een shell in de draaiende container van <code>api</code>."],
+ ok:[0,2,4],
+ ex:["Containernaam: <code>&lt;project&gt;-&lt;service&gt;-&lt;nummer&gt;</code>, met de projectnaam uit <code>name:</code>.","Compose heeft een interne DNS: elke servicenaam is een hostnaam. <code>ports:</code> opent enkel een poort op de host voor verkeer van buitenaf (hier 8080).","Ezelsbruggetje: <code>ports:</code> = de deur naar buiten, servicenaam = het adres binnenshuis."]},
+{id:"R9-10a",topic:"t4",type:"multi",pts:2,
+ q:"<pre>services:\n  web:\n    image: kdgstudent/web:1.0\n    ports:\n      - \"8000:80\"\n  api:\n    image: kdgstudent/api:1.0</pre>De app in <code>api</code> luistert in de container op poort 3000. Het project draait met <code>docker compose up -d</code>. Welke uitspraken zijn juist?",
+ opts:["<code>web</code> kan <code>api</code> niet bereiken, omdat <code>api</code> geen <code>ports:</code> heeft.","Om <code>api</code> vanuit <code>web</code> te bereiken, moet je bij <code>api</code> <code>ports: - \"3000:3000\"</code> toevoegen.","Een browser op de host bereikt <code>web</code> via poort 8000 van de host.","Een browser op de host bereikt <code>web</code> via poort 80 van de host."],
+ ok:[2],
+ ex:["<code>ports:</code> is enkel voor verkeer van buitenaf, via de hostpoort. Binnen het project vinden services elkaar op hun servicenaam (bv. <code>http://api:3000</code>); daarvoor is geen <code>ports:</code> nodig."]},
+{id:"R9-10b",topic:"t4",type:"multi",pts:2,
+ q:"<pre>name: blog\nservices:\n  data:\n    image: mysql:8\n  wordpress:\n    image: wordpress</pre>Je startte het project met <code>docker compose up -d</code>. De container van <code>data</code> is intussen gestopt, die van <code>wordpress</code> draait nog. Je staat in de projectmap. Welke uitspraken zijn juist?",
+ opts:["<code>docker compose exec data sh</code> opent een shell in de container van <code>data</code>.","De container van <code>wordpress</code> heet <code>blog-wordpress-1</code>.","<code>docker exec -it wordpress sh</code> opent een shell in de container van <code>wordpress</code>.","<code>docker compose logs -f</code> volgt de output van de services live.","De container van <code>wordpress</code> heet <code>wordpress</code>, net als de service."],
+ ok:[1,3],
+ ex:["<code>exec</code> (ook <code>compose exec</code>) werkt enkel in een draaiende container.","<code>docker exec</code> verwacht een containernaam (<code>blog-wordpress-1</code>), <code>docker compose exec</code> een servicenaam (<code>wordpress</code>)."]},
+{id:"R9-14",topic:"t4",type:"fill",pts:2,
+ q:"Je staat in de map met <code>docker-compose.yml</code>, en het project draait. Geef het volledige commando dat <code>hostname</code> uitvoert in de draaiende container van de service <code>web</code>.",
+ regex:/^docker compose exec( -it| -ti| -i -t| -t -i)? web hostname$/,
+ answer:"<code>docker compose exec web hostname</code>",
+ ex:["Zo in de cursus (Compose-CLI). <code>web</code> is een servicenaam; gewone <code>docker exec</code> verwacht een containernaam (bv. <code>&lt;project&gt;-web-1</code>). <code>-it</code> mag, maar is niet nodig."]},
+{id:"R9-5",topic:"t1",type:"multi",pts:2,
+ q:"Een team start een CI-runner van een onbekende uitgever. De image heeft geen <code>USER</code>-instructie.<pre>docker run -d --name ci \\\n  -v /var/run/docker.sock:/var/run/docker.sock \\\n  -e DB_PASSWORD=geheim \\\n  someone/ci-runner:latest</pre>Welke uitspraken zijn juist?",
+ opts:["Root in de container is een aparte gebruiker zonder rechten op de host, dus als root draaien is geen risico.","Wie in de container de Docker-socket kan gebruiken, heeft in de praktijk root-rechten op de host.","Iedereen die <code>docker inspect ci</code> kan uitvoeren, kan de waarde van <code>DB_PASSWORD</code> lezen.","Een geheugenlek in <code>ci</code> kan de host niet treffen, omdat de container in eigen namespaces draait.","Met een specifieke versietag in plaats van <code>:latest</code> weet je beter welke image je draait."],
+ ok:[1,2,4],
+ ex:["<code>docker.sock</code> mounten = de host weggeven. UID 0 in de container = UID 0 op de host.","Namespaces bepalen enkel wat een proces ziet; zonder limieten kan één container de host uithongeren. <code>-e</code> is zichtbaar met <code>docker inspect</code>."]},
+{id:"R9-11",topic:"t1",type:"multi",pts:2,
+ q:"Welke maatregelen verkleinen het beveiligingsrisico van containers op een gedeelde host?",
+ opts:["Wachtwoorden met <code>-e</code> meegeven in plaats van als bestand via een bind mount.","Images enkel gebruiken van betrouwbare uitgevers (officiële of geverifieerde images).","Alle gebruikers in de groep <code>docker</code> zetten, zodat niemand nog <code>sudo</code> nodig heeft.","In de Dockerfile met <code>USER</code> een gewone gebruiker instellen.","De kernel van de host up-to-date houden."],
+ ok:[1,3,4],
+ ex:["Cursus (container security): \"Secrets at runtime: with bind mount · Avoid environment variables\", \"Run container as regular USER\", \"Do you 'trust' images?\".","De groep <code>docker</code> = root-rechten (\"here be dragons\")."]},
+{id:"R9-6",topic:"t2",type:"multi",pts:2,
+ q:"<pre>$ docker run hello-world\n$ docker ps -a\nCONTAINER ID   IMAGE         COMMAND    STATUS                     NAMES\nb3cc9b72393f   hello-world   \"/hello\"   Exited (0) 7 seconds ago   eager_lamport</pre>Je wil deze container verwijderen. Welke uitspraken zijn juist?",
+ opts:["<code>docker rm b3c</code> werkt: de container is gestopt, en <code>b3c</code> is een uniek begin van het ID.","<code>docker rm hello-world</code> doet hetzelfde.","<code>docker rm b3c</code> faalt, omdat je altijd het volledige container ID moet opgeven.","<code>docker rm eager_lamport</code> doet hetzelfde.","Na <code>docker rm b3c</code> is ook de image <code>hello-world</code> van je schijf verwijderd."],
+ ok:[0,3],
+ ex:["<code>rm</code> werkt op een container: naam of uniek begin van het ID. De image verwijder je met <code>rmi</code>."]},
+{id:"R9-15",topic:"t1",type:"multi",pts:2,
+ q:"Een collega zegt: \"Een container is gewoon een kleine VM.\" Met welke uitspraken weerleg je dat terecht?",
+ opts:["Een VM heeft een eigen kernel bovenop een hypervisor; een container deelt de kernel van de host.","Een container emuleert de hardware, net zoals een VM, maar in een lichtere vorm.","Een container start doorgaans in seconden, een VM heeft eerder minuten nodig.","Een container-image is doorgaans GB's groot, omdat er een volledig besturingssysteem met kernel in zit.","Omdat containers geen eigen kernel hebben, isoleren ze sterker dan VM's."],
+ ok:[0,2],
+ ex:["Een container is een gewoon proces op de hostkernel (namespaces + cgroups), geen hardware-emulatie; MB's in plaats van GB's.","Eén gedeelde kernel = zwakkere isolatie dan bij VM's."]}
 ];
 MINE.forEach(q=>{ q.src = "Oefenronde "+q.id[1]; });
 const ALL = Q.concat(MINE);
@@ -701,7 +786,7 @@ const TOPICS = [
  {id:"t7",name:"Publiceren en registries"}
 ];
 
-const VERSION = "v0.1";
+const VERSION = "v0.2";
 
 const TYPE = {mc:"Meerkeuze",multi:"Meerdere antwoorden",fill:"Invulvraag",open:"Open vraag"};
 const L = "ABCDEFGH";

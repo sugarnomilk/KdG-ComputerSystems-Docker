@@ -1,4 +1,4 @@
-# CS2 Docker – Practice Exam (v0.1)
+# CS2 Docker – Practice Exam (v0.2)
 
 A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG). No login or account needed.
 
@@ -8,17 +8,17 @@ A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG).
 
 ## What's included
 
-- **136 questions** in the draw:
+- **153 questions** in the draw:
 
   | Topic | Questions |
   |---|---|
-  | Containers on Linux (chroot, namespaces, cgroups, VM vs container) | 22 |
-  | Docker CLI (images vs containers, `ps`, `logs`, `exec`, `--rm`, tags) | 22 |
-  | Ports and volumes (`-p`, bind mounts vs named volumes) | 13 |
-  | Docker Compose (`up -d`, `--build`, `down`, volumes, `.env`) | 19 |
-  | Dockerfile (RUN vs CMD/ENTRYPOINT, WORKDIR, ENV, EXPOSE) | 15 |
+  | Containers on Linux (chroot, namespaces, cgroups, VM vs container, container security) | 25 |
+  | Docker CLI (images vs containers, `ps`, `logs`, `exec`, `rm`, `--rm`, tags) | 23 |
+  | Ports and volumes (`-p`, `-P`, bind mounts vs named volumes) | 16 |
+  | Docker Compose (`up -d`, `--build`, `down`, volumes, `.env`, service names, `exec`) | 23 |
+  | Dockerfile (RUN vs CMD/ENTRYPOINT, WORKDIR, ENV, EXPOSE, ADD vs COPY, LABEL) | 17 |
   | Layers, cache, multi-stage builds, security, secrets | 29 |
-  | Publishing (naming, tagging, Docker Hub, local registry) | 16 |
+  | Publishing (naming, tagging, Docker Hub, local registry, `start` vs `run`) | 20 |
 
 - Questions from the course's sample exam plus extra practice questions, a bit harder than the sample exam.
 - Choose 10 to 40 questions per session; every topic appears at least once. Each new session is a fresh random draw.
@@ -42,15 +42,19 @@ Your progress (only your current or last session, so you can resume) is stored i
 
 Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues) with the question ID (e.g. `R8-35`) and what is wrong, ideally with the slide that backs it up. Reported mistakes are fixed and the affected options removed or rewritten.
 
-## Recent changes (9 Nov)
+## Changelog
 
+### v0.2 (9 Nov)
+- 17 new questions on topics that were underrepresented: publishing (naming, push per tag, local registry, `start` vs `run`), Dockerfile (ADD vs COPY, LABEL, multiple COPY sources, relative WORKDIR), ports (`-P`, `-p`, privileged ports), Compose (service names as hostnames, container names, `compose exec`) and container security.
+- New questions test one concept each, like the real exam; options that relied on material outside the slides were left out.
+
+### v0.1 (9 Nov)
 - Cleanup: 15 near-duplicate or out-of-scope questions removed.
 - Stricter fill-in grading where answers were too lenient (`.env` needs the dot; commands need `docker`); any unique container-ID prefix is now accepted.
 - One question reworded to remove ambiguity.
 
 ## Upcoming
 
-- More questions on topics that are still underrepresented (publishing, Dockerfile instructions, ports, Compose details, container security).
 - Smarter sessions: remember per question whether you got it right, and draw new and previously missed questions first (stored locally, with a reset button).
 - A "report a mistake" button on every question.
 - Code cleanup: proper, semantic HTML and CSS, and the questions in a separate file so others can contribute.
