@@ -8,7 +8,7 @@ A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG).
 
 ## What's included
 
-- **136 questions** in the draw (141 in total; a few sample-exam questions the teacher marked out of scope are kept but never drawn), covering the whole course:
+- **136 questions** in the draw:
 
   | Topic | Questions |
   |---|---|
