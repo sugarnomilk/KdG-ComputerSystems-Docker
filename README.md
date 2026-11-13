@@ -66,7 +66,7 @@ Each question in `data/questions.json` has these fields:
 | `topic` | `t1`–`t7` (see `data/topics.json`); without a topic the question is never drawn |
 | `type` | `mc` (one answer), `multi` (several answers), `fill`, `open` |
 | `pts` | points: 1 for `mc`, 2 otherwise |
-| `source` | shown under the question, e.g. `Oefenronde 10` |
+| `source` | course reference shown under the question: `Hoofdstuk <n> – <title> › <slide>`, e.g. `Hoofdstuk 2 – Docker CLI › Volumes (bind mount)` (separate several with `; `) |
 | `q`, `opts`, `ex` | question, options and explanation lines (HTML allowed) |
 | `ok` | indexes of the correct options (`mc`, `multi`) |
 | `answer`, `accept` or `regex` | `fill`: the answer shown, and the accepted answers or a regular expression (tested on lower-cased input with single spaces) |
@@ -83,6 +83,10 @@ Your progress (only your current or last session, so you can resume) is stored i
 Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues) with the question ID (e.g. `R8-35`) and what is wrong, ideally with the slide from the course that backs up your claim. Reported mistakes are fixed and the affected options removed or rewritten.
 
 ## Changelog
+
+### Unreleased
+- The source shown under each question now points to the course (chapter and slide) instead of the practice round it came from.
+- The start screen explains how you can lose your progress.
 
 ### v0.3 (13 Nov)
 - Two kinds of exam: **Slim** draws concepts you missed and questions you never saw first (a concept is done after two fully correct questions, a missed question rests until a new one was answered), **Rando** is a fully random draw. Every topic still appears at least once.

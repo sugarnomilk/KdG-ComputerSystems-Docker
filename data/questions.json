@@ -4,7 +4,7 @@
   "topic": "t1",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 1",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Een bedrijf zet zijn monolithische applicatie om naar microservices in Docker-containers. De security officer maakt zich zorgen. Welk scenario illustreert het best een nadeel waar hij zich terecht zorgen over maakt?",
   "opts": [
    "Een ontwikkelaar verwijdert per ongeluk een container, waardoor alle klantgegevens in het bestandssysteem van die container verloren gaan.",
@@ -25,7 +25,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 2",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "Welke uitspraken zijn juist?",
   "opts": [
    "Namespaces zorgen ervoor dat een container enkel zijn eigen processen ziet.",
@@ -50,7 +50,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 3",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Welke uitspraken zijn juiste verschillen tussen een virtuele machine (VM) en een container?",
   "opts": [
    "Een VM heeft een eigen kernel bovenop een hypervisor; een container deelt de kernel van de host.",
@@ -74,7 +74,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 4",
+  "source": "Hoofdstuk 1 – Introduction › Images & containers everywhere",
   "q": "Welke uitspraken over containers in de praktijk zijn juist?",
   "opts": [
    "Op één host kunnen tientallen tot honderden containers tegelijk draaien.",
@@ -98,7 +98,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Base images",
   "q": "Welke uitspraken over het hergebruiken van images zijn juist?",
   "opts": [
    "Voor je zelf een image opbouwt, zoek je eerst een bestaande (bv. officiële) image die je kan hergebruiken.",
@@ -120,7 +120,7 @@
   "topic": "t2",
   "type": "fill",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Container Layers (docker exec); Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "<code>docker ps</code> geeft deze uitvoer:<pre>CONTAINER ID   IMAGE   COMMAND                  CREATED\nfa538e1a29bd   nginx   \"/docker-entrypoint.…\"   6 seconds ago</pre>Vul het ontbrekende woord aan om een interactieve shell in deze draaiende container te starten:<pre>docker ____ -it fa538e1a29bd /bin/sh</pre>",
   "answer": "<code>exec</code>",
   "accept": [
@@ -138,7 +138,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 7",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "Je voert deze commando's na elkaar uit. Er draaiden vooraf geen containers.<pre>$ docker container run -it fedora echo \"hello 1\"\nhello 1\n$ docker container run -it fedora echo \"hello 2\"\nhello 2\n$ docker container run -it fedora echo \"hello 3\"\nhello 3</pre>Hoeveel containers zijn er daarna nog actief (status Up)?",
   "opts": [
    "3",
@@ -159,7 +159,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 8",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "Waarom is het aanbevolen om <code>docker run --rm ...</code> te gebruiken?",
   "opts": [
    "De container wordt automatisch verwijderd zodra hij stopt, zodat je geen hoop gestopte containers overhoudt.",
@@ -179,7 +179,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 9",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Container Layers (docker exec); Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "<code>docker ps</code> toont:<pre>CONTAINER ID   IMAGE        COMMAND                  STATUS         NAMES\n4f1c2b9a7e30   nginx:1.27   \"/docker-entrypoint.…\"   Up 5 minutes   web</pre>Welke commando's zijn correct?",
   "opts": [
    "<code>docker stop web</code>",
@@ -204,7 +204,7 @@
   "topic": "t2",
   "type": "fill",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 10",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "Je voert <code>docker run bitnami/mongodb</code> uit. Welke tag van de image wordt gebruikt?",
   "answer": "<code>latest</code>",
   "accept": [
@@ -225,7 +225,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 11",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "Je voert deze commando's uit:<pre>$ docker run hello-world\n$ docker ps -a\nCONTAINER ID   IMAGE         COMMAND    CREATED         STATUS\nb3cc9b72393f   hello-world   \"/hello\"   8 seconds ago   Exited (0) 7 seconds ago\n$ docker rm b3c</pre>Werkt het laatste commando?",
   "opts": [
    "Ja: de container is gestopt, en een afgekort ID volstaat zolang het uniek is.",
@@ -246,7 +246,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 12",
+  "source": "Hoofdstuk 3 – Docker Compose › variable interpolation (.env)",
   "q": "In je <code>docker-compose.yml</code> staat:<pre>services:\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}</pre>In welk bestand, in dezelfde map, zet je <code>DB_PASSWORD=geheim</code>, zodat <code>docker compose up</code> de waarde automatisch invult? Geef de bestandsnaam.",
   "answer": "<code>.env</code>",
   "accept": [
@@ -268,7 +268,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 13",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "Deze twee commando's werken allebei:<pre>docker run -d httpd\ndocker run -d httpd</pre>Maar bij deze twee commando's faalt het tweede:<pre>docker run -d -p 80:80 httpd\ndocker run -d -p 80:80 httpd</pre>Waarom?",
   "opts": [
    "Je kan van dezelfde image maar één container met gepubliceerde poorten starten.",
@@ -288,7 +288,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 14",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (bind mount)",
   "q": "Op de host bestaat de map <code>/data/shared</code>. Je start twee containers:<pre>docker run -d --name container-A -v /data/shared:/app/output ubuntu-app-1\ndocker run -d --name container-B -v /data/shared:/var/log/app ubuntu-app-2</pre>De applicatie in container-A schrijft het bestand <code>rapport.pdf</code> in <code>/app/output/</code>. Wat gebeurt er?",
   "opts": [
    "<code>rapport.pdf</code> is enkel zichtbaar in container-A, want containers kunnen elkaars bestanden nooit zien.",
@@ -311,7 +311,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 15",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › CMD or ENTRYPOINT?",
   "q": "Welke uitspraken over argumenten na de imagenaam bij <code>docker run</code> en over CMD/ENTRYPOINT zijn juist?",
   "opts": [
    "Heeft de image enkel een CMD, dan vervangen de argumenten na de imagenaam de CMD.",
@@ -335,7 +335,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 16",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile RUN en CMD",
   "q": "Welke uitspraken over de RUN-instructie in een Dockerfile zijn juist?",
   "opts": [
    "Een volgende RUN-instructie overschrijft de vorige.",
@@ -357,7 +357,7 @@
   "topic": "t6",
   "type": "fill",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 19",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Multi-stage builds",
   "q": "Deze multi-stage Dockerfile is nog niet af:<pre># Stage 1: bouwen\nFROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env\nWORKDIR /src\nCOPY *.csproj ./\nRUN dotnet restore\nCOPY . ./\nRUN dotnet publish -c Release -o /out\n\n# Stage 2: productie\nFROM mcr.microsoft.com/dotnet/aspnet:10.0\nWORKDIR /app\n[AANVULLEN]\nENTRYPOINT [\"dotnet\", \"MyDotNetApp.dll\"]</pre>Schrijf de volledige regel voor <code>[AANVULLEN]</code> die de gepubliceerde bestanden uit de eerste stage naar de werkmap van de productie-stage kopieert.",
   "answer": "<code>COPY --from=build-env /out .</code> (ook juist: <code>/app</code> als doel)",
   "regex": "^copy\\s+--from[= ]build-env\\s+\\/out\\/?\\.?\\s+(\\.|\\.\\/|\\/app\\/?|\\/app\\/\\.)$",
@@ -371,7 +371,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 20",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Dockerfile Cache",
   "q": "Een ontwikkelaar bouwt een image voor een C-applicatie. <code>apt-get install gcc</code> duurt 2 minuten, het compileren 5 seconden. De broncode <code>main.c</code> verandert vaak. Welke Dockerfile is het efficiëntst?",
   "opts": [
    "<pre>FROM debian:12\nCOPY main.c .\nRUN apt-get update && apt-get install -y gcc\nRUN gcc main.c -o myapp\nCMD [\"./myapp\"]</pre>",
@@ -392,7 +392,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 22",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › .dockerignore",
   "q": "Waarvoor dient het bestand <code>.dockerignore</code>?",
   "opts": [
    "Het bevat containers die Docker moet negeren bij <code>docker ps</code>.",
@@ -412,7 +412,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 23",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile WORKDIR",
   "q": "Waarvoor dient de instructie WORKDIR in een Dockerfile?",
   "opts": [
    "Ze herstart de container automatisch als die faalt.",
@@ -432,7 +432,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 25",
+  "source": "Hoofdstuk 3 – Docker Compose › Syntax (volumes)",
   "q": "In deze <code>docker-compose.yml</code> zitten twee fouten: WordPress vindt de database niet, en na <code>docker compose down</code> en <code>up</code> is de database leeg. Welke aanpassingen lossen samen beide problemen op?<pre>services:\n  data:\n    image: mysql:8\n    restart: always\n    environment:\n      MYSQL_ROOT_PASSWORD: supersecretroot\n      MYSQL_DATABASE: wordpress\n      MYSQL_USER: wordpress\n      MYSQL_PASSWORD: supersecret\n  wordpress:\n    depends_on:\n      - data\n    image: wordpress\n    ports:\n      - \"8000:80\"\n    restart: always\n    environment:\n      WORDPRESS_DB_HOST: wordpress\n      WORDPRESS_DB_USER: wordpress\n      WORDPRESS_DB_PASSWORD: supersecret\nvolumes:\n  db_data: {}</pre>",
   "opts": [
    "<code>WORDPRESS_DB_HOST: wordpress</code> vervangen door <code>WORDPRESS_DB_HOST: data</code>",
@@ -455,7 +455,7 @@
   "topic": "t4",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 26",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Je staat in de map met <code>docker-compose.yml</code>. Met welk commando start je alle services in de achtergrond?",
   "opts": [
    "<code>docker compose start</code>",
@@ -475,7 +475,7 @@
   "topic": "t4",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 27",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Wat doet <code>docker compose down</code> (zonder extra opties)?",
   "opts": [
    "Het stopt en verwijdert de containers en het netwerk van het project. Named volumes blijven bestaan.",
@@ -495,7 +495,7 @@
   "topic": "t7",
   "type": "fill",
   "pts": 2,
-  "source": "Voorbeeldexamen, vraag 28",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "Op je Linux-host draait een eigen registry op poort 5000. Je hebt net lokaal de image <code>httpbin:v1</code> gebouwd. Welke naam moet de image krijgen (met <code>docker tag</code>) om ze naar die registry te kunnen pushen?",
   "answer": "<code>localhost:5000/httpbin:v1</code>",
   "accept": [
@@ -512,7 +512,7 @@
   "topic": "t7",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 29",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je hebt lokaal de image <code>webapp:1.0</code> gebouwd. Je wil die publiceren in je eigen repository op Docker Hub. Je gebruikersnaam is <code>kdgstudent</code>. Welke reeks commando's werkt?",
   "opts": [
    "<code>docker login</code> → <code>docker tag webapp:1.0 kdgstudent/webapp:1.0</code> → <code>docker push kdgstudent/webapp:1.0</code>",
@@ -533,7 +533,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Voorbeeldexamen, vraag 31",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Je wil weten uit hoeveel lagen de lokale image <code>webapp:1.0</code> bestaat. Hoe doe je dat het best?",
   "opts": [
    "Met <code>docker image inspect webapp:1.0</code>: je telt de sha256-waarden onder <code>RootFS</code> → <code>Layers</code>.",
@@ -553,7 +553,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (chroot)",
   "q": "Op een Linux-host voer je uit:<pre>root@host:~# chroot /srv/chroot/debian /bin/bash</pre>De chroot-map bevat een volledig Debian-bestandssysteem, en <code>/proc</code> is erin gemount. Welke uitspraken zijn juist?",
   "opts": [
    "Vanuit de chroot kan het proces de map <code>/home</code> van de host niet meer bereiken via een pad.",
@@ -577,7 +577,7 @@
   "topic": "t1",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 1 – Introduction › Access to the docker socket",
   "q": "Je hebt Docker net geïnstalleerd op AlmaLinux en de service draait. Als gewone gebruiker <code>myuser</code> krijg je:<pre>$ docker info\nServer:\npermission denied while trying to connect to the docker API at unix:///var/run/docker.sock\n\n$ ls -l /var/run/docker.sock\nsrw-rw---- 1 root docker 0 Oct 28 13:46 /var/run/docker.sock</pre>Welke uitspraak is het meest correct?",
   "opts": [
    "De daemon <code>dockerd</code> draait niet. Start hem met <code>systemctl start docker</code>.",
@@ -598,7 +598,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 2",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "Op één Linux-host draaien twee containers: een <code>nginx</code>-container en een <code>postgres</code>-container, allebei gewoon gestart met <code>docker run</code>. Welke uitspraken zijn juist?",
   "opts": [
    "Binnen de nginx-container zie je de postgres-processen niet, dankzij namespaces.",
@@ -621,7 +621,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Container Layers",
   "q": "Je voert na elkaar uit:<pre>$ docker run -d --name web nginx:1.27\n$ docker exec -it web sh\n# echo \"test\" > /usr/share/nginx/html/test.html\n# exit\n$ docker stop web\n$ docker start web</pre>Welke uitspraak is juist?",
   "opts": [
    "Bij <code>exit</code> in de exec-shell stopt de container <code>web</code>, dus <code>docker stop web</code> geeft een fout.",
@@ -642,7 +642,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 2",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker run -d --rm --name api -p 80:3000 kdgstudent/api:2.0\n$ docker ps -a\nCONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES\n$ docker logs api\nError response from daemon: No such container: api</pre>De app crasht blijkbaar meteen bij het opstarten. Wat is de juiste verklaring en aanpak?",
   "opts": [
    "Door <code>--rm</code> werd de container verwijderd zodra hij stopte, en zijn logs dus ook. Start hem opnieuw zonder <code>--rm</code> (of zonder <code>-d</code>, op de voorgrond) om de fout te zien.",
@@ -662,7 +662,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile – Syntax",
   "q": "Welke uitspraken over Dockerfile-instructies zijn juist?",
   "opts": [
    "<code>EXPOSE 80</code> zorgt ervoor dat poort 80 automatisch op de host gepubliceerd wordt bij <code>docker run</code>.",
@@ -686,7 +686,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 2",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile RUN en CMD",
   "q": "Je bouwt deze image op <b>1 november</b> als <code>buildinfo</code>:<pre>FROM debian:13\nRUN date > /build-time.txt\nCMD [\"cat\", \"/build-time.txt\"]</pre>Op <b>5 november</b> voer je twee keer <code>docker run --rm buildinfo</code> uit. Wat zie je?",
   "opts": [
    "Telkens de datum en tijd van 5 november, bij elke run een iets ander tijdstip.",
@@ -706,7 +706,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Dockerfile Cache",
   "q": "<pre>FROM ubuntu:24.04\nLABEL author=\"Student &lt;student@kdg.be&gt;\"\nENV REFRESHED_AT=2026-09-01\nRUN apt-get update && apt-get install -y curl\nCOPY . /app\nCMD [\"/app/run.sh\"]</pre>Alles staat in de cache. Je verandert enkel de datum naar <code>2026-11-05</code> en bouwt opnieuw (zonder <code>--no-cache</code>). Wat gebeurt er?",
   "opts": [
    "Vanaf de gewijzigde ENV-regel is de cache ongeldig: de <code>apt-get</code>-stap en alle stappen erna worden opnieuw uitgevoerd. FROM en LABEL komen uit de cache.",
@@ -726,7 +726,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers (docker system prune)",
   "q": "Op een buildserver draait dagelijks:<pre>/usr/bin/docker system prune -af --filter \"until=168h\"</pre>Wat wordt hierdoor <b>niet</b> verwijderd?",
   "opts": [
    "Gestopte containers die ouder zijn dan 7 dagen",
@@ -747,7 +747,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 1",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "<pre>docker run -d -p 5000:5000 --name registry --restart=always registry:latest\ndocker build -t mynginx .\ndocker tag mynginx localhost:5000/mynginx:v1\ndocker push localhost:5000/mynginx:v1</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Zonder de <code>docker tag</code>-stap zou <code>docker push mynginx</code> naar Docker Hub (<code>docker.io</code>) proberen te pushen.",
@@ -770,7 +770,7 @@
   "topic": "t3",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (bind mount)",
   "q": "Op de host staat je website in <code>/home/student/site</code>. nginx serveert in de container de bestanden uit <code>/usr/share/nginx/html</code>. Een wijziging op de host moet meteen zichtbaar zijn, zonder de container opnieuw te bouwen of te starten. Vul aan:<pre>docker run -d -p 8080:80 -v ______________________ nginx:1.27</pre>",
   "answer": "<code>/home/student/site:/usr/share/nginx/html</code>",
   "accept": [
@@ -790,7 +790,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Dit project draait al met <code>docker compose up -d</code>:<pre>services:\n  api:\n    image: kdgstudent/api:2.1\n    environment:\n      LOG_LEVEL: info\n    ports:\n      - \"80:3000\"\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}\n    volumes:\n      - dbdata:/var/lib/postgresql/data\nvolumes:\n  dbdata:</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Je wijzigt <code>LOG_LEVEL</code> naar <code>debug</code>. Met <code>docker compose up -d</code> wordt de api-container opnieuw aangemaakt met de nieuwe waarde.",
@@ -814,7 +814,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile RUN en CMD",
   "q": "Deze Dockerfile wordt gebouwd als <code>logtest</code>:<pre>FROM alpine:3.20\nRUN echo \"gebouwd\" >> /log.txt\nCMD [\"sh\", \"-c\", \"echo gestart >> /log.txt && cat /log.txt\"]</pre>Daarna voer je uit:<pre>$ docker run --name t logtest\n$ docker start -a t</pre>(<code>-a</code> toont de output in je terminal.) Wat is de output van <code>docker start -a t</code>?",
   "opts": [
    "<code>gebouwd</code> / <code>gestart</code>",
@@ -835,7 +835,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › CMD or ENTRYPOINT?",
   "q": "Deze Dockerfile wordt gebouwd als <code>kdgstudent/app</code>:<pre>FROM alpine:3.20\nCMD [\"ping\", \"-c\", \"3\", \"localhost\"]</pre>Wat gebeurt er bij <code>docker run --rm kdgstudent/app kdg.be</code>?",
   "opts": [
    "Er wordt 3 keer naar <code>kdg.be</code> gepingd.",
@@ -855,7 +855,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "<pre>FROM node:22-alpine\nLABEL maintainer=\"student@kdg.be\"\nENV NODE_ENV=production\nCOPY package.json /app/\nRUN cd /app && npm install\nCOPY . /app\nEXPOSE 3000\nUSER node\nCMD [\"node\", \"/app/server.js\"]</pre>Hoeveel <b>nieuwe lagen</b> voegt deze Dockerfile toe bovenop <code>node:22-alpine</code>?",
   "opts": [
    "2",
@@ -875,7 +875,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Container Security",
   "q": "<pre>FROM python:3.13-slim\nENV API_KEY=sk-12345geheim\nCOPY app.py /app/\nCMD [\"python\", \"/app/app.py\"]</pre>Je bouwt deze image en pusht ze <b>publiek</b> naar Docker Hub als <code>kdgstudent/bot:1.0</code>. Welke uitspraken zijn juist?",
   "opts": [
    "Iedereen die de image pullt, kan de sleutel lezen, bv. met <code>docker image inspect</code> of <code>docker history</code>.",
@@ -898,7 +898,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Dockerfile Cache",
   "q": "<pre>FROM node:22-alpine\nWORKDIR /app\nCOPY package.json .\nRUN npm install\nCOPY . .\nCMD [\"node\", \"server.js\"]</pre><code>npm install</code> duurt 90 seconden. Je past bijna elke dag <code>server.js</code> aan, maar <code>package.json</code> wijzigt zelden. Waarom wordt <code>package.json</code> apart en eerst gekopieerd?",
   "opts": [
    "Zolang <code>package.json</code> niet wijzigt, komt <code>npm install</code> uit de cache. Wijzig je enkel <code>server.js</code>, dan wordt pas vanaf <code>COPY . .</code> opnieuw gebouwd.",
@@ -918,7 +918,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 3",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "<pre>$ docker images\nREPOSITORY   TAG   IMAGE ID\nwebapp       1.0   8e2d4c1a9f03\n$ docker tag webapp:1.0 kdgstudent/webapp:1.0\n$ docker tag webapp:1.0 kdgstudent/webapp:latest</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker images</code> toont nu 3 regels, allemaal met IMAGE ID <code>8e2d4c1a9f03</code>.",
@@ -941,7 +941,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 4",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers; Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile CMD",
   "q": "<pre>$ docker run -d --name a busybox\n$ docker run -d --name b nginx:1.27\n$ docker run -dit --name c busybox\n$ docker run -d --name d alpine:3.20 sleep 3600</pre>De standaard-CMD van <code>busybox</code> is <code>sh</code>. Welke containers staan <b>na 1 minuut</b> nog op <code>Up</code>?",
   "opts": [
    "<code>a</code>",
@@ -965,7 +965,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 4",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "Een app luistert in de container op poort <b>3000</b>. De Dockerfile bevat <code>EXPOSE 3000</code>. De host heeft IP <code>192.168.121.199</code>, poort 80 en 8080 zijn vrij.<pre>$ docker run -d --name shop kdgstudent/shop:1.0</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Zo is de app niet bereikbaar via het IP van de host, ook al staat <code>EXPOSE 3000</code> in de image.",
@@ -989,7 +989,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 4",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (named volume)",
   "q": "<pre>$ docker run -d --name db1 -e POSTGRES_PASSWORD=x \\\n    -v pgdata:/var/lib/postgresql/data postgres:16\n$ docker run -d --name db2 -e POSTGRES_PASSWORD=x \\\n    -v pgdata2:/var/lib/postgresql/data postgres:16</pre>Vooraf bestonden er geen volumes. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker volume ls</code> toont <code>pgdata</code> en <code>pgdata2</code>, ook al heb je ze nooit zelf aangemaakt.",
@@ -1012,7 +1012,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 4",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je Docker Hub-account heet <code>kdgstudent</code> en je bent al ingelogd.<pre>$ docker build -t webshop:2.0 .\n$ docker push webshop:2.0\ndenied: requested access to the resource is denied</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Docker probeerde naar <code>docker.io</code> te pushen, omdat er geen registry in de naam staat.",
@@ -1035,7 +1035,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 4",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "<pre>$ docker images\nREPOSITORY   TAG       IMAGE ID       CREATED        SIZE\nbusybox      1.38.0    6d3e4188a38a   9 months ago   4.28MB\nbusybox      latest    6d3e4188a38a   9 months ago   4.28MB</pre>Een maand later verschijnt op Docker Hub een nieuwe busybox met de tag <code>latest</code>. Lokaal heb je nog niets gedaan. Welke uitspraken zijn juist?",
   "opts": [
    "Lokaal blijft <code>busybox:latest</code> naar <code>6d3e4188a38a</code> wijzen tot je <code>docker pull busybox</code> uitvoert.",
@@ -1058,7 +1058,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (chroot)",
   "q": "Welke uitspraken zijn juist?",
   "opts": [
    "chroot verandert enkel de root-map van een proces en zijn kindprocessen; kernel, processen, netwerk en gebruikers blijven gedeeld met de host.",
@@ -1082,7 +1082,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "<pre>$ docker run -d --name rapport  --memory 128m kdgstudent/rapport:1.0\n$ docker run -d --name rapport2 kdgstudent/rapport:1.0</pre>De app heeft ongeveer 500 MB geheugen nodig. De host heeft 8 GB RAM, grotendeels vrij. Welke uitspraken zijn juist?",
   "opts": [
    "<code>rapport</code> kan gekild worden omdat het over zijn cgroup-limiet gaat, terwijl <code>rapport2</code> gewoon kan blijven werken.",
@@ -1105,7 +1105,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker images\nREPOSITORY   TAG   IMAGE ID       SIZE\nshop         2.0   a81c44e2d0f3   210MB\n\n$ docker ps -a\nCONTAINER ID   IMAGE      COMMAND            STATUS                    NAMES\n5be2a0c91d7e   shop:2.0   \"node worker.js\"   Exited (0) 3 minutes ago  worker\n77ac13f0b2e9   shop:2.0   \"node server.js\"   Up 10 minutes             api</pre>Welke commando's werken zoals bedoeld?",
   "opts": [
    "<code>docker logs worker</code> (toont de output van de gestopte worker)",
@@ -1130,7 +1130,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "Er draaiden vooraf geen containers.<pre>$ docker run --name job1 alpine:3.20 echo één\néén\n$ docker run --rm --name job2 alpine:3.20 echo twee\ntwee\n$ docker run -d --name web nginx:1.27</pre>Een minuut later: welke uitspraken zijn juist?",
   "opts": [
    "<code>docker ps</code> toont enkel <code>web</code>.",
@@ -1154,7 +1154,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (named volume)",
   "q": "Je start een database, maakt er tabellen in aan, en voert dan uit:<pre>$ docker run -d --name pg -e POSTGRES_PASSWORD=x \\\n    -v pgdata:/var/lib/postgresql/data postgres:16\n  ... (tabellen aangemaakt) ...\n$ docker rm -f pg\n$ docker run -d --name pg -e POSTGRES_PASSWORD=x \\\n    -v /srv/pgdata:/var/lib/postgresql/data postgres:16</pre>Welke uitspraken zijn juist?",
   "opts": [
    "De nieuwe container ziet een lege databank: <code>/srv/pgdata</code> is een map op de host, geen verwijzing naar het volume <code>pgdata</code>.",
@@ -1177,7 +1177,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (bind mount)",
   "q": "Op de host staat je website in <code>/srv/site</code> (met o.a. <code>index.html</code>). Je start:<pre>docker run -d --name web -p 8080:80 -v /srv/site:/usr/share/nginx/html nginx:1.27</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Pas je <code>/srv/site/index.html</code> aan op de host, dan toont <code>http://host:8080</code> meteen de nieuwe versie, zonder de container te herstarten.",
@@ -1201,7 +1201,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Een collega past de Dockerfile aan, zodat de sleutel \"in dezelfde stap\" weer verwijderd wordt:<pre>FROM debian:13\nCOPY cert.key /tmp/cert.key\nRUN ./install-cert.sh /tmp/cert.key && rm /tmp/cert.key\nCMD [\"/app/start.sh\"]</pre>Welke uitspraken zijn juist?",
   "opts": [
    "De sleutel zit niet in de image, omdat ze in dezelfde RUN-regel verwijderd wordt.",
@@ -1223,7 +1223,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › .dockerignore",
   "q": "Versie <code>1.0</code> van <code>kdgstudent/api</code> werd vorige week publiek gepusht, toen nog <b>zonder</b> <code>.dockerignore</code>. Vandaag bouw en push je versie <code>1.1</code> met dit project:<pre>api/\n├── Dockerfile          (bevat: COPY . /app)\n├── .dockerignore       (bevat: .env)\n├── .gitignore          (bevat: .env)\n├── .env                (bevat: DB_PASSWORD=geheim)\n├── docker-compose.yml  (gebruikt ${DB_PASSWORD})\n└── server.js</pre>Welke uitspraken zijn juist?",
   "opts": [
    "In image <code>1.1</code> zit het bestand <code>.env</code> niet.",
@@ -1248,7 +1248,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Base images",
   "q": "Je team stelt richtlijnen op voor de base images van nieuwe projecten. Welke uitspraken zijn in lijn met de cursus?",
   "opts": [
    "Een minimale distributie zoals alpine of busybox heeft een shell en een eenvoudige package manager.",
@@ -1271,7 +1271,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je bent op Docker Hub ingelogd als <code>kdgstudent</code>. Deze commando's lukken zonder fouten:<pre>$ docker build -t kdgstudent/blog .\n$ docker push kdgstudent/blog</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Omdat er geen tag in de naam staat, werd de image gebouwd en gepusht als <code>kdgstudent/blog:latest</code>.",
@@ -1293,7 +1293,7 @@
   "topic": "t4",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Je project met de services <code>web</code> en <code>db</code> draait met <code>docker compose up -d</code>. De website geeft een fout, en je wil de output van <b>beide</b> services live volgen terwijl je de pagina herlaadt. Je staat in de map met <code>docker-compose.yml</code>. Welk commando gebruik je?",
   "opts": [
    "<code>docker compose ps</code>",
@@ -1313,7 +1313,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile WORKDIR",
   "q": "De map <code>/app</code> bestaat nog niet in <code>node:22-alpine</code>.<pre>FROM node:22-alpine\nWORKDIR /app\nCOPY package.json .\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>package.json</code> komt in de image terecht als <code>/app/package.json</code>.",
@@ -1335,7 +1335,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Multi-stage builds",
   "q": "Deze Dockerfile wordt in één keer gebouwd met <code>docker build -t hello:1.0 .</code><pre>FROM gcc:latest AS build\nCOPY helloworld.c /tmp/\nRUN gcc /tmp/helloworld.c -o /tmp/helloworld\n\nFROM busybox:latest\nCOPY --from=build /tmp/helloworld /helloworld\nCMD [\"/helloworld\"]</pre>Welke uitspraken over de image <code>hello:1.0</code> zijn juist?",
   "opts": [
    "De image vertrekt van busybox en bevat de gcc-compiler niet.",
@@ -1356,7 +1356,7 @@
   "topic": "t7",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "Gisteren startte je een eigen registry en pushte je er een image naar:<pre>$ docker run -d -p 5000:5000 --name registry registry:latest\n$ docker tag mynginx localhost:5000/mynginx:v1\n$ docker push localhost:5000/mynginx:v1</pre>Vannacht werd de host herstart. Vandaag lukt <code>docker push localhost:5000/mynginx:v2</code> niet, en <code>docker ps -a</code> toont de container <code>registry</code> als <code>Exited</code>. Met welk volledig commando start je deze bestaande registry-container opnieuw (zonder een nieuwe aan te maken)?",
   "answer": "<code>docker start registry</code>",
   "accept": [
@@ -1373,7 +1373,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 2 – Docker CLI › Environment variables",
   "q": "<pre>$ docker run -d --name db \\\n    -e POSTGRES_USER=myuser \\\n    -e POSTGRES_PASSWORD=geheim \\\n    -e POSTGRES_DB=mydb \\\n    postgres:17</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Met meerdere <code>-e</code>-opties geef je meerdere omgevingsvariabelen mee aan de container.",
@@ -1395,7 +1395,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Op een server staat <code>python:3.13-slim</code> al lokaal. Een collega heeft <code>kdgstudent/api:1.0</code> gepusht:<pre>FROM python:3.13-slim\nCOPY requirements.txt /app/\nRUN pip install -r /app/requirements.txt\nCMD [\"python\", \"/app/main.py\"]</pre>Wat moet de server downloaden bij <code>docker pull kdgstudent/api:1.0</code>?",
   "opts": [
    "Alle lagen, ook die van <code>python:3.13-slim</code>, omdat het een andere image is.",
@@ -1415,7 +1415,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 5",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "Een nieuw project, waarvan de images lokaal nog <b>niet</b> bestaan:<pre>services:\n  frontend:\n    image: example/webapp\n    build: ./webapp\n\n  backend:\n    image: example/database\n    build:\n      context: backend\n      dockerfile: ../backend.Dockerfile</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Bij de eerste <code>docker compose up -d</code> worden beide images gebouwd, omdat ze lokaal nog niet bestaan.",
@@ -1436,7 +1436,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Op een server staat <code>python:3.13-slim</code> al lokaal, verder niets. Een collega pushte <code>kdgstudent/api:1.0</code> en <code>kdgstudent/worker:1.0</code>, die elk zo beginnen:<pre>FROM python:3.13-slim\nCOPY requirements.txt /app/\nRUN pip install -r /app/requirements.txt\nCMD [\"python\", \"/app/main.py\"]</pre>Je voert <code>docker pull kdgstudent/api:1.0</code> uit. Welke uitspraken zijn juist?",
   "opts": [
    "Bij het pullen wordt <code>pip install</code> op de server opnieuw uitgevoerd.",
@@ -1460,7 +1460,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › CMD or ENTRYPOINT?",
   "q": "Deze Dockerfile wordt gebouwd als <code>kdgstudent/app</code>:<pre>FROM alpine:3.20\nCMD [\"ping\", \"-c\", \"3\", \"localhost\"]</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker run --rm kdgstudent/app</code> pingt 3 keer naar <code>localhost</code>.",
@@ -1483,7 +1483,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile WORKDIR",
   "q": "De mappen <code>/srv</code> en <code>/srv/web</code> bestaan nog niet in <code>node:22-alpine</code>. Gebouwd als <code>kdgstudent/web</code>:<pre>FROM node:22-alpine\nWORKDIR /srv\nCOPY package.json .\nRUN npm install\nWORKDIR web\nCOPY . .\nEXPOSE 8080\nCMD [\"node\", \"server.js\"]</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>package.json</code> komt in de image terecht als <code>/srv/package.json</code>.",
@@ -1507,7 +1507,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile ENV; Hoofdstuk 2 – Docker CLI › Environment variables",
   "q": "De Dockerfile van <code>kdgstudent/api:2.0</code> bevat <code>ENV LOG_LEVEL=warning</code>. Je start:<pre>$ docker run -d --name api -e LOG_LEVEL=info kdgstudent/api:2.0</pre>Welke uitspraken zijn juist?",
   "opts": [
    "In de container <code>api</code> heeft <code>LOG_LEVEL</code> de waarde <code>info</code>.",
@@ -1529,7 +1529,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "De host heeft extern IP <code>192.168.121.199</code>. nginx luistert in de container op poort 80, de app in <code>kdgstudent/app</code> op poort 8080.<pre>$ docker run -d --name a -p 8080:80 nginx:latest\n$ docker run -d --name b -p 9090:8080 kdgstudent/app</pre>Beide commando's lukken. Welke uitspraken zijn juist?",
   "opts": [
    "Een client die naar <code>http://192.168.121.199:8080</code> surft, komt bij de nginx van container <code>a</code>.",
@@ -1551,7 +1551,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "Dit project draait al: bij de eerste <code>docker compose up -d</code> werden beide images gebouwd.<pre>services:\n  frontend:\n    image: example/webapp\n    build: ./webapp\n\n  backend:\n    image: example/database\n    build:\n      context: backend\n      dockerfile: ../backend.Dockerfile</pre>Je past de broncode in <code>./webapp</code> aan. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker compose up -d --build</code> bouwt de image opnieuw, zodat <code>frontend</code> met de nieuwe code draait.",
@@ -1575,7 +1575,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (chroot)",
   "q": "Op een Linux-host voer je uit:<pre>root@host:~# chroot /srv/chroot/debian /bin/bash</pre>De map <code>/srv/chroot/debian</code> bevat een volledig Debian-bestandssysteem. Welke uitspraken zijn juist?",
   "opts": [
    "De bash ziet <code>/srv/chroot/debian</code> als zijn root-map <code>/</code>.",
@@ -1599,7 +1599,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Op een AlmaLinux-host met kernel <code>5.14.0</code> draaien twee containers, allebei gewoon gestart met <code>docker run</code>: <code>web</code> (van <code>nginx:1.27</code>, gebaseerd op Debian) en <code>db</code> (van <code>postgres:16</code>). Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker exec web uname -r</code> toont <code>5.14.0-...</code>, de kernel van de host.",
@@ -1620,7 +1620,7 @@
   "topic": "t1",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 1 – Introduction › Access to the docker socket",
   "q": "Docker draait op een server. De nieuwe gebruiker <code>jan</code> krijgt:<pre>$ docker ps\npermission denied while trying to connect to the docker API at unix:///var/run/docker.sock\n\n$ ls -l /var/run/docker.sock\nsrw-rw---- 1 root docker 0 Nov  7 09:12 /var/run/docker.sock</pre>Welke uitspraak is juist?",
   "opts": [
    "<code>jan</code> moet eerst <code>docker login</code> uitvoeren; daarna krijgt hij toegang tot de socket.",
@@ -1640,7 +1640,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je Docker Hub-account heet <code>kdgstudent</code>, maar je maakte een typfout:<pre>$ docker build -t kdgstudnet/webapp:1.0 .\n$ docker tag kdgstudnet/webapp:1.0 kdgstudent/webapp:1.0</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker images</code> toont nu twee regels met hetzelfde IMAGE ID.",
@@ -1662,7 +1662,7 @@
   "topic": "t6",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "<pre>FROM python:3.13-slim\nENV APP_ENV=prod\nCOPY requirements.txt /app/\nRUN pip install -r /app/requirements.txt\nEXPOSE 8000\nCMD [\"python\", \"/app/main.py\"]</pre>Hoeveel <b>nieuwe</b> lagen voegt deze Dockerfile toe bovenop <code>python:3.13-slim</code>?",
   "opts": [
    "1",
@@ -1682,7 +1682,7 @@
   "topic": "t3",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "Een Flask-app luistert in de container op poort <b>5000</b>. Poort 80 en 8080 van de host zijn al bezet. De app moet bereikbaar zijn via <code>http://&lt;host&gt;:8081</code>. Vul aan:<pre>docker run -d -p __________ kdgstudent/flask:1.0</pre>",
   "answer": "<code>8081:5000</code>",
   "accept": [
@@ -1700,7 +1700,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Een Compose-project met de services <code>web</code> en <code>db</code> draait met <code>docker compose up -d</code>. <code>db</code> bewaart zijn data in het named volume <code>dbdata</code>. Welke uitspraken zijn juist?",
   "opts": [
    "Wijzig je de poort van <code>web</code> in <code>docker-compose.yml</code>, dan volstaat <code>docker compose restart web</code> om de nieuwe poort te gebruiken.",
@@ -1723,7 +1723,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je bent op Docker Hub ingelogd als <code>kdgstudent</code>.<pre>$ docker build -t shop:1.0 .\n$ docker push shop:1.0\ndenied: requested access to the resource is denied</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Docker probeerde naar <code>docker.io</code> te pushen, omdat er geen registry vooraan in de naam staat.",
@@ -1746,7 +1746,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Multi-stage builds",
   "q": "Gebouwd met één commando: <code>docker build -t kdgstudent/tool:1.0 .</code><pre>FROM golang:1.23 AS build\nCOPY main.go /src/\nRUN go build -o /app /src/main.go\n\nFROM alpine:3.20\nCOPY --from=build /app /app\nCMD [\"/app\"]</pre>Welke uitspraken over de image <code>kdgstudent/tool:1.0</code> zijn juist?",
   "opts": [
    "De image bevat de Go-compiler uit <code>golang:1.23</code>.",
@@ -1769,7 +1769,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Je Compose-project met de services <code>web</code>, <code>api</code> en <code>db</code> draait op de achtergrond. Je staat in de map met <code>docker-compose.yml</code>. Met welk volledig commando volg je de output van <b>alle</b> services live mee?",
   "answer": "<code>docker compose logs -f</code>",
   "accept": [
@@ -1787,7 +1787,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "<pre>services:\n  api:\n    image: kdgstudent/api:3.0\n    build: ./api</pre>Het project draait al. Je hebt de code in <code>./api</code> aangepast. Met welk volledig commando wordt de image opnieuw gebouwd en draait <code>api</code> daarna met de nieuwe code, op de achtergrond?",
   "answer": "<code>docker compose up -d --build</code>",
   "accept": [
@@ -1809,7 +1809,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile – Syntax",
   "q": "Welke uitspraken over Dockerfile-instructies zijn juist?",
   "opts": [
    "<code>EXPOSE 80</code> publiceert poort 80 op de host bij <code>docker run</code>.",
@@ -1832,7 +1832,7 @@
   "topic": "t7",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 6",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "<pre>$ docker ps -a\nCONTAINER ID   IMAGE                                STATUS                     NAMES\n3fa91c0d22e1   localhost:5000/kdgstudent/blog:2.1   Exited (0) 9 hours ago     blog</pre>De host werd vannacht herstart. Met welk volledig commando start je deze <b>bestaande</b> container opnieuw, zonder een nieuwe aan te maken?",
   "answer": "<code>docker start blog</code> (ook juist: het container ID of de eerste tekens ervan, bv. <code>docker start 3fa9</code>)",
   "regex": "^docker (container )?start (blog|3(?:f(?:a(?:9(?:1(?:c(?:0(?:d(?:2(?:2(?:e(?:1)?)?)?)?)?)?)?)?)?)?)?)$",
@@ -1846,7 +1846,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Een bedrijf verhuist zijn applicaties van virtuele machines naar Docker-containers op één Linux-host. De security officer is bezorgd. Welke uitspraken zijn juist?",
   "opts": [
    "Wordt een kernelkwetsbaarheid vanuit één container misbruikt, dan kan een aanvaller ook de host en de andere containers treffen.",
@@ -1869,7 +1869,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "Welke uitspraken over hoe containers op Linux werken zijn juist?",
   "opts": [
    "Met cgroups beperk je hoeveel CPU en geheugen een container mag gebruiken.",
@@ -1893,7 +1893,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 1 – Introduction › Images & containers everywhere",
   "q": "Welke uitspraken over containers in de praktijk zijn juist?",
   "opts": [
    "Op één host kunnen tientallen tot honderden containers tegelijk draaien.",
@@ -1917,7 +1917,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "De webserver <code>httpd</code> luistert in de container op poort 80. Je voert na elkaar uit:<pre>$ docker run -d --name w1 httpd\n$ docker run -d --name w2 httpd\n$ docker run -d --name w3 -p 80:80 httpd\n$ docker run -d --name w4 -p 80:80 httpd</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>w1</code> en <code>w2</code> starten allebei, ook al luisteren ze allebei op poort 80 in hun container.",
@@ -1940,7 +1940,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (bind mount)",
   "q": "Op de host bestaat de map <code>/data/shared</code>.<pre>$ docker run -d --name a -v /data/shared:/app/output kdgstudent/rapport\n$ docker run -d --name b -v /data/shared:/var/log/app kdgstudent/viewer\n$ docker run -d --name c -v shared:/app/output kdgstudent/rapport</pre>De app in <code>a</code> schrijft het bestand <code>/app/output/rapport.pdf</code>. Welke uitspraken zijn juist?",
   "opts": [
    "<code>b</code> ziet het bestand meteen als <code>/var/log/app/rapport.pdf</code>.",
@@ -1962,7 +1962,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 3 – Docker Compose › variable interpolation (.env)",
   "q": "In je <code>docker-compose.yml</code> staat:<pre>    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Zet je <code>DB_PASSWORD=geheim</code> in een bestand <code>.env</code> in dezelfde map, dan vult <code>docker compose up</code> de waarde automatisch in.",
@@ -1985,7 +1985,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 3 – Docker Compose › Syntax (volumes)",
   "q": "<pre>services:\n  data:\n    image: mysql:8\n    restart: always\n  wordpress:\n    image: wordpress\n    depends_on:\n      - data\n    environment:\n      WORDPRESS_DB_HOST: wordpress\nvolumes:\n  db_data: {}</pre>WordPress vindt de databank niet, en na <code>docker compose down</code> en <code>up -d</code> is de databank leeg. Welke uitspraken zijn juist?",
   "opts": [
    "<code>WORDPRESS_DB_HOST</code> verwijst naar WordPress zelf; het moet de databankservice zijn: <code>data</code>.",
@@ -2008,7 +2008,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Je staat in de map met een <code>docker-compose.yml</code> met de services <code>web</code> en <code>db</code>; <code>db</code> gebruikt het named volume <code>dbdata</code>. Het project draaide nog nooit. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker compose up -d</code> maakt de containers aan en start alle services op de achtergrond.",
@@ -2031,7 +2031,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › CMD or ENTRYPOINT?",
   "q": "Twee images, allebei gebaseerd op <code>alpine:3.20</code>:<pre>img-a:  CMD [\"echo\", \"hallo\"]\nimg-b:  ENTRYPOINT [\"echo\", \"hallo\"]</pre>Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker run --rm img-a wereld</code> geeft een fout: Docker probeert een programma <code>wereld</code> te starten.",
@@ -2056,7 +2056,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 7",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "Je hebt lokaal <code>webapp:1.0</code> gebouwd. Je Docker Hub-account heet <code>kdgstudent</code>, en op deze host draait ook een eigen registry op poort 5000. Welke uitspraken zijn juist?",
   "opts": [
    "Naar Docker Hub: <code>docker login</code>, dan <code>docker tag webapp:1.0 kdgstudent/webapp:1.0</code>, dan <code>docker push kdgstudent/webapp:1.0</code>.",
@@ -2079,7 +2079,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers; Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile CMD",
   "q": "Er draaiden vooraf geen containers.<pre>$ docker run -d --name t2 ubuntu sleep 600\n$ docker run -it --name t3 ubuntu ls /\nbin  boot  dev  etc  home  lib  ...</pre>Een halve minuut later. Welke uitspraken zijn juist?",
   "opts": [
    "<code>t3</code> staat nog op <code>Up</code>, omdat hij met <code>-it</code> gestart is.",
@@ -2102,7 +2102,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "In je projectmap staat een <code>docker-compose.yml</code>. De service <code>web</code> heeft <code>build: .</code>, de service <code>db</code> gebruikt <code>image: postgres</code>. Het project draait al. Je past de Dockerfile van <code>web</code> aan. Geef het ene commando dat de image van <code>web</code> opnieuw bouwt en daarna alle services op de achtergrond start.",
   "answer": "<code>docker compose up -d --build</code>",
   "regex": "^(?=.* (-d|--detach)( |$))(?=.* --build( |$))docker[ -]compose up( (-d|--detach|--build))+$",
@@ -2116,7 +2116,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Multi-stage builds",
   "q": "<pre>FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build\nWORKDIR /src\nCOPY . .\nRUN dotnet publish -c Release -o /out\nFROM mcr.microsoft.com/dotnet/aspnet:8.0\nCOPY --from=build /out /app\nENTRYPOINT [\"dotnet\", \"/app/web.dll\"]</pre>Welke uitspraken over de eindimage zijn juist?",
   "opts": [
    "De eindimage bevat de SDK, omdat die in de eerste stage aanwezig was.",
@@ -2139,7 +2139,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "De app in <code>kdgstudent/web</code> luistert in de container op poort 3000. Je wil ze op de host openen via <code>http://localhost:8080</code>. Welk commando doet dat?",
   "opts": [
    "<code>docker run -d -p 3000:8080 kdgstudent/web</code>",
@@ -2159,7 +2159,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Op Docker Hub staat <code>kdgstudent/api:2.0</code>, gebouwd met:<pre>FROM python:3.12\nCOPY . /app\nRUN pip install -r /app/requirements.txt\nCMD [\"python\", \"/app/app.py\"]</pre>Op een andere host voer je enkel <code>docker pull kdgstudent/api:2.0</code> uit. Welke uitspraken zijn juist?",
   "opts": [
    "Tijdens de pull wordt <code>pip install</code> opnieuw uitgevoerd op die host.",
@@ -2181,7 +2181,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Een team overweegt zijn apps in containers te draaien in plaats van in VM's. Welke uitspraken zijn juist?",
   "opts": [
    "Een image bevat de app samen met de bibliotheken die ze nodig heeft, zodat ze op elke host met Docker op dezelfde manier werkt.",
@@ -2203,7 +2203,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "<pre>services:\n  db:\n    image: postgres\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n  api:\n    image: kdgstudent/api\n    environment:\n      DB_HOST: api\nvolumes:\n  pgdata:</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Het volume <code>pgdata</code> wordt ook in de container van <code>api</code> gemount, omdat het onderaan onder <code>volumes:</code> staat.",
@@ -2224,7 +2224,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (push naar Docker Hub)",
   "q": "Je bent op Docker Hub ingelogd als <code>kdgstudent</code>.<pre>$ docker build -t blog:2.0 .\n$ docker tag blog:2.0 kdgstudent/blog:2.0\n$ docker push kdgstudent/blog:2.0</pre>De push lukt. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker push blog:2.0</code> had ook gewerkt, omdat je ingelogd bent als <code>kdgstudent</code>.",
@@ -2246,7 +2246,7 @@
   "topic": "t6",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Hoeveel <b>nieuwe</b> lagen voegt deze Dockerfile toe bovenop <code>alpine:3.20</code>? Antwoord met een getal.<pre>FROM alpine:3.20\nLABEL version=\"1.0\"\nRUN apk add curl\nCOPY start.sh /start.sh\nENV MODE=prod\nCOPY config/ /etc/app/\nEXPOSE 8080\nCMD [\"/start.sh\"]</pre>",
   "answer": "<code>3</code>",
   "accept": [
@@ -2264,7 +2264,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "<pre>$ docker images\nREPOSITORY       TAG      IMAGE ID       SIZE\nkdgstudent/app   2.0      f00ba4123456   180MB\nkdgstudent/app   latest   f00ba4123456   180MB</pre>Op Docker Hub staat intussen een nieuwere <code>kdgstudent/app:latest</code>. Lokaal deed je nog niets. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker run -d kdgstudent/app</code> haalt automatisch de nieuwere versie van Docker Hub.",
@@ -2286,7 +2286,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker run -d --name api kdgstudent/api:2.0\n$ docker run -d --rm --name worker kdgstudent/worker:1.0</pre>Beide apps crashen meteen bij het opstarten. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker logs worker</code> toont nog waarom <code>worker</code> crashte.",
@@ -2308,7 +2308,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Container Layers",
   "q": "<pre>$ docker run -d --name web nginx:1.27\n$ docker run -d --name job alpine:3.20 echo klaar\n$ docker exec web sh -c \"echo test > /tmp/x.txt\"\n$ docker stop web\n$ docker start web</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Door <code>-d</code> blijft <code>job</code> draaien tot je hem zelf stopt.",
@@ -2330,7 +2330,7 @@
   "topic": "t3",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "De app in de image <code>kdgstudent/shop:1.0</code> luistert in de container op poort <code>3000</code>. Op de host zijn poort 3000 en 8080 al bezet. Start op de achtergrond een container met de naam <code>shop</code>, die bereikbaar is via <code>http://&lt;host&gt;:8090</code>. Geef het volledige commando.",
   "answer": "<code>docker run -d --name shop -p 8090:3000 kdgstudent/shop:1.0</code>",
   "regex": "^(?=.* (-d|--detach)( |$))(?=.* --name[ =]shop( |$))(?=.* (-p ?|--publish[ =])8090:3000( |$))docker (container )?run( (-d|--detach|--name[ =]shop|-p ?8090:3000|--publish[ =]8090:3000))+ kdgstudent\\/shop:1\\.0$",
@@ -2344,7 +2344,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers",
   "q": "Deze image werd publiek naar Docker Hub gepusht:<pre>FROM alpine:3.20\nCOPY .env /app/.env\nRUN rm /app/.env\nENV DB_PASS=geheim123</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Door de regel <code>RUN rm /app/.env</code> is de image kleiner geworden.",
@@ -2365,7 +2365,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Dockerfile Cache",
   "q": "<pre>FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install -r requirements.txt\nCOPY . .\nCMD [\"python\", \"main.py\"]</pre>Alles staat in de build cache. Welke uitspraken zijn juist?",
   "opts": [
    "Wijzig je <code>requirements.txt</code>, dan wordt enkel die COPY-regel opnieuw uitgevoerd; <code>pip install</code> komt uit de cache.",
@@ -2388,7 +2388,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "<pre>services:\n  api:\n    image: kdgstudent/api:3.1\n    build: ./api\n    ports:\n      - \"8000:8000\"</pre>Het project draait al. Je past <code>./api/app.py</code> aan. Met welk volledig commando draait <code>api</code> daarna, op de achtergrond, met de nieuwe code?",
   "answer": "<code>docker compose up -d --build</code>",
   "regex": "^(?=.* (-d|--detach)( |$))(?=.* --build( |$))docker[ -]compose up( (-d|--detach|--build))+( api)?$",
@@ -2402,7 +2402,7 @@
   "topic": "t1",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (chroot)",
   "q": "<pre>root@host:~# chroot /opt/sandbox /bin/bash\nbash-5.2# echo hi > /tmp/a.txt</pre>De map <code>/opt/sandbox</code> bevat een volledig Linux-bestandssysteem. Wat is het volledige pad van <code>a.txt</code>, gezien vanop de host?",
   "answer": "<code>/opt/sandbox/tmp/a.txt</code>",
   "accept": [
@@ -2417,7 +2417,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 6 – Publishing › Publishing (pull van Docker Hub)",
   "q": "De Dockerfile van <code>kdgstudent/web:1.4</code> bevat o.a. <code>RUN npm install</code>, <code>EXPOSE 3000</code> en <code>CMD [\"node\", \"server.js\"]</code>. Op host B staan nog geen images of containers. Je voert daar enkel <code>docker pull kdgstudent/web:1.4</code> uit. Welke uitspraken zijn juist?",
   "opts": [
    "Tijdens de pull wordt <code>npm install</code> uitgevoerd op host B.",
@@ -2437,7 +2437,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "Een Compose-project draait op de achtergrond: <code>web</code> (<code>image: nginx:1.27</code>) en <code>db</code> (<code>image: postgres</code>, named volume <code>dbdata</code>). Je wijzigt in <code>docker-compose.yml</code> enkel een environment-variabele van <code>db</code>. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker compose restart db</code> volstaat om de nieuwe waarde te gebruiken.",
@@ -2460,7 +2460,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Image Layers (docker system prune)",
   "q": "Een server voert vannacht <code>docker system prune -af --filter \"until=168h\"</code> uit. Welke van deze zaken blijven daarna gegarandeerd staan?",
   "opts": [
    "Een gestopte container die 10 dagen geleden aangemaakt werd.",
@@ -2482,7 +2482,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "Welke uitspraken over hoe containers op Linux werken zijn juist?",
   "opts": [
    "Met namespaces beperk je hoeveel geheugen een container mag gebruiken.",
@@ -2503,7 +2503,7 @@
   "topic": "t2",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 8",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker ps -a\nCONTAINER ID   IMAGE                                STATUS                    NAMES\n9e8d7c6b5a41   localhost:5000/kdgstudent/wiki:3.0   Exited (0) 2 hours ago    wiki\n1f2e3d4c5b6a   postgres:16                          Exited (0) 2 hours ago    wikidb</pre>De host werd herstart. Met welk volledig commando start je de <b>bestaande</b> container van de wiki-app opnieuw (niet de databank), zonder een nieuwe container aan te maken?",
   "answer": "<code>docker start wiki</code>",
   "regex": "^docker (container )?start (wiki|9(?:e(?:8(?:d(?:7(?:c(?:6(?:b(?:5(?:a(?:4(?:1)?)?)?)?)?)?)?)?)?)?)?)$",
@@ -2517,7 +2517,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "<pre>$ docker ps -a\nCONTAINER ID   IMAGE                 STATUS                  NAMES\n3c9a71e0b2d4   kdgstudent/blog:1.0   Exited (0) 1 hour ago   blog</pre>Er werd geen volume gebruikt. In de read/write-laag van <code>blog</code> staan blogposts die gebruikers hebben opgeladen. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker start blog</code> start dezelfde container opnieuw, en de posts staan er nog.",
@@ -2541,7 +2541,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "<pre>$ docker build -t kdgstudent/api:2.0 .\n$ docker tag kdgstudent/api:2.0 localhost:5000/kdgstudent/api:2.0\n$ docker tag kdgstudent/api:2.0 localhost:5000/kdgstudent/api:latest\n$ docker push localhost:5000/kdgstudent/api:2.0</pre>Alles lukt. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker push kdgstudent/api:2.0</code> zou naar dezelfde plek pushen als het laatste commando.",
@@ -2564,7 +2564,7 @@
   "topic": "t7",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "<pre>$ docker run -d -p 5000:5000 --name registry registry:latest</pre>De host wordt herstart. Welke uitspraken zijn juist?",
   "opts": [
    "De registry draait daarna vanzelf weer, omdat ze met <code>-d</code> gestart werd.",
@@ -2587,7 +2587,7 @@
   "topic": "t7",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "Je hebt lokaal de image <code>webapp:1.0</code>. Je bedrijf heeft een eigen registry op <code>registry.kdg.be</code>. Vul aan, zodat je de image daarna met dezelfde naam en tag naar die registry kan pushen:<pre>docker tag webapp:1.0 ______________________</pre>",
   "answer": "<code>registry.kdg.be/webapp:1.0</code>",
   "regex": "^(docker (image )?tag webapp:1\\.0 )?registry\\.kdg\\.be\\/webapp:1\\.0$",
@@ -2601,7 +2601,7 @@
   "topic": "t5",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile – Syntax",
   "q": "<pre>FROM nginx:1.27\nLABEL author=\"Student &lt;student@kdg.be&gt;\"\nADD https://example.com/logo.png /usr/share/nginx/html/\nCOPY index.html style.css /usr/share/nginx/html/</pre>Welke uitspraken zijn juist?",
   "opts": [
    "ADD kan een bestand van een URL ophalen; COPY kan dat niet.",
@@ -2625,7 +2625,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile WORKDIR",
   "q": "Een Dockerfile bevat na elkaar <code>WORKDIR /opt</code>, <code>WORKDIR app</code> en <code>WORKDIR config</code>. Wat is daarna de werkmap?",
   "opts": [
    "<code>/config</code>",
@@ -2645,7 +2645,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile EXPOSE",
   "q": "De image <code>nginx:1.27</code> bevat <code>EXPOSE 80</code>. Je start:<pre>docker run -d --name web -P -v /srv/site:/usr/share/nginx/html nginx:1.27</pre>Welke uitspraken zijn juist?",
   "opts": [
    "De site is bereikbaar via poort 80 van de host, omdat nginx in de container op poort 80 luistert.",
@@ -2669,7 +2669,7 @@
   "topic": "t3",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "De app luistert in de container op poort 3000. Je start:<pre>docker run -d --name shop -p 8080:3000 kdgstudent/shop:1.0</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Op de host zelf bereik je de app via <code>http://localhost:3000</code>.",
@@ -2692,7 +2692,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "Op een Linux-host start de gewone gebruiker <code>jan</code> (geen root) zonder Docker een eigen webserverprogramma dat op poort 80 wil luisteren. Het programma geeft een fout over rechten. Wat is de verklaring?",
   "opts": [
    "Poort 80 is op een host met Docker altijd voorbehouden aan de Docker-daemon.",
@@ -2712,7 +2712,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "<pre>name: shop\nservices:\n  api:\n    image: kdgstudent/shop-api:1.0\n    ports:\n      - \"8080:3000\"\n  db:\n    image: postgres:17\n    environment:\n      POSTGRES_PASSWORD: ${DB_PASSWORD}</pre>Je voert in de projectmap <code>docker compose up -d</code> uit. Welke uitspraken zijn juist?",
   "opts": [
    "De container van <code>api</code> heet <code>shop-api-1</code>.",
@@ -2737,7 +2737,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "<pre>services:\n  web:\n    image: kdgstudent/web:1.0\n    ports:\n      - \"8000:80\"\n  api:\n    image: kdgstudent/api:1.0</pre>De app in <code>api</code> luistert in de container op poort 3000. Het project draait met <code>docker compose up -d</code>. Welke uitspraken zijn juist?",
   "opts": [
    "<code>web</code> kan <code>api</code> niet bereiken, omdat <code>api</code> geen <code>ports:</code> heeft.",
@@ -2757,7 +2757,7 @@
   "topic": "t4",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "<pre>name: blog\nservices:\n  data:\n    image: mysql:8\n  wordpress:\n    image: wordpress</pre>Je startte het project met <code>docker compose up -d</code>. De container van <code>data</code> is intussen gestopt, die van <code>wordpress</code> draait nog. Je staat in de projectmap. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker compose exec data sh</code> opent een shell in de container van <code>data</code>.",
@@ -2780,7 +2780,7 @@
   "topic": "t4",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "Je staat in de map met <code>docker-compose.yml</code>, en het project draait. Geef het volledige commando dat <code>hostname</code> uitvoert in de draaiende container van de service <code>web</code>.",
   "answer": "<code>docker compose exec web hostname</code>",
   "regex": "^docker compose exec( -it| -ti| -i -t| -t -i)? web hostname$",
@@ -2794,7 +2794,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Container Security",
   "q": "Een team start een CI-runner van een onbekende uitgever. De image heeft geen <code>USER</code>-instructie.<pre>docker run -d --name ci \\\n  -v /var/run/docker.sock:/var/run/docker.sock \\\n  -e DB_PASSWORD=geheim \\\n  someone/ci-runner:latest</pre>Welke uitspraken zijn juist?",
   "opts": [
    "Root in de container is een aparte gebruiker zonder rechten op de host, dus als root draaien is geen risico.",
@@ -2818,7 +2818,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Container Security",
   "q": "Welke maatregelen verkleinen het beveiligingsrisico van containers op een gedeelde host?",
   "opts": [
    "Wachtwoorden met <code>-e</code> meegeven in plaats van als bestand via een bind mount.",
@@ -2842,7 +2842,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker run hello-world\n$ docker ps -a\nCONTAINER ID   IMAGE         COMMAND    STATUS                     NAMES\nb3cc9b72393f   hello-world   \"/hello\"   Exited (0) 7 seconds ago   eager_lamport</pre>Je wil deze container verwijderen. Welke uitspraken zijn juist?",
   "opts": [
    "<code>docker rm b3c</code> werkt: de container is gestopt, en <code>b3c</code> is een uniek begin van het ID.",
@@ -2864,7 +2864,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 9",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Een collega zegt: \"Een container is gewoon een kleine VM.\" Met welke uitspraken weerleg je dat terecht?",
   "opts": [
    "Een VM heeft een eigen kernel bovenop een hypervisor; een container deelt de kernel van de host.",
@@ -2887,7 +2887,7 @@
   "topic": "t2",
   "type": "fill",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "<pre>$ docker ps -a\nCONTAINER ID   IMAGE                  STATUS                    NAMES\n9e8d7c6b5a41   kdgstudent/wiki:3.0    Exited (0) 2 hours ago    wiki\n1f2e3d4c5b6a   postgres:16            Exited (0) 2 hours ago    wikidb</pre>Met welk volledig commando start je de bestaande container die op <code>postgres:16</code> gebaseerd is opnieuw, zonder een nieuwe aan te maken?",
   "answer": "<code>docker start wikidb</code>",
   "regex": "^docker (container )?start (wikidb|1(?:f(?:2(?:e(?:3(?:d(?:4(?:c(?:5(?:b(?:6(?:a)?)?)?)?)?)?)?)?)?)?)?)$",
@@ -2901,7 +2901,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 1 – Introduction › Containers vs. Virtual Machines",
   "q": "Welke uitspraken over containers en VM's zijn juist?",
   "opts": [
    "Een container deelt de kernel van de host.",
@@ -2922,7 +2922,7 @@
   "topic": "t4",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 3 – Docker Compose › service discovery",
   "q": "<pre>$ docker ps\nNAMES\nshop-web-1\nshop-db-1</pre>Dit zijn de Compose-services <code>web</code> en <code>db</code>. Welk commando opent een shell in de draaiende web-service?",
   "opts": [
    "<code>docker exec -it web sh</code>",
@@ -2942,7 +2942,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 2 – Docker CLI › Publishing ports (Port forward)",
   "q": "Je voert twee keer na elkaar <code>docker run -d -p 8080:80 nginx:1.27</code> uit (andere containernamen). Wat gebeurt er bij de tweede?",
   "opts": [
    "Het mislukt: hostpoort 8080 is al in gebruik door de eerste container.",
@@ -2962,7 +2962,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Dockerfile EXPOSE",
   "q": "De Dockerfile van <code>kdgstudent/web:1.0</code> bevat <code>EXPOSE 80</code>. Je start <code>docker run -d kdgstudent/web:1.0</code>. Welke uitspraak is juist?",
   "opts": [
    "Poort 80 is bereikbaar op poort 80 van de host.",
@@ -2982,7 +2982,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Multi-stage builds",
   "q": "<pre>FROM golang:1.23 AS build\nCOPY main.go /src/\nRUN go build -o /app /src/main.go\n\nFROM alpine:3.20\nCOPY --from=build /app /app\nCMD [\"/app\"]</pre>Het wordt gebouwd met één <code>docker build</code>. Welke uitspraken over de eindimage zijn juist?",
   "opts": [
    "Ze bevat de Go-compiler.",
@@ -3003,7 +3003,7 @@
   "topic": "t2",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 1 – Introduction › Running (creating) containers",
   "q": "De container <code>api</code> (image <code>kdgstudent/api:1.0</code>) is gestopt. Welk commando start precies die container opnieuw?",
   "opts": [
    "<code>docker run api</code>",
@@ -3023,7 +3023,7 @@
   "topic": "t7",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 6 – Publishing › Private Registry",
   "q": "Je hebt een eigen registry op <code>registry.kdg.local:5000</code> en de image <code>kdgstudent/shop:2.0</code>. Welke naam geef je met <code>docker tag</code> om naar die registry te pushen?",
   "opts": [
    "<code>kdgstudent/registry.kdg.local:5000/shop:2.0</code>",
@@ -3043,7 +3043,7 @@
   "topic": "t1",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 1 – Introduction › Containers on Linux (namespaces, cgroups)",
   "q": "Welke uitspraken over chroot, namespaces en cgroups zijn juist?",
   "opts": [
    "cgroups bepalen hoeveel CPU en geheugen een proces mag gebruiken.",
@@ -3064,7 +3064,7 @@
   "topic": "t2",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Container Layers (docker exec); Hoofdstuk 3 – Docker Compose › docker compose CLI",
   "q": "De container <code>worker</code> is gestopt, de container <code>api</code> draait. Welke commando's werken?",
   "opts": [
    "<code>docker logs worker</code>",
@@ -3085,7 +3085,7 @@
   "topic": "t4",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › Docker compose build step",
   "q": "De service <code>web</code> heeft <code>build: .</code> en de stack draait. Je wijzigt <code>app.py</code>. Welk commando bouwt opnieuw en start op de achtergrond?",
   "opts": [
    "<code>docker compose up -d</code>",
@@ -3105,7 +3105,7 @@
   "topic": "t5",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 4 – Dockerfile (deel 1) › CMD or ENTRYPOINT?",
   "q": "De image <code>groet:1.0</code> heeft <code>CMD [\"echo\", \"hallo\"]</code>. Wat toont <code>docker run groet:1.0 echo dag</code>?",
   "opts": [
    "<code>hallo</code>",
@@ -3125,7 +3125,7 @@
   "topic": "t6",
   "type": "multi",
   "pts": 2,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 5 – Dockerfile (deel 2) › Container Security",
   "q": "Je databankwachtwoord moet in een Compose-project terechtkomen, en de image gaat naar een publieke registry. Welke aanpakken zijn veilig?",
   "opts": [
    "<code>ENV DB_PASSWORD=geheim</code> in de Dockerfile",
@@ -3146,7 +3146,7 @@
   "topic": "t3",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 2 – Docker CLI › Volumes (named volume)",
   "q": "<pre>$ docker run -d --name db -v dbdata:/var/lib/data kdgstudent/db:1.0\n$ docker rm -f db\n$ docker volume ls</pre>Wat toont de laatste stap?",
   "opts": [
    "<code>dbdata</code> staat nog in de lijst.",
@@ -3166,7 +3166,7 @@
   "topic": "t7",
   "type": "mc",
   "pts": 1,
-  "source": "Oefenronde 10",
+  "source": "Hoofdstuk 1 – Introduction › Tags",
   "q": "Lokaal staan <code>kdgstudent/app:1.0</code> en <code>kdgstudent/app:latest</code>. Je voert <code>docker push kdgstudent/app:1.0</code> uit. Welke tag(s) staan daarna op Docker Hub?",
   "opts": [
    "Enkel <code>1.0</code>",

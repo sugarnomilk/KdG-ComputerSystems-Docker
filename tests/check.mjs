@@ -36,6 +36,7 @@ check("every pooled question has a known topic, type and points", () => {
     assert.ok(["mc", "multi", "fill", "open"].includes(q.type), `${q.id}: type`);
     assert.ok(q.pts > 0, `${q.id}: pts`);
     assert.ok(q.source, `${q.id}: source`);
+    assert.match(q.source, /^Hoofdstuk [1-6] – /, `${q.id}: source must point to a course chapter`);
   }
 });
 
