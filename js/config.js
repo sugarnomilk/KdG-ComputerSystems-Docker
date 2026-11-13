@@ -4,6 +4,8 @@ export const VERSION = "v0.2";
 // Do not change: it holds the learner's saved progress in localStorage.
 export const STORAGE_KEY = "cs2-docker-quiz-v2";
 
+export const REPO_URL = "https://github.com/sugarnomilk/KdG-ComputerSystems-Docker";
+
 export const MIN_QUESTIONS = 10;
 export const MAX_QUESTIONS = 40;
 export const DEFAULT_QUESTIONS = 20;

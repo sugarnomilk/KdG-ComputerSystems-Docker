@@ -353,3 +353,12 @@
   margin: 0;
   align-self: center;
 }
+
+.report-link {
+  color: inherit;
+  white-space: nowrap;
+}
+
+.report-link:hover {
+  color: var(--accent);
+}

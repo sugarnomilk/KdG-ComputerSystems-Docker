@@ -2,8 +2,10 @@
 import { OPTION_LETTERS, TYPE_LABELS } from "../config.js";
 import { $, action, cloneTemplate, el, field, scrollToTop } from "../dom.js";
 import { grade, outcome } from "../quiz.js";
+import { buildIssueUrl } from "../report.js";
 import { createAnswer } from "../state.js";
 import { formatNumber } from "../util.js";
+import { VERSION } from "../config.js";
 
 function pointsLabel(pts) {
   return `${pts} punt${pts > 1 ? "en" : ""}`;
@@ -109,6 +111,7 @@ export function renderQuestion(ctx) {
   field(screen, "text").innerHTML = q.q;
   field(screen, "multi-hint").hidden = q.type !== "multi";
   field(screen, "source").textContent = q.source;
+  field(screen, "report").href = buildIssueUrl(q, a, data.topicNames[q.topic], VERSION);
 
   const clearError = () => {
     error.textContent = "";
