@@ -1,0 +1,98 @@
+/* Element defaults and small utilities. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 var(--font-text);
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+
+h3 {
+  font-size: 15px;
+  margin: 18px 0 6px;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  background: var(--code);
+  border-radius: 8px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  font: 13px/1.5 var(--font-mono);
+  margin: 10px 0 14px;
+  white-space: pre;
+}
+
+code {
+  font: 0.9em var(--font-mono);
+  background: var(--code);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  font: 15px var(--font-mono);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+textarea {
+  font-family: inherit;
+  min-height: 110px;
+  resize: vertical;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
