@@ -10,7 +10,7 @@ const ARM_TIMEOUT_MS = 3000;
 
 // A tooltip can be dismissed with Escape, also while the pointer only hovers it (WCAG 1.4.13).
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") document.querySelectorAll(".tooltip").forEach((t) => t.classList.add("is-dismissed"));
+  if (e.key === "Escape") document.querySelectorAll("[role=tooltip]").forEach((tip) => (tip.hidden = true));
 });
 
 /** Mastered and total concepts, for all topics or one topic. */
@@ -81,9 +81,17 @@ export function renderStart(ctx) {
 
   // Two-step reset of the history only; a running exam stays untouched.
   const reset = action(screen, "reset-history");
+  // The tooltip text is hidden with the `hidden` attribute, so it stays hidden even if
+  // an older cached stylesheet is used.
   const tooltip = reset.closest(".tooltip");
-  tooltip.addEventListener("mouseenter", () => tooltip.classList.remove("is-dismissed"));
-  tooltip.addEventListener("focusin", () => tooltip.classList.remove("is-dismissed"));
+  const tip = tooltip.querySelector("[role=tooltip]");
+  const setTip = (visible) => () => {
+    tip.hidden = !visible;
+  };
+  tooltip.addEventListener("mouseenter", setTip(true));
+  tooltip.addEventListener("mouseleave", setTip(false));
+  tooltip.addEventListener("focusin", setTip(true));
+  tooltip.addEventListener("focusout", setTip(false));
   let armed = false;
   reset.addEventListener("click", () => {
     if (!armed) {

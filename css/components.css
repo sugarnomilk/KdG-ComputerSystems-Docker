@@ -373,7 +373,7 @@
   padding: 0;
 }
 
-/* Tooltip: shown on hover and on keyboard focus, hidden with Escape */
+/* Tooltip: shown on hover and keyboard focus by js/views/start.js (hidden attribute) */
 .tooltip {
   position: relative;
   display: inline-block;
@@ -392,19 +392,5 @@
   color: var(--bg);
   font-size: 13px;
   line-height: 1.4;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.12s;
   pointer-events: none;
-}
-
-.tooltip:hover .tooltip-text,
-.tooltip:focus-within .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-.tooltip.is-dismissed .tooltip-text {
-  visibility: hidden;
-  opacity: 0;
 }
