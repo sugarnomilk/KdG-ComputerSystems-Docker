@@ -1,0 +1,543 @@
+[
+ {
+  "id": "t1-vm-versus-container",
+  "topic": "t1",
+  "name": "VM versus container",
+  "description": "Eigen kernel, snelheid, geen hardware-emulatie",
+  "questions": [
+   "R10-2",
+   "R9-15",
+   "E3",
+   "R8-9"
+  ]
+ },
+ {
+  "id": "t1-gedeelde-kernel-en-risico",
+  "topic": "t1",
+  "name": "Gedeelde kernel en risico",
+  "description": "Een kernelfout raakt alle containers",
+  "questions": [
+   "R6-8",
+   "E1",
+   "R7-1"
+  ]
+ },
+ {
+  "id": "t1-namespaces-en-cgroups",
+  "topic": "t1",
+  "name": "Namespaces en cgroups",
+  "description": "Namespaces = wat je ziet, cgroups = hoeveel je mag",
+  "questions": [
+   "R10-9",
+   "E2",
+   "R7-2",
+   "R8-34",
+   "R2-7",
+   "R5-2"
+  ]
+ },
+ {
+  "id": "t1-chroot",
+  "topic": "t1",
+  "name": "chroot",
+  "description": "Enkel de root-map verandert; de rest wordt gedeeld",
+  "questions": [
+   "R8-27",
+   "R1-1",
+   "R6-7",
+   "R5-1"
+  ]
+ },
+ {
+  "id": "t1-containers-in-de-praktijk",
+  "topic": "t1",
+  "name": "Containers in de praktijk",
+  "description": "OCI-images, aantallen, microservices",
+  "questions": [
+   "E4",
+   "R7-3"
+  ]
+ },
+ {
+  "id": "t1-toegang-tot-de-docker-daemon",
+  "topic": "t1",
+  "name": "Toegang tot de Docker-daemon",
+  "description": "Groep docker, permission denied",
+  "questions": [
+   "R1-3",
+   "R6-9"
+  ]
+ },
+ {
+  "id": "t1-maatregelen-voor-containerbeveiliging",
+  "topic": "t1",
+  "name": "Maatregelen voor containerbeveiliging",
+  "description": "Betrouwbare images, USER, host-kernel up-to-date, Docker-socket",
+  "questions": [
+   "R9-11",
+   "R9-5"
+  ]
+ },
+ {
+  "id": "t2-exec-en-logs",
+  "topic": "t2",
+  "name": "exec en logs",
+  "description": "Welk commando werkt op een draaiende of gestopte container",
+  "questions": [
+   "E6",
+   "E9",
+   "R10-10"
+  ]
+ },
+ {
+  "id": "t2-run-maakt-nieuw-start-hervat",
+  "topic": "t2",
+  "name": "run maakt nieuw, start hervat",
+  "description": "docker run = nieuwe container; docker start = dezelfde container",
+  "questions": [
+   "R10-7",
+   "R10-1",
+   "R8-35",
+   "E7"
+  ]
+ },
+ {
+  "id": "t2-rm",
+  "topic": "t2",
+  "name": "--rm",
+  "description": "Container verdwijnt na stoppen, ook zijn logs",
+  "questions": [
+   "E8",
+   "R2-12",
+   "R5-4"
+  ]
+ },
+ {
+  "id": "t2-ps-ps-a-en-wat-een-gestopte-container-bewaart",
+  "topic": "t2",
+  "name": "ps, ps -a en wat een gestopte container bewaart",
+  "description": "Zichtbaarheid en read/write-laag na stop/start",
+  "questions": [
+   "R5-3",
+   "R1-5",
+   "R8-19",
+   "R8-17"
+  ]
+ },
+ {
+  "id": "t2-standaard-cmd-en-wat-een-container-draaiende-houdt",
+  "topic": "t2",
+  "name": "Standaard-CMD en wat een container draaiende houdt",
+  "description": "sleep vs ls, shell in busybox/alpine",
+  "questions": [
+   "R8-1",
+   "R4-2"
+  ]
+ },
+ {
+  "id": "t2-imagetag-latest",
+  "topic": "t2",
+  "name": "Imagetag: latest",
+  "description": "Zonder tag = latest",
+  "questions": [
+   "E10"
+  ]
+ },
+ {
+  "id": "t2-omgevingsvariabelen-met-e",
+  "topic": "t2",
+  "name": "Omgevingsvariabelen met -e",
+  "description": "-e overschrijft ENV in de image",
+  "questions": [
+   "R5-16",
+   "R6-4"
+  ]
+ },
+ {
+  "id": "t2-container-verwijderen-op-deel-van-id-of-naam",
+  "topic": "t2",
+  "name": "Container verwijderen op (deel van) ID of naam",
+  "description": "docker rm, uniek begin van een ID",
+  "questions": [
+   "E11",
+   "R9-6"
+  ]
+ },
+ {
+  "id": "t3-hostpoort-al-in-gebruik",
+  "topic": "t3",
+  "name": "Hostpoort al in gebruik",
+  "description": "Een hostpoort kan maar één keer gepubliceerd worden",
+  "questions": [
+   "R10-4",
+   "E13",
+   "R7-4"
+  ]
+ },
+ {
+  "id": "t3-p-hostpoort-containerpoort",
+  "topic": "t3",
+  "name": "-p hostpoort:containerpoort",
+  "description": "Juiste volgorde en poortkeuze",
+  "questions": [
+   "R8-6",
+   "R6-15",
+   "R8-21"
+  ]
+ },
+ {
+  "id": "t3-toegang-via-het-ip-van-de-host",
+  "topic": "t3",
+  "name": "Toegang via het IP van de host",
+  "description": "Welke poort, welk adres; DNAT-regel",
+  "questions": [
+   "R4-6",
+   "R6-5",
+   "R9-9"
+  ]
+ },
+ {
+  "id": "t3-p-kiest-een-hostpoort",
+  "topic": "t3",
+  "name": "-P kiest een hostpoort",
+  "description": "-P publiceert alle EXPOSE-poorten op willekeurige hostpoorten",
+  "questions": [
+   "R9-3"
+  ]
+ },
+ {
+  "id": "t3-poorten-onder-1024",
+  "topic": "t3",
+  "name": "Poorten onder 1024",
+  "description": "Privileged ports",
+  "questions": [
+   "R9-13"
+  ]
+ },
+ {
+  "id": "t3-bind-mounts",
+  "topic": "t3",
+  "name": "Bind mounts",
+  "description": "Hostmap in de container; wijzigingen zichtbaar; syntaxis",
+  "questions": [
+   "R3-4",
+   "E14",
+   "R7-5",
+   "R5-6"
+  ]
+ },
+ {
+  "id": "t3-named-volumes",
+  "topic": "t3",
+  "name": "Named volumes",
+  "description": "Overleven docker rm; opnieuw koppelen",
+  "questions": [
+   "R10-14",
+   "R4-7",
+   "R5-5"
+  ]
+ },
+ {
+  "id": "t4-up-d-en-down",
+  "topic": "t4",
+  "name": "up -d en down",
+  "description": "Wat starten, stoppen en verwijderen",
+  "questions": [
+   "E26",
+   "E27",
+   "R7-8"
+  ]
+ },
+ {
+  "id": "t4-compose-logs-f",
+  "topic": "t4",
+  "name": "compose logs -f",
+  "description": "Output van alle services volgen",
+  "questions": [
+   "R5-12",
+   "R6-23"
+  ]
+ },
+ {
+  "id": "t4-build",
+  "topic": "t4",
+  "name": "--build",
+  "description": "Opnieuw bouwen na codewijziging; build + image",
+  "questions": [
+   "R10-11",
+   "R8-4",
+   "R8-26",
+   "R6-27",
+   "R5-19",
+   "R6-6"
+  ]
+ },
+ {
+  "id": "t4-wijziging-in-het-compose-bestand-en-down-v",
+  "topic": "t4",
+  "name": "Wijziging in het Compose-bestand en down -v",
+  "description": "Enkel gewijzigde services opnieuw; volumes blijven tot -v",
+  "questions": [
+   "R3-5",
+   "R8-29",
+   "R6-16"
+  ]
+ },
+ {
+  "id": "t4-variabelen-met-env",
+  "topic": "t4",
+  "name": "Variabelen met .env",
+  "description": "${VAR} en het bestand .env",
+  "questions": [
+   "E12",
+   "R7-6"
+  ]
+ },
+ {
+  "id": "t4-servicenaam-als-hostnaam",
+  "topic": "t4",
+  "name": "Servicenaam als hostnaam",
+  "description": "Services vinden elkaar met de servicenaam; ports enkel voor buitenaf",
+  "questions": [
+   "R9-10a",
+   "R8-11"
+  ]
+ },
+ {
+  "id": "t4-volume-declareren-en-mounten",
+  "topic": "t4",
+  "name": "Volume declareren én mounten",
+  "description": "Declaratie onderaan volstaat niet",
+  "questions": [
+   "E25",
+   "R7-7"
+  ]
+ },
+ {
+  "id": "t4-servicenaam-of-containernaam",
+  "topic": "t4",
+  "name": "Servicenaam of containernaam",
+  "description": "compose exec <service> vs docker exec <project>-<service>-1",
+  "questions": [
+   "R10-3",
+   "R9-14",
+   "R9-4",
+   "R9-10b"
+  ]
+ },
+ {
+  "id": "t5-cmd-en-argumenten-bij-docker-run",
+  "topic": "t5",
+  "name": "CMD en argumenten bij docker run",
+  "description": "Argumenten vervangen CMD",
+  "questions": [
+   "R10-12",
+   "R3-11",
+   "R6-2",
+   "E15",
+   "R7-9"
+  ]
+ },
+ {
+  "id": "t5-run-bij-het-bouwen-cmd-bij-het-starten",
+  "topic": "t5",
+  "name": "RUN bij het bouwen, CMD bij het starten",
+  "description": "Wanneer wordt een instructie uitgevoerd",
+  "questions": [
+   "E16",
+   "R2-3",
+   "R3-3"
+  ]
+ },
+ {
+  "id": "t5-workdir",
+  "topic": "t5",
+  "name": "WORKDIR",
+  "description": "Werkmap voor volgende instructies, ook relatief",
+  "questions": [
+   "E23",
+   "R9-8",
+   "R5-13",
+   "R6-3"
+  ]
+ },
+ {
+  "id": "t5-add-copy-label-env-en-dubbele-cmd",
+  "topic": "t5",
+  "name": "ADD, COPY, LABEL, ENV en dubbele CMD",
+  "description": "Verschillen tussen instructies",
+  "questions": [
+   "R9-2",
+   "R1-18",
+   "R6-28"
+  ]
+ },
+ {
+  "id": "t5-expose",
+  "topic": "t5",
+  "name": "EXPOSE",
+  "description": "EXPOSE is enkel informatie; publiceren doe je met -p",
+  "questions": [
+   "R10-5"
+  ]
+ },
+ {
+  "id": "t6-bestaande-images-hergebruiken",
+  "topic": "t6",
+  "name": "Bestaande images hergebruiken",
+  "description": "Officiële base images; minimale distributies",
+  "questions": [
+   "E5",
+   "R5-10"
+  ]
+ },
+ {
+  "id": "t6-lagen-tellen",
+  "topic": "t6",
+  "name": "Lagen tellen",
+  "description": "Welke instructies een laag maken",
+  "questions": [
+   "E31",
+   "R6-14",
+   "R3-6",
+   "R8-14"
+  ]
+ },
+ {
+  "id": "t6-cache-en-volgorde-van-instructies",
+  "topic": "t6",
+  "name": "Cache en volgorde van instructies",
+  "description": "Wat verandert vaak, hoort onderaan",
+  "questions": [
+   "E20",
+   "R1-11",
+   "R3-14",
+   "R8-23"
+  ]
+ },
+ {
+  "id": "t6-multi-stage-builds",
+  "topic": "t6",
+  "name": "Multi-stage builds",
+  "description": "Eindimage bevat enkel de laatste stage",
+  "questions": [
+   "E19",
+   "R10-6",
+   "R5-14",
+   "R6-22",
+   "R8-5"
+  ]
+ },
+ {
+  "id": "t6-gedeelde-lagen-en-pull",
+  "topic": "t6",
+  "name": "Gedeelde lagen en pull",
+  "description": "Enkel ontbrekende lagen downloaden; pull voert niets uit",
+  "questions": [
+   "R5-18",
+   "R6-1",
+   "R8-8"
+  ]
+ },
+ {
+  "id": "t6-geheimen-in-images",
+  "topic": "t6",
+  "name": "Geheimen in images",
+  "description": "Laag blijft bewaard; ENV leesbaar; veilige aanpak",
+  "questions": [
+   "R3-8",
+   "R8-22",
+   "R5-8",
+   "R5-9",
+   "R10-13"
+  ]
+ },
+ {
+  "id": "t6-dockerignore",
+  "topic": "t6",
+  "name": ".dockerignore",
+  "description": "Bestanden uitsluiten van de build context",
+  "questions": [
+   "E22"
+  ]
+ },
+ {
+  "id": "t6-docker-system-prune",
+  "topic": "t6",
+  "name": "docker system prune",
+  "description": "Volumes en draaiende images blijven staan",
+  "questions": [
+   "R1-19",
+   "R8-32"
+  ]
+ },
+ {
+  "id": "t7-naam-voor-docker-hub",
+  "topic": "t7",
+  "name": "Naam voor Docker Hub",
+  "description": "account/naam:tag; zonder account = denied",
+  "questions": [
+   "E29",
+   "R5-11",
+   "R8-12",
+   "R6-19",
+   "R4-14"
+  ]
+ },
+ {
+  "id": "t7-naam-voor-een-eigen-registry",
+  "topic": "t7",
+  "name": "Naam voor een eigen registry",
+  "description": "host:poort vooraan",
+  "questions": [
+   "E28",
+   "R9-12",
+   "R10-8",
+   "R1-16",
+   "R7-11"
+  ]
+ },
+ {
+  "id": "t7-tags-zijn-extra-labels",
+  "topic": "t7",
+  "name": "Tags zijn extra labels",
+  "description": "Zelfde IMAGE ID; push per tag; latest",
+  "questions": [
+   "R10-15",
+   "R3-13",
+   "R9-7a",
+   "R8-16",
+   "R4-15"
+  ]
+ },
+ {
+  "id": "t7-fout-getagd",
+  "topic": "t7",
+  "name": "Fout getagd",
+  "description": "Opnieuw taggen, niet opnieuw bouwen",
+  "questions": [
+   "R6-13"
+  ]
+ },
+ {
+  "id": "t7-registry-container-na-herstart",
+  "topic": "t7",
+  "name": "Registry-container na herstart",
+  "description": "docker start, niet docker run",
+  "questions": [
+   "R5-15",
+   "R6-30",
+   "R9-7b",
+   "R9-1"
+  ]
+ },
+ {
+  "id": "t7-image-ophalen-op-een-andere-host",
+  "topic": "t7",
+  "name": "Image ophalen op een andere host",
+  "description": "Pull of run haalt lagen op; geen container bij pull",
+  "questions": [
+   "R8-28"
+  ]
+ }
+]

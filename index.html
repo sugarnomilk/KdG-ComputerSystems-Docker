@@ -36,17 +36,34 @@
   <template id="tpl-start">
     <section class="card" aria-labelledby="start-title">
       <h2 id="start-title">Nieuw oefenexamen</h2>
-      <p class="card-lead">Kies hoeveel vragen je wil. Je krijgt een willekeurige selectie uit minstens <span data-field="pool-size"></span> vragen. Er worden doorlopend vragen bijgevoegd tot en met de examendatum. Vragen zijn verdeeld over alle onderdelen van de cursus: elk onderdeel komt minstens één keer aan bod.</p>
+      <p class="card-lead">Kies hoeveel vragen je wil. Je krijgt een willekeurige selectie uit minstens <span data-field="pool-size"></span> vragen. Vragen zijn verdeeld over de onderdelen van de cursus die hieronder opgelijst staan: elk onderdeel komt minstens één keer aan bod.</p>
 
       <label class="label-strong" for="count-range">Aantal vragen: <output for="count-range" data-field="count"></output></label>
       <input class="range" type="range" id="count-range" step="1">
       <div class="actions" data-field="presets"></div>
 
+      <fieldset class="mode-picker">
+        <legend class="label-strong">Soort examen</legend>
+        <label class="option">
+          <input type="radio" name="mode" value="smart">
+          <span class="option-text"><strong>Slim</strong>: Begrippen die je miste en vragen die je nooit zag, komen eerst. Een begrip is afgerond zodra je twee vragen ervan volledig juist hebt. Elk onderdeel van de cursus komt alsnog minstens 1x aan bod.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="mode" value="random">
+          <span class="option-text"><strong>Rando</strong>: Een willekeurige selectie uit de hele pool. Je resultaten tellen mee voor Slim.</span>
+        </label>
+      </fieldset>
+
       <h3>Onderdelen</h3>
       <ul class="summary-list" data-field="topics"></ul>
+      <p class="hint" data-field="progress"></p>
 
       <div class="actions">
         <button class="btn btn-primary" type="button" data-action="start">Start examen</button>
+        <span class="tooltip">
+          <button class="btn" type="button" data-action="reset-history" aria-describedby="history-tip">Wis geschiedenis</button>
+          <span class="tooltip-text" id="history-tip" role="tooltip">Wist wat de app onthoudt over welke vragen je goed of fout had, enkel in deze browser. Slim begint dan opnieuw. Een lopend examen blijft staan.</span>
+        </span>
         <button class="btn" type="button" data-action="resume" hidden>Verder met vorig examen (<span data-field="resume-count"></span> vragen)</button>
       </div>
 
@@ -62,7 +79,7 @@
       </section>
       <section class="hint scoring-info" aria-labelledby="privacy-title">
         <h3 id="privacy-title">Privacy</h3>
-        <p>Je voortgang blijft enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p>
+        <p>Je voortgang en je geschiedenis per vraag blijven enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p>
       </section>
     </section>
   </template>
@@ -100,7 +117,7 @@
         <button class="btn btn-primary" type="button" data-action="confirm">Bevestig</button>
       </div>
 
-      <p class="hint source">Bron: <span data-field="source"></span></p>
+      <p class="hint source">Bron: <span data-field="source"></span> · <a class="report-link" data-field="report" target="_blank" rel="noopener">⚑ Meld een fout</a></p>
     </article>
 
     <nav class="pager" aria-label="Vorige en volgende vraag">

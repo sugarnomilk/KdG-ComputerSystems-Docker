@@ -353,3 +353,58 @@
   margin: 0;
   align-self: center;
 }
+
+.report-link {
+  color: inherit;
+  white-space: nowrap;
+}
+
+.report-link:hover {
+  color: var(--accent);
+}
+
+/* Exam kind and history */
+.mode-picker {
+  margin: 18px 0 4px;
+}
+
+.mode-picker legend {
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+/* Tooltip: shown on hover and on keyboard focus, hidden with Escape */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  width: 260px;
+  max-width: 80vw;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13px;
+  line-height: 1.4;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.12s;
+  pointer-events: none;
+}
+
+.tooltip:hover .tooltip-text,
+.tooltip:focus-within .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip.is-dismissed .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+}

@@ -1,6 +1,7 @@
 // Entry point: load the data, restore the saved state and draw the right screen.
 import { $, cloneTemplate } from "./dom.js";
 import { loadData } from "./data.js";
+import { loadHistory, saveHistory } from "./history.js";
 import { loadState, saveState } from "./state.js";
 import { initHeader, renderHeader } from "./views/header.js";
 import { renderStart } from "./views/start.js";
@@ -18,10 +19,13 @@ async function init() {
   }
 
   const state = loadState(new Set(Object.keys(data.byId)));
+  const history = loadHistory();
   const ctx = {
     data,
     state,
+    history,
     save: () => saveState(state),
+    saveHistory: () => saveHistory(history),
     render,
   };
 
