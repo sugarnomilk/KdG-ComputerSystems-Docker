@@ -4,6 +4,18 @@ import { correctCount, eligibleQuestions, isMastered, masteryTarget } from "./co
 import { allocateCounts } from "./quiz.js";
 import { shuffle } from "./util.js";
 
+const hasMiss = (concept, history) =>
+  concept.questions.some((q) => ["w", "p"].includes(history[q.id]?.r));
+
+/**
+ * Order of the unmastered concepts of a topic:
+ *   0  concepts you missed (a wrong or partially correct question)
+ *   1  concepts with questions you never saw
+ *   2  concepts where only a partially correct question is left (it returns last)
+ */
+const conceptGroup = ({ concept, items }, history) =>
+  items[0].tier === 2 ? 2 : hasMiss(concept, history) ? 0 : 1;
+
 /** Pick k question ids of one topic. */
 function selectForTopic(topicId, data, history, k, random) {
   const chosen = [];
@@ -21,7 +33,7 @@ function selectForTopic(topicId, data, history, k, random) {
   )
     .map((concept) => ({ concept, items: eligibleQuestions(concept, history) }))
     .filter((entry) => entry.items.length)
-    .sort((a, b) => a.items[0].tier - b.items[0].tier);
+    .sort((a, b) => conceptGroup(a, history) - conceptGroup(b, history));
 
   // 1. Per concept a block of questions, so it can reach mastery within this exam.
   for (const { concept, items } of active) {
@@ -35,9 +47,29 @@ function selectForTopic(topicId, data, history, k, random) {
   return chosen;
 }
 
+const MAX_SHUFFLE_TRIES = 500;
+
+/**
+ * Shuffle the exam, but keep questions of the same concept apart where possible,
+ * so a pair of related questions never follows each other.
+ */
+export function spread(ids, conceptOf, random = Math.random) {
+  const hasNeighbours = (order) =>
+    order.some((id, i) => i > 0 && conceptOf[id] === conceptOf[order[i - 1]]);
+  let order = shuffle([...ids], random);
+  for (let tries = 0; tries < MAX_SHUFFLE_TRIES && hasNeighbours(order); tries++) {
+    order = shuffle([...ids], random);
+  }
+  return order;
+}
+
 /** Draw n question ids; every topic gets at least one, as in the random draw. */
 export function pickSmart(data, history, n, random = Math.random) {
   const sizes = data.topics.map((t) => data.pool.filter((q) => q.topic === t.id).length);
   const counts = allocateCounts(sizes, n, random);
-  return data.topics.flatMap((t, i) => selectForTopic(t.id, data, history, counts[i], random));
+  const ids = data.topics.flatMap((t, i) => selectForTopic(t.id, data, history, counts[i], random));
+  const conceptOf = Object.fromEntries(
+    data.concepts.flatMap((c) => c.questions.map((q) => [q.id, c.id]))
+  );
+  return spread(ids, conceptOf, random);
 }

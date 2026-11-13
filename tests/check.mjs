@@ -170,6 +170,27 @@ check("smart pick: skips mastered concepts while others are left", () => {
   }
 });
 
+check("smart pick: missed concepts first, and related questions are spread out", () => {
+  const h = fresh();
+  const missed = data.concepts.find((c) => c.topic === "t4");
+  recordResult(h, missed.questions[0], 0);
+  const conceptOf = Object.fromEntries(data.concepts.flatMap((c) => c.questions.map((q) => [q.id, c.id])));
+  for (let i = 0; i < 60; i++) {
+    const ids = pickSmart(data, h, 10); // one question per topic
+    const t4 = ids.filter((id) => data.byId[id].topic === "t4");
+    assert.equal(conceptOf[t4[0]], missed.id, "the missed concept was not drawn first");
+    assert.notEqual(t4[0], missed.questions[0], "another question of the concept comes first");
+  }
+  for (let n = 10; n <= 40; n++) {
+    for (let i = 0; i < 40; i++) {
+      const ids = pickSmart(data, fresh(), n);
+      for (let k = 1; k < ids.length; k++) {
+        assert.notEqual(conceptOf[ids[k]], conceptOf[ids[k - 1]], `n=${n}: related questions are adjacent`);
+      }
+    }
+  }
+});
+
 check("smart pick: a concept can be drawn twice, so mastery is possible within one exam", () => {
   const h = fresh();
   let twice = false;
