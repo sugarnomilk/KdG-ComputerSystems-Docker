@@ -54,7 +54,7 @@ Your progress (only your current or last session, so you can resume) is stored i
 
 ## Found a mistake?
 
-Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues) with the question ID (e.g. `R8-35`) and what is wrong, ideally with the slide that backs it up. Reported mistakes are fixed and the affected options removed or rewritten.
+Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues) with the question ID (e.g. `R8-35`) and what is wrong, ideally with the slide from the course that backs up your claim. Reported mistakes are fixed and the affected options removed or rewritten.
 
 ## Changelog
 
