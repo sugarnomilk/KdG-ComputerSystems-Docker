@@ -39,9 +39,11 @@ So don't guess on multiple-answer questions. Fill-in answers ignore capitals, ex
 ```
 index.html            semantic page skeleton + <template>s for each screen
 css/                  tokens (colours), base (elements), layout, components
-js/                   ES modules: main, config, data, state, quiz (rules), util, dom
+js/                   ES modules: main, config, data, state, history, concepts, selection,
+                      quiz (rules), report, util, dom
 js/views/             header, start, question, end (one module per screen)
 data/questions.json   all questions (HTML allowed inside text fields)
+data/concepts.json    the questions grouped per concept (easiest first); used by Slim
 data/topics.json      the seven course topics
 tests/check.mjs       data and rules checks
 ```
@@ -96,11 +98,12 @@ Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues
 - Code cleanup: semantic HTML with templates, CSS and JavaScript in separate folders, and the questions in `data/questions.json`. Behaviour and look are unchanged.
 - Question bank cleanup: 19 combination or near-duplicate questions archived, 15 new questions from the 10 Nov practice exam.
 - The page now needs a web server (see Project structure).
+- Two kinds of exam. **Slim** draws concepts you missed and questions you never saw first: a concept is done once you answered two of its questions fully correct (one for a concept with a single question), a missed question rests until a new question was answered, and every topic still appears at least once. **Rando** is a fully random draw in random order. Both record your results.
+- The app remembers per question whether you got it right (only in your browser, with a "Wis geschiedenis" button that clears it).
+- A "Meld een fout" link on every question opens a pre-filled GitHub issue.
 
 ## Upcoming
 
-- Smarter sessions: remember per question whether you got it right, and draw new and previously missed questions first (stored locally, with a reset button).
-- A "report a mistake" button on every question.
 - A generalized version that can be reused for other exams.
 
 ---
