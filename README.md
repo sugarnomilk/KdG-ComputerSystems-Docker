@@ -71,7 +71,6 @@ Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues
 
 - Smarter sessions: remember per question whether you got it right, and draw new and previously missed questions first (stored locally, with a reset button).
 - A "report a mistake" button on every question.
-- Code cleanup: proper, semantic HTML and CSS, and the questions in a separate file so others can contribute.
 - A generalized version that can be reused for other exams.
 
 ---
