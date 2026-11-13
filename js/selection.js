@@ -4,17 +4,12 @@ import { correctCount, eligibleQuestions, isMastered, masteryTarget } from "./co
 import { allocateCountsRandom } from "./quiz.js";
 import { shuffle } from "./util.js";
 
-const hasMiss = (concept, history) =>
-  concept.questions.some((q) => ["w", "p"].includes(history[q.id]?.r));
-
 /**
- * Order of the unmastered concepts of a topic:
- *   0  concepts you missed (a wrong or partially correct question)
- *   1  concepts with questions you never saw
- *   2  concepts where only a partially correct question is left (it returns last)
+ * Order of the unmastered concepts of a topic. Concepts you missed and concepts with
+ * questions you never saw have the same priority, so a miss does not come straight
+ * back. Concepts where only a partially correct question is left return last.
  */
-const conceptGroup = ({ concept, items }, history) =>
-  items[0].tier === 2 ? 2 : hasMiss(concept, history) ? 0 : 1;
+const conceptGroup = ({ items }) => (items[0].tier === 2 ? 1 : 0);
 
 /** Pick k question ids of one topic. */
 function selectForTopic(topicId, data, history, k, random) {
@@ -33,7 +28,7 @@ function selectForTopic(topicId, data, history, k, random) {
   )
     .map((concept) => ({ concept, items: eligibleQuestions(concept, history) }))
     .filter((entry) => entry.items.length)
-    .sort((a, b) => conceptGroup(a, history) - conceptGroup(b, history));
+    .sort((a, b) => conceptGroup(a) - conceptGroup(b));
 
   // 1. Per concept one or two questions, so it can reach mastery within this exam.
   for (const { concept, items } of active) {

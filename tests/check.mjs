@@ -170,17 +170,19 @@ check("smart pick: skips mastered concepts while others are left", () => {
   }
 });
 
-check("smart pick: missed concepts first, and related questions are spread out", () => {
+check("smart pick: missed and unseen concepts have the same priority; related questions are spread out", () => {
   const h = fresh();
   const missed = data.concepts.find((c) => c.topic === "t4");
   recordResult(h, missed.questions[0], 0);
   const conceptOf = Object.fromEntries(data.concepts.flatMap((c) => c.questions.map((q) => [q.id, c.id])));
-  for (let i = 0; i < 60; i++) {
-    const ids = pickSmart(data, h, 10); // one question per topic
-    const t4 = ids.filter((id) => data.byId[id].topic === "t4");
-    assert.ok(t4.some((id) => conceptOf[id] === missed.id), "the missed concept was not drawn");
+  let drawn = 0;
+  const runs = 400;
+  for (let i = 0; i < runs; i++) {
+    const t4 = pickSmart(data, h, 10).filter((id) => data.byId[id].topic === "t4");
+    if (t4.some((id) => conceptOf[id] === missed.id)) drawn++;
     assert.ok(!t4.includes(missed.questions[0]), "another question of the concept comes first");
   }
+  assert.ok(drawn > 0 && drawn < runs, `the missed concept is ${drawn}/${runs}: it should be neither always nor never`);
   for (let n = 10; n <= 40; n++) {
     for (let i = 0; i < 40; i++) {
       const ids = pickSmart(data, fresh(), n);
@@ -189,6 +191,20 @@ check("smart pick: missed concepts first, and related questions are spread out",
       }
     }
   }
+});
+
+check("Rando: random order and random extras, every topic present", () => {
+  const orders = new Set();
+  const extras = new Set();
+  for (let i = 0; i < 200; i++) {
+    const ids = pick(data.pool, data.topics, 10);
+    orders.add(ids.map((id) => data.byId[id].topic).join(""));
+    const per = {};
+    ids.forEach((id) => (per[data.byId[id].topic] = (per[data.byId[id].topic] || 0) + 1));
+    Object.entries(per).filter(([, n]) => n > 1).forEach(([t]) => extras.add(t));
+  }
+  assert.ok(orders.size > 20, "the order is not shuffled");
+  assert.ok(extras.size >= 5, "extras always go to the same topics");
 });
 
 check("smart pick: with few questions the extras and the pairs differ per exam", () => {

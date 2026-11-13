@@ -8,6 +8,11 @@ import { pickSmart } from "../selection.js";
 
 const ARM_TIMEOUT_MS = 3000;
 
+// A tooltip can be dismissed with Escape, also while the pointer only hovers it (WCAG 1.4.13).
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") document.querySelectorAll(".tooltip").forEach((t) => t.classList.add("is-dismissed"));
+});
+
 /** Mastered and total concepts, for all topics or one topic. */
 function conceptProgress(data, history, topicId) {
   const concepts = data.concepts.filter((c) => !topicId || c.topic === topicId);
@@ -76,6 +81,9 @@ export function renderStart(ctx) {
 
   // Two-step reset of the history only; a running exam stays untouched.
   const reset = action(screen, "reset-history");
+  const tooltip = reset.closest(".tooltip");
+  tooltip.addEventListener("mouseenter", () => tooltip.classList.remove("is-dismissed"));
+  tooltip.addEventListener("focusin", () => tooltip.classList.remove("is-dismissed"));
   let armed = false;
   reset.addEventListener("click", () => {
     if (!armed) {

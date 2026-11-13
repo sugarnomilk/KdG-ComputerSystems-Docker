@@ -60,7 +60,10 @@
 
       <div class="actions">
         <button class="btn btn-primary" type="button" data-action="start">Start examen</button>
-        <button class="btn" type="button" data-action="reset-history">Wis geschiedenis</button>
+        <span class="tooltip">
+          <button class="btn" type="button" data-action="reset-history" aria-describedby="history-tip">Wis geschiedenis</button>
+          <span class="tooltip-text" id="history-tip" role="tooltip">Wist wat de app onthoudt over welke vragen je goed of fout had, enkel in deze browser. Slim begint dan opnieuw. Een lopend examen blijft staan.</span>
+        </span>
         <button class="btn" type="button" data-action="resume" hidden>Verder met vorig examen (<span data-field="resume-count"></span> vragen)</button>
       </div>
 
