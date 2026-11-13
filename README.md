@@ -1,4 +1,4 @@
-# CS2 Docker – Practice Exam (v0.2)
+# CS2 Docker – Practice Exam (v0.3)
 
 A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG). No login or account needed.
 
@@ -84,6 +84,13 @@ Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues
 
 ## Changelog
 
+### v0.3 (13 Nov)
+- Two kinds of exam: **Slim** draws concepts you missed and questions you never saw first (a concept is done after two fully correct questions, a missed question rests until a new one was answered), **Rando** is a fully random draw. Every topic still appears at least once.
+- The app remembers per question whether you got it right (in your browser only), with a "Wis geschiedenis" button.
+- A "Meld een fout" link on every question opens a pre-filled GitHub issue.
+- Code cleanup: semantic HTML with templates, CSS and JavaScript in separate folders, questions in `data/questions.json`. The page now needs a web server (see Project structure).
+- Question bank cleanup: 19 combination or near-duplicate questions and 5 out-of-scope sample-exam questions removed, 15 questions from the 10 Nov practice exam added (149 in total).
+
 ### v0.2 (9 Nov)
 - 17 new questions on topics that were underrepresented: publishing (naming, push per tag, local registry, `start` vs `run`), Dockerfile (ADD vs COPY, LABEL, multiple COPY sources, relative WORKDIR), ports (`-P`, `-p`, privileged ports), Compose (service names as hostnames, container names, `compose exec`) and container security.
 - New questions test one concept each, like the real exam; options that relied on material outside the slides were left out.
@@ -92,15 +99,6 @@ Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues
 - Cleanup: 15 near-duplicate or out-of-scope questions removed.
 - Stricter fill-in grading where answers were too lenient (`.env` needs the dot; commands need `docker`); any unique container-ID prefix is now accepted.
 - One question reworded to remove ambiguity.
-
-## Unreleased
-
-- Code cleanup: semantic HTML with templates, CSS and JavaScript in separate folders, and the questions in `data/questions.json`. Behaviour and look are unchanged.
-- Question bank cleanup: 19 combination or near-duplicate questions archived, 15 new questions from the 10 Nov practice exam.
-- The page now needs a web server (see Project structure).
-- Two kinds of exam. **Slim** draws concepts you missed and questions you never saw first: a concept is done once you answered two of its questions fully correct (one for a concept with a single question), a missed question rests until a new question was answered, and every topic still appears at least once. **Rando** is a fully random draw in random order. Both record your results.
-- The app remembers per question whether you got it right (only in your browser, with a "Wis geschiedenis" button that clears it).
-- A "Meld een fout" link on every question opens a pre-filled GitHub issue.
 
 ## Upcoming
 

@@ -1,5 +1,5 @@
 // App-wide constants. Bump VERSION only for an explicit release (and update README.md).
-export const VERSION = "v0.2";
+export const VERSION = "v0.3";
 
 // Do not change: it holds the learner's saved progress in localStorage.
 export const STORAGE_KEY = "cs2-docker-quiz-v2";
