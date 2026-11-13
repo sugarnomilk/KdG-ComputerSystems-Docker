@@ -362,3 +362,13 @@
 .report-link:hover {
   color: var(--accent);
 }
+
+/* Exam kind and history */
+.mode-picker {
+  margin: 18px 0 4px;
+}
+
+.mode-picker legend {
+  margin-bottom: 6px;
+  padding: 0;
+}

@@ -3,6 +3,7 @@ import { OPTION_LETTERS, TYPE_LABELS } from "../config.js";
 import { $, action, cloneTemplate, el, field, scrollToTop } from "../dom.js";
 import { grade, outcome } from "../quiz.js";
 import { buildIssueUrl } from "../report.js";
+import { recordResult } from "../history.js";
 import { createAnswer } from "../state.js";
 import { formatNumber } from "../util.js";
 import { VERSION } from "../config.js";
@@ -94,7 +95,7 @@ function buildOptions(fieldset, q, a) {
 }
 
 export function renderQuestion(ctx) {
-  const { data, state, save, render } = ctx;
+  const { data, state, history, save, saveHistory, render } = ctx;
   const k = state.cur;
   const id = state.sel[k];
   const q = data.byId[id];
@@ -162,6 +163,8 @@ export function renderQuestion(ctx) {
         ? openResult(q, a, (points) => {
             a.self = points;
             a.pts = points;
+            recordResult(history, q, points);
+            saveHistory();
             save();
             render();
           })
@@ -199,6 +202,10 @@ export function renderQuestion(ctx) {
     }
     a.done = true;
     a.pts = grade(q, a);
+    if (a.pts != null) {
+      recordResult(history, q, a.pts);
+      saveHistory();
+    }
     save();
     render();
   }

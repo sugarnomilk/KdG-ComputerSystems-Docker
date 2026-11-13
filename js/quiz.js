@@ -12,38 +12,44 @@ export const normalize = (s) =>
   s.trim().replace(/^[`'"“”‘’]+|[`'"“”‘’]+$/g, "").trim().replace(/\s+/g, " ").toLowerCase();
 
 /**
- * Draw n question ids: every topic at least once, the rest spread
- * proportionally to the number of questions per topic.
+ * How many questions each topic gets out of n: every topic at least once, the rest
+ * spread proportionally to the topic sizes.
  */
-export function pick(pool, topics, n, random = Math.random) {
-  const groups = topics.map((t) => ({
-    t: t.id,
-    qs: shuffle(pool.filter((q) => q.topic === t.id), random),
-  }));
-  const alloc = groups.map(() => 1);
-  const rest = n - groups.length;
-  const extra = groups.reduce((sum, g) => sum + g.qs.length - 1, 0);
-  const want = groups.map((g) => (rest * (g.qs.length - 1)) / extra);
-  groups.forEach((g, i) => {
-    alloc[i] += Math.floor(want[i]);
+export function allocateCounts(sizes, n, random = Math.random) {
+  const alloc = sizes.map(() => 1);
+  const rest = n - sizes.length;
+  const extra = sizes.reduce((sum, size) => sum + size - 1, 0);
+  const want = sizes.map((size) => (rest * (size - 1)) / extra);
+  want.forEach((w, i) => {
+    alloc[i] += Math.floor(w);
   });
   let left = n - alloc.reduce((a, b) => a + b, 0);
-  const order = groups
-    .map((g, i) => i)
+  const order = sizes
+    .map((size, i) => i)
     .sort((a, b) => (want[b] % 1) - (want[a] % 1) || random() - 0.5);
   for (const i of order) {
     if (left <= 0) break;
-    if (alloc[i] < groups[i].qs.length) {
+    if (alloc[i] < sizes[i]) {
       alloc[i]++;
       left--;
     }
   }
   while (left > 0) {
-    const i = groups.findIndex((g, k) => alloc[k] < g.qs.length);
+    const i = sizes.findIndex((size, k) => alloc[k] < size);
     alloc[i]++;
     left--;
   }
-  return groups.flatMap((g, i) => g.qs.slice(0, alloc[i]).map((q) => q.id));
+  return alloc;
+}
+
+/** "Rando": a random draw, ignoring the history. */
+export function pick(pool, topics, n, random = Math.random) {
+  const groups = topics.map((t) => ({
+    t: t.id,
+    qs: shuffle(pool.filter((q) => q.topic === t.id), random),
+  }));
+  const counts = allocateCounts(groups.map((g) => g.qs.length), n, random);
+  return groups.flatMap((g, i) => g.qs.slice(0, counts[i]).map((q) => q.id));
 }
 
 /** Points for an answer; null for an open question that is not self-assessed yet. */

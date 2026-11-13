@@ -42,11 +42,25 @@
       <input class="range" type="range" id="count-range" step="1">
       <div class="actions" data-field="presets"></div>
 
+      <fieldset class="mode-picker">
+        <legend class="label-strong">Soort examen</legend>
+        <label class="option">
+          <input type="radio" name="mode" value="smart">
+          <span class="option-text"><strong>Slim</strong>: nieuwe vragen en vragen die je miste komen eerst. Een begrip is afgerond zodra je twee vragen ervan volledig juist hebt; elk onderdeel komt toch altijd aan bod.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="mode" value="random">
+          <span class="option-text"><strong>Rando</strong>: een willekeurige selectie, zoals voorheen. Je resultaten tellen wel mee voor Slim.</span>
+        </label>
+      </fieldset>
+
       <h3>Onderdelen</h3>
       <ul class="summary-list" data-field="topics"></ul>
+      <p class="hint" data-field="progress"></p>
 
       <div class="actions">
         <button class="btn btn-primary" type="button" data-action="start">Start examen</button>
+        <button class="btn" type="button" data-action="reset-history">Wis geschiedenis</button>
         <button class="btn" type="button" data-action="resume" hidden>Verder met vorig examen (<span data-field="resume-count"></span> vragen)</button>
       </div>
 
@@ -62,7 +76,7 @@
       </section>
       <section class="hint scoring-info" aria-labelledby="privacy-title">
         <h3 id="privacy-title">Privacy</h3>
-        <p>Je voortgang blijft enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p>
+        <p>Je voortgang en je geschiedenis per vraag blijven enkel in je eigen browser; er wordt niets doorgestuurd. Herlaad de pagina voor de nieuwste vragen.</p>
       </section>
     </section>
   </template>

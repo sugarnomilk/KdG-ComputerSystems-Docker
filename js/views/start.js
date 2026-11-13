@@ -1,10 +1,21 @@
-// Start screen: choose the number of questions.
+// Start screen: choose the number of questions and the kind of exam.
 import { COUNT_PRESETS } from "../config.js";
+import { clearHistory } from "../history.js";
+import { isMastered } from "../concepts.js";
 import { $, action, cloneTemplate, el, field, scrollToTop, summaryRow } from "../dom.js";
 import { pick, questionLimits } from "../quiz.js";
+import { pickSmart } from "../selection.js";
+
+const ARM_TIMEOUT_MS = 3000;
+
+/** Mastered and total concepts, for all topics or one topic. */
+function conceptProgress(data, history, topicId) {
+  const concepts = data.concepts.filter((c) => !topicId || c.topic === topicId);
+  return { done: concepts.filter((c) => isMastered(c, history)).length, total: concepts.length };
+}
 
 export function renderStart(ctx) {
-  const { data, state, save, render } = ctx;
+  const { data, state, history, save, saveHistory, render } = ctx;
   const { min, max } = questionLimits(data.pool);
   const screen = cloneTemplate("tpl-start");
 
@@ -30,20 +41,55 @@ export function renderStart(ctx) {
     presets.append(button);
   });
 
+  // Kind of exam.
+  screen.querySelectorAll("input[name=mode]").forEach((input) => {
+    input.checked = input.value === state.mode;
+    input.addEventListener("change", () => {
+      state.mode = input.value;
+      save();
+    });
+  });
+
+  // Questions and progress per topic.
   field(screen, "topics").append(
-    ...data.topics.map((t) =>
-      summaryRow(t.name, `${data.pool.filter((q) => q.topic === t.id).length} vragen`, "muted")
-    )
+    ...data.topics.map((t) => {
+      const questions = data.pool.filter((q) => q.topic === t.id).length;
+      const { done, total } = conceptProgress(data, history, t.id);
+      return summaryRow(t.name, `${questions} vragen · ${done}/${total} begrippen afgerond`, "muted");
+    })
   );
+  const overall = conceptProgress(data, history);
+  field(screen, "progress").textContent = `Afgeronde begrippen: ${overall.done} van ${overall.total}.`;
 
   action(screen, "start").addEventListener("click", () => {
-    state.sel = pick(data.pool, data.topics, state.n);
+    state.sel =
+      state.mode === "smart"
+        ? pickSmart(data, history, state.n)
+        : pick(data.pool, data.topics, state.n);
     state.ans = {};
     state.cur = 0;
     state.phase = "quiz";
     save();
     render();
     scrollToTop();
+  });
+
+  // Two-step reset of the history only; a running exam stays untouched.
+  const reset = action(screen, "reset-history");
+  let armed = false;
+  reset.addEventListener("click", () => {
+    if (!armed) {
+      armed = true;
+      reset.textContent = "Zeker? Klik nog eens";
+      setTimeout(() => {
+        armed = false;
+        reset.textContent = "Wis geschiedenis";
+      }, ARM_TIMEOUT_MS);
+      return;
+    }
+    clearHistory(history);
+    saveHistory();
+    render();
   });
 
   const resume = action(screen, "resume");

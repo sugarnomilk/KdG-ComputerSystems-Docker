@@ -4,9 +4,12 @@ import fs from "node:fs";
 import assert from "node:assert/strict";
 import { prepareData } from "../js/data.js";
 import { grade, pick, questionLimits } from "../js/quiz.js";
+import { recordResult } from "../js/history.js";
+import { correctCount, eligibleQuestions, isMastered, masteryTarget } from "../js/concepts.js";
+import { pickSmart } from "../js/selection.js";
 
 const read = (file) => JSON.parse(fs.readFileSync(new URL(`../data/${file}`, import.meta.url), "utf8"));
-const data = prepareData(read("topics.json"), read("questions.json"));
+const data = prepareData(read("topics.json"), read("questions.json"), read("concepts.json"));
 let failures = 0;
 const check = (name, fn) => {
   try {
@@ -86,6 +89,97 @@ check("pick: right size, no duplicates, every topic present", () => {
     const topics = new Set(ids.map((id) => data.byId[id].topic));
     assert.equal(topics.size, data.topics.length, `n=${n}: topics`);
   }
+});
+
+
+check("concepts: every question in exactly one concept, of its own topic", () => {
+  const seen = new Map();
+  for (const c of data.concepts) {
+    assert.ok(data.topicNames[c.topic], `${c.id}: topic`);
+    assert.ok(c.questions.length > 0 && c.questions.every(Boolean), `${c.id}: questions`);
+    for (const q of c.questions) {
+      assert.ok(!seen.has(q.id), `${q.id} is in two concepts`);
+      assert.equal(q.topic, c.topic, `${q.id} is in a concept of another topic`);
+      seen.set(q.id, c.id);
+    }
+  }
+  assert.equal(seen.size, data.pool.length, "questions without a concept");
+});
+
+const FULL = (q) => q.pts;
+const fresh = () => ({});
+
+check("mastery: two fully correct questions, one for a single-question concept", () => {
+  const h = fresh();
+  const [c] = data.concepts.filter((c) => c.questions.length >= 3);
+  recordResult(h, c.questions[0], FULL(c.questions[0]));
+  assert.equal(isMastered(c, h), false);
+  recordResult(h, c.questions[1], 1e-9);
+  assert.equal(isMastered(c, h), false, "partial does not count");
+  recordResult(h, c.questions[2], FULL(c.questions[2]));
+  assert.equal(correctCount(c, h), 2);
+  assert.equal(isMastered(c, h), true);
+  const single = data.concepts.find((c) => c.questions.length === 1);
+  assert.equal(masteryTarget(single), 1);
+});
+
+check("eligibility: partial parks the question until a later question fails", () => {
+  const h = fresh();
+  const c = data.concepts.find((c) => c.questions.length >= 3);
+  const [a, b, d] = c.questions;
+  recordResult(h, a, 1e-9); // partial
+  let tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
+  assert.equal(tiers[a.id], 2);
+  assert.equal(tiers[b.id], 0);
+  recordResult(h, b, 0); // the follow-up fails
+  tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
+  assert.equal(tiers[a.id], 1, "partial question is released");
+  assert.equal(tiers[b.id], 1, "wrong question comes after unseen ones");
+  assert.equal(tiers[d.id], 0);
+  recordResult(h, d, FULL(d));
+  assert.ok(!(d.id in Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, 1]))), "correct is not eligible");
+});
+
+check("smart pick: right size, no duplicates, every topic present, also when everything is mastered", () => {
+  const { min, max } = questionLimits(data.pool);
+  const histories = [fresh()];
+  const all = fresh();
+  data.pool.forEach((q) => recordResult(all, q, FULL(q)));
+  histories.push(all);
+  const mixed = fresh();
+  data.pool.forEach((q, i) => recordResult(mixed, q, i % 3 === 0 ? FULL(q) : i % 3 === 1 ? 0 : 1e-9));
+  histories.push(mixed);
+  for (const h of histories) {
+    for (let n = min; n <= max; n++) {
+      const ids = pickSmart(data, h, n);
+      assert.equal(ids.length, n, `n=${n}`);
+      assert.equal(new Set(ids).size, n, `n=${n}: duplicates`);
+      assert.equal(new Set(ids.map((id) => data.byId[id].topic)).size, data.topics.length, `n=${n}: topics`);
+    }
+  }
+});
+
+check("smart pick: skips mastered concepts while others are left", () => {
+  const h = fresh();
+  const mastered = data.concepts.filter((c) => c.topic === "t4").slice(0, 3);
+  mastered.forEach((c) => c.questions.slice(0, 2).forEach((q) => recordResult(h, q, FULL(q))));
+  const skipped = new Set(mastered.flatMap((c) => c.questions.map((q) => q.id)));
+  for (let i = 0; i < 50; i++) {
+    const ids = pickSmart(data, h, 20);
+    assert.ok(!ids.some((id) => skipped.has(id)), "a mastered concept was drawn");
+  }
+});
+
+check("smart pick: a concept can be drawn twice, so mastery is possible within one exam", () => {
+  const h = fresh();
+  let twice = false;
+  for (let i = 0; i < 30 && !twice; i++) {
+    const ids = pickSmart(data, h, 15);
+    const per = {};
+    for (const c of data.concepts) per[c.id] = c.questions.filter((q) => ids.includes(q.id)).length;
+    twice = Object.values(per).some((n) => n >= 2);
+  }
+  assert.ok(twice);
 });
 
 console.log(`\n${data.questions.length} questions, ${data.pool.length} in the draw`);

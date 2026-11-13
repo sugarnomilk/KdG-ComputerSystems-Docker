@@ -1,9 +1,10 @@
 // Quiz state and its persistence in localStorage (per browser, never sent anywhere).
-import { DEFAULT_QUESTIONS, STORAGE_KEY } from "./config.js";
+import { DEFAULT_MODE, DEFAULT_QUESTIONS, STORAGE_KEY } from "./config.js";
 
 export const createState = () => ({
   phase: "start", // "start" | "quiz"
   n: DEFAULT_QUESTIONS, // chosen number of questions
+  mode: DEFAULT_MODE, // "smart" | "random"
   sel: [], // ids of the selected questions
   cur: 0, // current question index, or "end"
   ans: {}, // answers by question id
@@ -15,7 +16,7 @@ export const createAnswer = () => ({ sel: [], text: "", self: null, done: false,
 export function loadState(knownIds) {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    if (saved && Array.isArray(saved.sel) && saved.sel.every((id) => knownIds.has(id))) return saved;
+    if (saved && Array.isArray(saved.sel) && saved.sel.every((id) => knownIds.has(id))) return { ...createState(), ...saved };
   } catch (e) {
     /* unreadable or blocked storage: start fresh */
   }
