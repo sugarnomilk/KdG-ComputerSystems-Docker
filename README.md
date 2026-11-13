@@ -8,17 +8,17 @@ A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG).
 
 ## What's included
 
-- **153 questions** in the draw:
+- **149 questions** in the draw:
 
   | Topic | Questions |
   |---|---|
-  | Containers on Linux (chroot, namespaces, cgroups, VM vs container, container security) | 25 |
-  | Docker CLI (images vs containers, `ps`, `logs`, `exec`, `rm`, `--rm`, tags) | 23 |
-  | Ports and volumes (`-p`, `-P`, bind mounts vs named volumes) | 16 |
-  | Docker Compose (`up -d`, `--build`, `down`, volumes, `.env`, service names, `exec`) | 23 |
-  | Dockerfile (RUN vs CMD/ENTRYPOINT, WORKDIR, ENV, EXPOSE, ADD vs COPY, LABEL) | 17 |
-  | Layers, cache, multi-stage builds, security, secrets | 29 |
-  | Publishing (naming, tagging, Docker Hub, local registry, `start` vs `run`) | 20 |
+  | Containers on Linux (chroot, namespaces, cgroups, VM vs container, container security) | 23 |
+  | Docker CLI (images vs containers, `ps`, `logs`, `exec`, `rm`, `--rm`, tags) | 21 |
+  | Ports and volumes (`-p`, `-P`, bind mounts vs named volumes) | 18 |
+  | Docker Compose (`up -d`, `--build`, `down`, volumes, `.env`, service names, `exec`) | 24 |
+  | Dockerfile (RUN vs CMD/ENTRYPOINT, WORKDIR, ENV, EXPOSE, ADD vs COPY, LABEL) | 16 |
+  | Layers, cache, multi-stage builds, security, secrets | 26 |
+  | Publishing (naming, tagging, Docker Hub, local registry, `start` vs `run`) | 21 |
 
 - Questions from the course's sample exam plus extra practice questions, a bit harder than the sample exam.
 - Choose 10 to 40 questions per session; every topic appears at least once. Each new session is a fresh random draw.
@@ -43,10 +43,34 @@ js/                   ES modules: main, config, data, state, quiz (rules), util,
 js/views/             header, start, question, end (one module per screen)
 data/questions.json   all questions (HTML allowed inside text fields)
 data/topics.json      the seven course topics
-tests/check.mjs       data and rules checks: node tests/check.mjs
+tests/check.mjs       data and rules checks
 ```
 
-The questions are loaded with `fetch`, so open the page through a web server (GitHub Pages, or locally `python3 -m http.server` and `http://localhost:8000`); double-clicking `index.html` does not work.
+No build step and no dependencies: plain HTML, CSS and ES modules. The questions are loaded with `fetch`, so open the page through a web server (GitHub Pages, or locally `python3 -m http.server` and then `http://localhost:8000`); double-clicking `index.html` does not work.
+
+## Contributing
+
+Run the checks before opening a pull request:
+
+```
+node tests/check.mjs
+```
+
+Each question in `data/questions.json` has these fields:
+
+| Field | Meaning |
+|---|---|
+| `id` | unique, e.g. `R10-3` |
+| `topic` | `t1`–`t7` (see `data/topics.json`); without a topic the question is never drawn |
+| `type` | `mc` (one answer), `multi` (several answers), `fill`, `open` |
+| `pts` | points: 1 for `mc`, 2 otherwise |
+| `source` | shown under the question, e.g. `Oefenronde 10` |
+| `q`, `opts`, `ex` | question, options and explanation lines (HTML allowed) |
+| `ok` | indexes of the correct options (`mc`, `multi`) |
+| `answer`, `accept` or `regex` | `fill`: the answer shown, and the accepted answers or a regular expression (tested on lower-cased input with single spaces) |
+| `model` | `open`: model answer lines |
+
+Keep one concept per question, and stay within the course material. The localStorage key (`STORAGE_KEY` in `js/config.js`) must not change, or learners lose their saved progress.
 
 ## Privacy
 
@@ -66,6 +90,12 @@ Open an [issue](https://github.com/sugarnomilk/KdG-ComputerSystems-Docker/issues
 - Cleanup: 15 near-duplicate or out-of-scope questions removed.
 - Stricter fill-in grading where answers were too lenient (`.env` needs the dot; commands need `docker`); any unique container-ID prefix is now accepted.
 - One question reworded to remove ambiguity.
+
+## Unreleased
+
+- Code cleanup: semantic HTML with templates, CSS and JavaScript in separate folders, and the questions in `data/questions.json`. Behaviour and look are unchanged.
+- Question bank cleanup: 19 combination or near-duplicate questions archived, 15 new questions from the 10 Nov practice exam.
+- The page now needs a web server (see Project structure).
 
 ## Upcoming
 

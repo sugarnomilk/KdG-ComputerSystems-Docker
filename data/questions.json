@@ -353,48 +353,6 @@
   ]
  },
  {
-  "id": "E17",
-  "topic": null,
-  "type": "mc",
-  "pts": 1,
-  "source": "Voorbeeldexamen, vraag 17",
-  "q": "Gegeven deze Dockerfile:<pre>FROM busybox\nCMD [\"echo\", \"$HOME\"]</pre>Wat is de output van <code>docker run &lt;image&gt;</code>?",
-  "opts": [
-   "<code>/root</code>",
-   "<code>$HOME</code>",
-   "Een lege regel",
-   "Een foutmelding"
-  ],
-  "ok": [
-   1
-  ],
-  "ex": [
-   "De exec-vorm (JSON) heeft geen shell, dus je ziet letterlijk <code>$HOME</code>. De shell-vorm <code>CMD echo $HOME</code> geeft <code>/root</code>."
-  ],
-  "note": "Te geavanceerd volgens de leerkracht"
- },
- {
-  "id": "E18",
-  "topic": null,
-  "type": "mc",
-  "pts": 1,
-  "source": "Voorbeeldexamen, vraag 18",
-  "q": "Deze image bevat enkel een statisch gecompileerd programma. Er staat geen CMD of ENTRYPOINT in:<pre>FROM scratch\nCOPY hello /hello</pre>Is deze image bruikbaar?",
-  "opts": [
-   "Nee, <code>docker build</code> faalt zonder CMD.",
-   "Ja, maar je moet het programma zelf opgeven: <code>docker run img /hello</code>. Zonder commando faalt <code>docker run</code> met \"no command specified\".",
-   "Ja, Docker start automatisch een shell.",
-   "Nee, een image op basis van <code>scratch</code> kan nooit gestart worden."
-  ],
-  "ok": [
-   1
-  ],
-  "ex": [
-   "<code>scratch</code> is een lege containerdoos. Zonder CMD moet je het commando bij het opstarten meegeven."
-  ],
-  "oos": true
- },
- {
   "id": "E19",
   "topic": "t6",
   "type": "fill",
@@ -428,19 +386,6 @@
    "Oefen het lezen: een Dockerfile loopt van boven naar onder. Vraag bij elke regel wat er al bestaat. C compileert voor <code>main.c</code> er is, D gebruikt gcc voor het geïnstalleerd is.",
    "Cache: wijzigt een regel, dan wordt alles erna opnieuw uitgevoerd. Wat zelden verandert zet je dus bovenaan (A installeert gcc opnieuw bij elke codewijziging)."
   ]
- },
- {
-  "id": "E21",
-  "topic": null,
-  "type": "open",
-  "pts": 2,
-  "source": "Voorbeeldexamen, vraag 21",
-  "q": "Gegeven deze Dockerfile:<pre>FROM almalinux:9\nUSER user1\nCMD echo \"Uitgevoerd door $(whoami)\"</pre>De image bouwt zonder fouten, maar <code>docker run</code> faalt. Waarom, en hoe los je het op?",
-  "model": [
-   "De gebruiker <code>user1</code> bestaat niet in de image: <i>unable to find user user1</i>.",
-   "Oplossing: draai als root, of maak hem eerst aan vóór <code>USER</code>: <code>RUN groupadd user1 &amp;&amp; useradd -g user1 user1</code>."
-  ],
-  "oos": true
  },
  {
   "id": "E22",
@@ -481,24 +426,6 @@
   "ex": [
    "Bestaat de map nog niet, dan maakt WORKDIR ze aan."
   ]
- },
- {
-  "id": "E24",
-  "topic": null,
-  "type": "fill",
-  "pts": 2,
-  "source": "Voorbeeldexamen, vraag 24",
-  "q": "Gegeven deze <code>docker-compose.yml</code>:<pre>services:\n  frontend-app:\n    image: nginx:alpine\n    ports:\n      - \"4000:80\"\n  data-service:\n    image: my-api-server\n    ports:\n      - \"6000:9000\"</pre><code>data-service</code> luistert in de container op poort 9000. Welke URL gebruikt de <code>frontend-app</code>-container om <code>data-service</code> aan te spreken?",
-  "answer": "<code>http://data-service:9000</code>",
-  "accept": [
-   "http://data-service:9000",
-   "http://data-service:9000/",
-   "data-service:9000"
-  ],
-  "ex": [
-   "De servicenaam (DNS van Compose) en de containerpoort, niet de hostpoort 6000. Vanaf de host zelf gebruik je wel <code>localhost:6000</code>."
-  ],
-  "oos": true
  },
  {
   "id": "E25",
@@ -600,32 +527,6 @@
    "De naam is zeer belangrijk: <code>account/naam:tag</code>. Zonder je account vooraan probeert Docker naar <code>docker.io/library/...</code> te pushen en krijg je <i>denied</i>.",
    "<code>docker tag</code> heeft twee namen nodig: de bestaande en de nieuwe."
   ]
- },
- {
-  "id": "E30",
-  "topic": null,
-  "type": "multi",
-  "pts": 2,
-  "source": "Voorbeeldexamen, vraag 30",
-  "q": "Naar welke van deze diensten kan je container images pushen?",
-  "opts": [
-   "Docker Hub",
-   "Quay.io",
-   "GitHub Container Registry (ghcr.io)",
-   "Google Artifact Registry",
-   "Docker Desktop",
-   "Docker Compose"
-  ],
-  "ok": [
-   0,
-   1,
-   2,
-   3
-  ],
-  "ex": [
-   "Docker Desktop en Docker Compose zijn tools, geen registries."
-  ],
-  "oos": true
  },
  {
   "id": "E31",
