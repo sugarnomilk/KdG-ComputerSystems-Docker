@@ -42,6 +42,23 @@ export function allocateCounts(sizes, n, random = Math.random) {
   return alloc;
 }
 
+/**
+ * Like allocateCounts, but the extra questions go to random topics (more likely to
+ * larger topics), so the draw differs from exam to exam. Every topic keeps at least one.
+ */
+export function allocateCountsRandom(sizes, n, random = Math.random) {
+  const alloc = sizes.map(() => 1);
+  for (let left = n - sizes.length; left > 0; left--) {
+    const weights = sizes.map((size, i) => Math.max(0, size - alloc[i]));
+    const total = weights.reduce((a, b) => a + b, 0);
+    if (total === 0) break;
+    let r = random() * total;
+    const i = weights.findIndex((w) => (r -= w) < 0);
+    alloc[i]++;
+  }
+  return alloc;
+}
+
 /** "Rando": a random draw, ignoring the history. */
 export function pick(pool, topics, n, random = Math.random) {
   const groups = topics.map((t) => ({

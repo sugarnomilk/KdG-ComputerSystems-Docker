@@ -1,7 +1,7 @@
 // "Slim" exam selection: unmastered concepts first, topic distribution unchanged.
 import { BLOCK_SIZE } from "./config.js";
 import { correctCount, eligibleQuestions, isMastered, masteryTarget } from "./concepts.js";
-import { allocateCounts } from "./quiz.js";
+import { allocateCountsRandom } from "./quiz.js";
 import { shuffle } from "./util.js";
 
 const hasMiss = (concept, history) =>
@@ -35,10 +35,12 @@ function selectForTopic(topicId, data, history, k, random) {
     .filter((entry) => entry.items.length)
     .sort((a, b) => conceptGroup(a, history) - conceptGroup(b, history));
 
-  // 1. Per concept a block of questions, so it can reach mastery within this exam.
+  // 1. Per concept one or two questions, so it can reach mastery within this exam.
   for (const { concept, items } of active) {
     const needed = Math.max(1, masteryTarget(concept) - correctCount(concept, history));
-    items.slice(0, Math.min(BLOCK_SIZE, needed)).forEach(({ q }) => take(q));
+    // Random block size: sometimes two questions of this concept, sometimes one.
+    const size = 1 + Math.floor(random() * Math.min(BLOCK_SIZE, needed));
+    items.slice(0, size).forEach(({ q }) => take(q));
   }
   // 2. More from the unmastered concepts.
   for (const { items } of active) items.forEach(({ q }) => take(q));
@@ -66,7 +68,7 @@ export function spread(ids, conceptOf, random = Math.random) {
 /** Draw n question ids; every topic gets at least one, as in the random draw. */
 export function pickSmart(data, history, n, random = Math.random) {
   const sizes = data.topics.map((t) => data.pool.filter((q) => q.topic === t.id).length);
-  const counts = allocateCounts(sizes, n, random);
+  const counts = allocateCountsRandom(sizes, n, random);
   const ids = data.topics.flatMap((t, i) => selectForTopic(t.id, data, history, counts[i], random));
   const conceptOf = Object.fromEntries(
     data.concepts.flatMap((c) => c.questions.map((q) => [q.id, c.id]))

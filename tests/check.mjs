@@ -178,8 +178,8 @@ check("smart pick: missed concepts first, and related questions are spread out",
   for (let i = 0; i < 60; i++) {
     const ids = pickSmart(data, h, 10); // one question per topic
     const t4 = ids.filter((id) => data.byId[id].topic === "t4");
-    assert.equal(conceptOf[t4[0]], missed.id, "the missed concept was not drawn first");
-    assert.notEqual(t4[0], missed.questions[0], "another question of the concept comes first");
+    assert.ok(t4.some((id) => conceptOf[id] === missed.id), "the missed concept was not drawn");
+    assert.ok(!t4.includes(missed.questions[0]), "another question of the concept comes first");
   }
   for (let n = 10; n <= 40; n++) {
     for (let i = 0; i < 40; i++) {
@@ -189,6 +189,23 @@ check("smart pick: missed concepts first, and related questions are spread out",
       }
     }
   }
+});
+
+check("smart pick: with few questions the extras and the pairs differ per exam", () => {
+  const extraTopics = new Set();
+  let pairs = 0;
+  let noPairs = 0;
+  const conceptOf = Object.fromEntries(data.concepts.flatMap((c) => c.questions.map((q) => [q.id, c.id])));
+  for (let i = 0; i < 300; i++) {
+    const ids = pickSmart(data, fresh(), 10);
+    const perTopic = {};
+    ids.forEach((id) => (perTopic[data.byId[id].topic] = (perTopic[data.byId[id].topic] || 0) + 1));
+    Object.entries(perTopic).filter(([, n]) => n > 1).forEach(([t]) => extraTopics.add(t));
+    const hasPair = new Set(ids.map((id) => conceptOf[id])).size < ids.length;
+    hasPair ? pairs++ : noPairs++;
+  }
+  assert.ok(extraTopics.size >= 5, `extras always go to the same topics: ${[...extraTopics]}`);
+  assert.ok(pairs > 0 && noPairs > 0, `pairs=${pairs} noPairs=${noPairs}`);
 });
 
 check("smart pick: a concept can be drawn twice, so mastery is possible within one exam", () => {
