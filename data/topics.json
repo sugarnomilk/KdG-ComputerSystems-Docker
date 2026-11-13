@@ -1,0 +1,30 @@
+[
+ {
+  "id": "t1",
+  "name": "Containers op Linux"
+ },
+ {
+  "id": "t2",
+  "name": "Docker CLI: images en containers"
+ },
+ {
+  "id": "t3",
+  "name": "Poorten en volumes"
+ },
+ {
+  "id": "t4",
+  "name": "Docker Compose"
+ },
+ {
+  "id": "t5",
+  "name": "Dockerfile"
+ },
+ {
+  "id": "t6",
+  "name": "Lagen, cache, multi-stage en security"
+ },
+ {
+  "id": "t7",
+  "name": "Publiceren en registries"
+ }
+]

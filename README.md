@@ -34,6 +34,20 @@ A free, browser-based practice exam for **Computersystemen 2 – Docker** (KdG).
 
 So don't guess on multiple-answer questions. Fill-in answers ignore capitals, extra spaces, quotes and a trailing period. A "full command" must start with `docker`; a container ID may be shortened to any unique prefix, as in the sample exam.
 
+## Project structure
+
+```
+index.html            semantic page skeleton + <template>s for each screen
+css/                  tokens (colours), base (elements), layout, components
+js/                   ES modules: main, config, data, state, quiz (rules), util, dom
+js/views/             header, start, question, end (one module per screen)
+data/questions.json   all questions (HTML allowed inside text fields)
+data/topics.json      the seven course topics
+tests/check.mjs       data and rules checks: node tests/check.mjs
+```
+
+The questions are loaded with `fetch`, so open the page through a web server (GitHub Pages, or locally `python3 -m http.server` and `http://localhost:8000`); double-clicking `index.html` does not work.
+
 ## Privacy
 
 Your progress (only your current or last session, so you can resume) is stored in your own browser; nothing is sent anywhere. Use **"Kopieer resultaat"** at the end to keep your result or to go over your mistakes later (with AI or a classmate).
