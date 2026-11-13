@@ -1,6 +1,6 @@
 // "Slim" exam selection: unmastered concepts first, topic distribution unchanged.
 import { BLOCK_SIZE } from "./config.js";
-import { correctCount, eligibleQuestions, isMastered, masteryTarget } from "./concepts.js";
+import { COOLING, correctCount, eligibleQuestions, isMastered, masteryTarget } from "./concepts.js";
 import { allocateCountsRandom } from "./quiz.js";
 import { shuffle } from "./util.js";
 
@@ -26,7 +26,10 @@ function selectForTopic(topicId, data, history, k, random) {
     data.concepts.filter((c) => c.topic === topicId && !isMastered(c, history)),
     random
   )
-    .map((concept) => ({ concept, items: eligibleQuestions(concept, history) }))
+    .map((concept) => ({
+      concept,
+      items: eligibleQuestions(concept, history).filter((item) => item.tier !== COOLING),
+    }))
     .filter((entry) => entry.items.length)
     .sort((a, b) => conceptGroup(a) - conceptGroup(b));
 
@@ -39,7 +42,7 @@ function selectForTopic(topicId, data, history, k, random) {
   }
   // 2. More from the unmastered concepts.
   for (const { items } of active) items.forEach(({ q }) => take(q));
-  // 3. Nothing left (everything mastered): any question of the topic. A topic always appears.
+  // 3. Nothing left (everything mastered or resting): any question of the topic. A topic always appears.
   shuffle(data.pool.filter((q) => q.topic === topicId && !used.has(q.id)), random).forEach(take);
   return chosen;
 }

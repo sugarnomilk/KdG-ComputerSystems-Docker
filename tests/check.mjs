@@ -108,6 +108,16 @@ check("concepts: every question in exactly one concept, of its own topic", () =>
 
 const FULL = (q) => q.pts;
 const fresh = () => ({});
+const answerNew = (h, count = 1, skip = new Set()) => {
+  // answer `count` questions for the first time
+  for (const q of data.pool) {
+    if (count === 0) break;
+    if (!h[q.id] && !skip.has(q.id)) {
+      recordResult(h, q, q.pts);
+      count--;
+    }
+  }
+};
 
 check("mastery: two fully correct questions, one for a single-question concept", () => {
   const h = fresh();
@@ -127,11 +137,14 @@ check("eligibility: partial parks the question until a later question fails", ()
   const h = fresh();
   const c = data.concepts.find((c) => c.questions.length >= 3);
   const [a, b, d] = c.questions;
+  const skip = new Set(c.questions.map((q) => q.id));
   recordResult(h, a, 1e-9); // partial
+  answerNew(h, 1, skip); // a new question in between, so the cooldown is over
   let tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
   assert.equal(tiers[a.id], 2);
   assert.equal(tiers[b.id], 0);
   recordResult(h, b, 0); // the follow-up fails
+  answerNew(h, 1, skip);
   tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
   assert.equal(tiers[a.id], 1, "partial question is released");
   assert.equal(tiers[b.id], 1, "wrong question comes after unseen ones");
@@ -222,6 +235,21 @@ check("smart pick: with few questions the extras and the pairs differ per exam",
   }
   assert.ok(extraTopics.size >= 5, `extras always go to the same topics: ${[...extraTopics]}`);
   assert.ok(pairs > 0 && noPairs > 0, `pairs=${pairs} noPairs=${noPairs}`);
+});
+
+check("cooldown: a missed question rests until a new question was answered", () => {
+  const h = fresh();
+  const c = data.concepts.find((c) => c.topic === "t4" && c.questions.length >= 3);
+  const missed = c.questions[0];
+  recordResult(h, missed, 0);
+  let tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
+  assert.equal(tiers[missed.id], 3, "rests right after the miss");
+  for (let i = 0; i < 100; i++) {
+    assert.ok(!pickSmart(data, h, 10).includes(missed.id), "a resting question was drawn");
+  }
+  answerNew(h, 1, new Set(c.questions.map((q) => q.id)));
+  tiers = Object.fromEntries(eligibleQuestions(c, h).map((i) => [i.q.id, i.tier]));
+  assert.equal(tiers[missed.id], 1, "returns after one new question");
 });
 
 check("smart pick: a concept can be drawn twice, so mastery is possible within one exam", () => {

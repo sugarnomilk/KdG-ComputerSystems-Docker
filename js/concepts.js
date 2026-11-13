@@ -1,5 +1,7 @@
 // Concept mastery, based on the history. No DOM.
-import { MASTERY_COUNT } from "./config.js";
+import { COOLDOWN_NEW_QUESTIONS, MASTERY_COUNT } from "./config.js";
+
+export const COOLING = 3; // tier of a missed question that is still resting
 
 /** How many fully correct questions a concept needs (a one-question concept needs one). */
 export const masteryTarget = (concept) => Math.min(MASTERY_COUNT, concept.questions.length);
@@ -15,11 +17,15 @@ export const isMastered = (concept, history) => correctCount(concept, history) >
  *   0  not answered yet
  *   1  answered wrong, or partially correct but a later question of the concept failed
  *   2  partially correct and nothing failed since: only when nothing else is left
+ *   3  (COOLING) missed, and fewer than COOLDOWN_NEW_QUESTIONS new questions were
+ *      answered since: it rests and is not drawn yet
  */
 export function questionTier(concept, q, history) {
   const entry = history[q.id];
   if (!entry) return 0;
   if (entry.r === "c") return null;
+  const newSince = Object.values(history).filter((e) => (e.f ?? e.t) > entry.t).length;
+  if (newSince < COOLDOWN_NEW_QUESTIONS) return COOLING;
   if (entry.r === "w") return 1;
   const failedSince = concept.questions.some((other) => {
     const o = history[other.id];

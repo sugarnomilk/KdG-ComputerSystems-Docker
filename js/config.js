@@ -15,6 +15,10 @@ export const HISTORY_KEY = "cs2-docker-history-v1"; // per-question results (sep
 
 // Mastery: a concept is done when this many of its questions were answered fully correct.
 export const MASTERY_COUNT = 2;
+// After a miss, a question only returns once at least this many other questions were
+// answered for the first time since ("1 new question in between").
+export const COOLDOWN_NEW_QUESTIONS = 1;
+
 // "Slim" may draw up to this many questions of one concept (spread through the exam),
 // so a concept can reach mastery within one exam.
 export const BLOCK_SIZE = 2;

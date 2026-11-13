@@ -2,8 +2,8 @@
 // so "Wis geschiedenis" does not touch a running exam.
 import { HISTORY_KEY } from "./config.js";
 
-// history[questionId] = { r: "c" | "p" | "w", t: timestamp }
-//   c = fully correct, p = partially correct, w = wrong; t orders the attempts.
+// history[questionId] = { r: "c" | "p" | "w", t: last attempt, f: first attempt }
+//   c = fully correct, p = partially correct, w = wrong; t and f are increasing stamps.
 
 export function loadHistory() {
   try {
@@ -27,7 +27,8 @@ export function saveHistory(history) {
 export function recordResult(history, q, points, now = Date.now()) {
   const latest = Math.max(0, ...Object.values(history).map((entry) => entry.t || 0));
   const r = points >= q.pts ? "c" : points <= 0 ? "w" : "p";
-  history[q.id] = { r, t: Math.max(now, latest + 1) };
+  const t = Math.max(now, latest + 1);
+  history[q.id] = { r, t, f: history[q.id]?.f ?? t };
 }
 
 export function clearHistory(history) {
